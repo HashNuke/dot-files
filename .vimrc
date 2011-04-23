@@ -1,3 +1,6 @@
+" Created on Akash Manohar's machine
+" This uses Vundle (https://github.com/gmarik/vundle) to manage vim scripts 
+
 " no more compatible with vi
 set nocompatible
 
