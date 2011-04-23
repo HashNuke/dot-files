@@ -88,6 +88,9 @@ Bundle "tpope/vim-haml"
 " coffeescript
 Bundle "kchmck/vim-coffee-script"
 
+" ActionScript
+Bundle "actionscript.vim--Cuss"
+
 " Utility
 Bundle "SuperTab"
 
