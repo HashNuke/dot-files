@@ -50,6 +50,8 @@ set hlsearch
 
 au BufRead,BufNewFile {Gemfile,Rakefile,Capfile,*.rake,config.ru}  set ft=ruby
 au BufRead,BufNewFile {*.md,*.mkd,*.markdown}                      set ft=markdown
+au Bufread,BufNewFile *.as set filetype=actionscript
+
 
 """"""""""
 " BUNDLES
