@@ -15,8 +15,8 @@ set autoread
 " TABing and INDENTing stuff
 """""""""""""""""""""""""""""
 
-set tabstop=2
-set shiftwidth=2
+" set tabstop=2
+" set shiftwidth=2
 
 " tabs are actually multiple spaces
 set expandtab
