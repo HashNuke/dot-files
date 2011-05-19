@@ -53,6 +53,7 @@ au BufRead,BufNewFile {*.md,*.mkd,*.markdown}                      set ft=markdo
 au Bufread,BufNewFile *.as set filetype=actionscript
 au BufRead,BufNewFile {*.html.haml,*.haml}                         set ft=haml
 au BufRead,BufNewFile {*.rkt,*.scm}                                set ft=scheme
+au BufRead,BufNewFile {*.tt}                                set ft=treetop
 
 
 """"""""""
@@ -94,6 +95,9 @@ Bundle "kchmck/vim-coffee-script"
 
 " ActionScript
 Bundle "actionscript.vim--Cuss"
+
+" Treetop
+Bundle "nanki/treetop.vim"
 
 " Utility
 Bundle "SuperTab"
