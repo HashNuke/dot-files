@@ -31,6 +31,11 @@ set cindent
 " backspacing
 set backspace=indent,eol,start
 
+" turn line numbering on
+set number
+
+" set bg and fg of numbering
+highlight LineNr ctermfg=white ctermbg=black
 
 """""""""""
 " SEARCH
