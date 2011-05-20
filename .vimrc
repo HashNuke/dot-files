@@ -34,11 +34,9 @@ set backspace=indent,eol,start
 " turn line numbering on
 set number
 
-" set bg and fg of numbering
-" highlight LineNr ctermfg=white ctermbg=black
-
 " set colorscheme to evening
 colorscheme evening
+
 
 """""""""""
 " SEARCH
@@ -121,4 +119,11 @@ filetype plugin indent on
 set background=dark
 
 " TODO Steal some tricks from http://stackoverflow.com/questions/95072/what-are-your-favorite-vim-tricks/225852 as mentioned by gmarik
+
+" set bg and fg of numbering
+highlight LineNr ctermfg=black ctermbg=white
+
+" make filename and status always visible
+set modeline
+set ls=2
 
