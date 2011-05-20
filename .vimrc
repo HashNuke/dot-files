@@ -35,7 +35,10 @@ set backspace=indent,eol,start
 set number
 
 " set bg and fg of numbering
-highlight LineNr ctermfg=white ctermbg=black
+" highlight LineNr ctermfg=white ctermbg=black
+
+" set colorscheme to evening
+colorscheme evening
 
 """""""""""
 " SEARCH
@@ -46,7 +49,6 @@ set ignorecase
 
 " highlight search
 set hlsearch
-
 
 
 """"""""""""
