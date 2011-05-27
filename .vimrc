@@ -48,6 +48,12 @@ set ignorecase
 " highlight search
 set hlsearch
 
+""""""""""""
+" PASTING
+""""""""""""
+
+" set key to toggle paste
+set pastetoggle=<F2>
 
 """"""""""""
 " FILETYPES
