@@ -11,6 +11,10 @@ set nobackup
 " autoread from disk when file is changed outside of vim
 set autoread
 
+" i am on a mac. syntax highlighting did not work until i added this
+syntax on
+colorscheme desert
+
 """""""""""""""""""""""""""""
 " TABing and INDENTing stuff
 """""""""""""""""""""""""""""
@@ -35,7 +39,7 @@ set backspace=indent,eol,start
 set number
 
 " set colorscheme to evening
-colorscheme evening
+" colorscheme evening
 
 
 """""""""""
@@ -73,8 +77,11 @@ au BufRead,BufNewFile {*.tt}                                set ft=treetop
 
 filetype on
 
-set rtp+=~/.vim/vundle.git/ 
+set rtp+=~/.vim/bundle/vundle/ 
 call vundle#rc()
+
+" Vundle can manage vundle"
+Bundle "gmarik/vundle"
 
 Bundle "L9"
 Bundle "FuzzyFinder"
@@ -82,6 +89,9 @@ Bundle "ack.vim"
 
 " markdown syntax
 Bundle "Markdown"
+
+" ruby bob, ruby! that should come first
+Bundle "vim-scripts/kkruby.vim"
 
 Bundle "git://git.wincent.com/command-t.git"
 
@@ -122,14 +132,11 @@ filetype plugin indent on
 " "Bundles here
 " filetype plugin indent on
 
-set background=dark
-
 " TODO Steal some tricks from http://stackoverflow.com/questions/95072/what-are-your-favorite-vim-tricks/225852 as mentioned by gmarik
 
 " set bg and fg of numbering
-highlight LineNr ctermfg=black ctermbg=white
+" highlight LineNr ctermfg=black ctermbg=white
 
 " make filename and status always visible
 set modeline
 set ls=2
-
