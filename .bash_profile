@@ -1,4 +1,4 @@
-source ~/.cmd_profile.sh
+source ~/.cmd_profile
 
 source ~/dot-files/git-completion.sh
 source ~/dot-files/ruby_identifier.sh
