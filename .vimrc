@@ -137,3 +137,10 @@ highlight LineNr ctermfg=black ctermbg=white
 " make filename and status always visible
 set modeline
 set ls=2
+
+"""""""""""""""
+" KEY MAPPINGS
+"""""""""""""""
+
+" maps w!! to sudo save
+cmap w!! %!sudo tee > /dev/null %
