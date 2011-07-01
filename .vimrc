@@ -93,6 +93,8 @@ Bundle "L9"
 Bundle "FuzzyFinder"
 Bundle "ack.vim"
 
+" Molokai ColorScheme
+
 " NERDtree
 Bundle "scrooloose/nerdtree"
 
@@ -102,7 +104,9 @@ Bundle "Markdown"
 " ruby bob, ruby! that should come first
 Bundle "vim-scripts/kkruby.vim"
 
-Bundle "git://git.wincent.com/command-t.git"
+" Command-T file finder
+" disabled coz it needs the same ruby as MacVim build
+" Bundle "wincent/Command-T"
 
 " cucumber
 Bundle "cucumber.zip"
