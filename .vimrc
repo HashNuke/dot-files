@@ -93,7 +93,8 @@ Bundle "L9"
 Bundle "FuzzyFinder"
 Bundle "ack.vim"
 
-" Molokai ColorScheme
+" File opener
+Bundle "Quicksilver.vim"
 
 " NERDtree
 Bundle "scrooloose/nerdtree"
