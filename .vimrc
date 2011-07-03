@@ -4,6 +4,9 @@
 " no more compatible with vi
 set nocompatible
 
+" no beep
+set vb
+
 " write no backup files
 set nowritebackup
 set nobackup
