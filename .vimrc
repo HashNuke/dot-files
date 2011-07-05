@@ -80,7 +80,7 @@ au BufRead,BufNewFile {*.tt}  set ft=treetop
 " BUNDLES
 """"""""""
 
-filetype on
+filetype off
 
 set rtp+=~/.vim/bundle/vundle/ 
 call vundle#rc()
@@ -88,12 +88,10 @@ call vundle#rc()
 " Vundle can manage vundle"
 Bundle "gmarik/vundle"
 
+" I don't understand these, but it was there when I stole someone's vimrc
 Bundle "L9"
 Bundle "FuzzyFinder"
 Bundle "ack.vim"
-
-" File opener
-Bundle "Quicksilver.vim"
 
 " NERDtree
 Bundle "scrooloose/nerdtree"
@@ -103,10 +101,6 @@ Bundle "Markdown"
 
 " ruby bob, ruby! that should come first
 Bundle "vim-scripts/kkruby.vim"
-
-" Command-T file finder
-" disabled coz it needs the same ruby as MacVim build
-" Bundle "wincent/Command-T"
 
 " cucumber
 Bundle "cucumber.zip"
@@ -136,8 +130,10 @@ Bundle "actionscript.vim--Cuss"
 " Treetop
 Bundle "nanki/treetop.vim"
 
-" Utility
+" AutoCompleter
 Bundle "SuperTab"
+
+" Used to format text into tables. Useless for me, but still fashionable.
 Bundle "godlygeek/tabular"
 
 " end bundle list
@@ -146,11 +142,6 @@ filetype plugin indent on
 """""""""""""""""
 " OTHER BELLS
 """""""""""""""""
-
-" NOTE: if some plugins fail to work, put the config *between* lines:
-" filetype off
-" "Bundles here
-" filetype plugin indent on
 
 " TODO Steal some tricks from http://stackoverflow.com/questions/95072/what-are-your-favorite-vim-tricks/225852 as mentioned by gmarik
 
@@ -169,27 +160,30 @@ set laststatus=2
 set statusline=
 set statusline+=%f " file name
 set statusline+=\ \  " some whitespace 
-set statusline+=%-14.(%l,%c%V%)%P\  " offset
+set statusline+=%-14.(%l,%c%V%)%P\  " line, column number and percentage
 set statusline+=%= " right align
 set statusline+=%h%1*%m%r%w%0* " flags
 set statusline+=[%{strlen(&ft)?&ft:'none'}, " filetype
 set statusline+=%{&fileformat}]\  " file format
 
+" god knows what this is, I'll ask him later
 set ls=2
+
 
 """"""""""""""""""""""""""""
 " KEY AND COMMAND MAPPINGS
 """"""""""""""""""""""""""""
+
 "Set Mapleader. Like Emacs's mod key.
 let mapleader = ","
 let g:mapleader = ","
 
-" <Leader> followed by the , key to open NERDTree
+" <Leader> followed by the, key to open NERDTree
 map <Leader>, :NERDTreeToggle<cr>
 
-" gestures.
+" use my Macbook's trackpad's gestures to switch tabs
 nmap <SwipeLeft> :tabp<CR>
 nmap <SwipeRight> :tabn<CR>
 
-" maps w!! to sudo save
+" maps w!! to sudo-save
 cmap w!! %!sudo tee > /dev/null %
