@@ -18,6 +18,9 @@ set autoread
 syntax on
 colorscheme desert
 
+" set the working directory to the current file's path
+set autochdir
+
 """""""""""""""""""""""""""""
 " TABing and INDENTing stuff
 """""""""""""""""""""""""""""
@@ -177,6 +180,10 @@ let g:mapleader = ","
 
 " <Leader> followed by the, key to open NERDTree
 map <Leader>, :NERDTreeToggle<cr>
+
+" use my Macbook's trackpad's gestures to switch tabs
+nmap <SwipeLeft> :tabp<CR>
+nmap <SwipeRight> :tabn<CR>
 
 " maps w!! to sudo-save
 cmap w!! %!sudo tee > /dev/null %
