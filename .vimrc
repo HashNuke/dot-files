@@ -21,10 +21,6 @@ colorscheme desert
 " set the working directory to the current file's path
 set autochdir
 
-"Set Mapleader
-let mapleader = ","
-let g:mapleader = ","
-
 """""""""""""""""""""""""""""
 " TABing and INDENTing stuff
 """""""""""""""""""""""""""""
@@ -184,8 +180,16 @@ set ls=2
 """"""""""""""""""""""""""""
 " KEY AND COMMAND MAPPINGS
 """"""""""""""""""""""""""""
+"Set Mapleader. Like Emacs's mod key.
+let mapleader = ","
+let g:mapleader = ","
 
+" <Leader> followed by the , key to open NERDTree
 map <Leader>, :NERDTreeToggle<cr>
+
+" gestures.
+nmap <SwipeLeft> :tabp<CR>
+nmap <SwipeRight> :tabn<CR>
 
 " maps w!! to sudo save
 cmap w!! %!sudo tee > /dev/null %
