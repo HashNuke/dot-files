@@ -182,9 +182,11 @@ let g:mapleader = ","
 map <Leader>, :NERDTreeToggle<cr>
 
 " use my Macbook's trackpad's gestures to switch tabs
+" The mappings below are for normal mode
 nmap <SwipeLeft> :tabp<CR>
 nmap <SwipeRight> :tabn<CR>
 
+" the same switching as above for insert mode
 imap <SwipeLeft> :tabp<CR>
 imap <SwipeRight> <ESC>:tabn<CR>
 
