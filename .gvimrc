@@ -187,7 +187,7 @@ nmap <SwipeLeft> :tabp<CR>
 nmap <SwipeRight> :tabn<CR>
 
 " the same switching as above for insert mode
-imap <SwipeLeft> :tabp<CR>
+imap <SwipeLeft> <ESC>:tabp<CR>
 imap <SwipeRight> <ESC>:tabn<CR>
 
 " maps w!! to sudo-save
