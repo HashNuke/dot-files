@@ -185,5 +185,8 @@ map <Leader>, :NERDTreeToggle<cr>
 nmap <SwipeLeft> :tabp<CR>
 nmap <SwipeRight> :tabn<CR>
 
+imap <SwipeLeft> :tabp<CR>
+imap <SwipeRight> <ESC>:tabn<CR>
+
 " maps w!! to sudo-save
 cmap w!! %!sudo tee > /dev/null %
