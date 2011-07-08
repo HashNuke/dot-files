@@ -18,6 +18,9 @@ set autoread
 syntax on
 colorscheme desert
 
+" set the working directory to the current file's path
+set autochdir
+
 """""""""""""""""""""""""""""
 " TABing and INDENTing stuff
 """""""""""""""""""""""""""""
@@ -133,6 +136,9 @@ Bundle "SuperTab"
 " Used to format text into tables. Useless for me, but still fashionable.
 Bundle "godlygeek/tabular"
 
+" Solarized colors
+Bundle "altercation/vim-colors-solarized"
+
 " end bundle list
 filetype plugin indent on
 
@@ -177,6 +183,15 @@ let g:mapleader = ","
 
 " <Leader> followed by the, key to open NERDTree
 map <Leader>, :NERDTreeToggle<cr>
+
+" use my Macbook's trackpad's gestures to switch tabs
+" The mappings below are for normal mode
+nmap <SwipeLeft> :tabp<CR>
+nmap <SwipeRight> :tabn<CR>
+
+" the same switching as above for insert mode
+imap <SwipeLeft> <ESC>:tabp<CR>
+imap <SwipeRight> <ESC>:tabn<CR>
 
 " maps w!! to sudo-save
 cmap w!! %!sudo tee > /dev/null %
