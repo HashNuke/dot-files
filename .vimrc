@@ -1,25 +1,24 @@
 " Created on Akash Manohar's machine
 " This uses Vundle (https://github.com/gmarik/vundle) to manage vim scripts 
 
-" no more compatible with vi
+" no more compatible with vi (like I care ;)
 set nocompatible
 
-" no beep
+" stop beeping! STFU!
 set vb
 
-" write no backup files
+" write no backup files (don't know what these do, I still have .swp files)
 set nowritebackup
 set nobackup
 
 " autoread from disk when file is changed outside of vim
 set autoread
 
-" i am on a mac. syntax highlighting did not work until i added this
-syntax on
-colorscheme desert
-
 " set the working directory to the current file's path
-set autochdir
+if has('gui_running')
+    set autochdir
+endif
+
 
 """""""""""""""""""""""""""""
 " TABing and INDENTing stuff
@@ -44,8 +43,6 @@ set backspace=indent,eol,start
 " turn line numbering on
 set number
 
-" set font and font size in macvim
-set guifont=Monaco:h13
 
 """""""""""
 " SEARCH
@@ -142,18 +139,10 @@ Bundle "altercation/vim-colors-solarized"
 " end bundle list
 filetype plugin indent on
 
+
 """""""""""""""""
-" OTHER BELLS
+" STATUS LINE 
 """""""""""""""""
-
-" TODO Steal some tricks from http://stackoverflow.com/questions/95072/what-are-your-favorite-vim-tricks/225852 as mentioned by gmarik
-
-" set bg and fg of line numbering
-" for cmd-line, 8 is dark grey, and 7 is light grey
-highlight LineNr ctermfg=8 ctermbg=7
-
-" for GUI, use hex
-highlight LineNr guifg=#CCCCCC guibg=#666666
 
 " make filename and status always visible
 set modeline
@@ -181,17 +170,51 @@ set ls=2
 let mapleader = ","
 let g:mapleader = ","
 
+
 " <Leader> followed by the, key to open NERDTree
 map <Leader>, :NERDTreeToggle<cr>
 
-" use my Macbook's trackpad's gestures to switch tabs
-" The mappings below are for normal mode
-nmap <SwipeLeft> :tabp<CR>
-nmap <SwipeRight> :tabn<CR>
 
-" the same switching as above for insert mode
-imap <SwipeLeft> <ESC>:tabp<CR>
-imap <SwipeRight> <ESC>:tabn<CR>
+" use macvim's three finger swipes to switch tabs
+if has("gui_macvim")
+    " mappings for normal mode
+    nmap <SwipeLeft> :tabp<CR>
+    nmap <SwipeRight> :tabn<CR>
 
-" maps w!! to sudo-save
+    " mappings for insert mode
+    imap <SwipeLeft> <ESC>:tabp<CR>
+    imap <SwipeRight> <ESC>:tabn<CR>
+endif
+
+
+" w!! to sudo-save
 cmap w!! %!sudo tee > /dev/null %
+
+
+"""""""""""""""""""""""""""""""""""""
+" AFTER PARTY
+" I use this space to initiate stuff
+""""""""""""""""""""""""""""""""""""""
+
+syntax enable
+if has("gui_running")
+    " VIM IS RUNNING IN GUI
+
+    " set font and font size in macvim
+    set guifont=Monaco:h13
+    
+    set background=dark
+    colorscheme solarized
+else
+    " VIM IS RUNNING IN COMMAND LINE
+    
+    " set bg and fg of line numbering
+    " for cmd-line, 8 is dark grey, and 7 is light grey
+    highlight LineNr ctermfg=8 ctermbg=7
+    
+    "set color scheme to desert
+    colorscheme desert
+endif
+
+
+" TODO Later on steal some tricks from http://stackoverflow.com/questions/95072/what-are-your-favorite-vim-tricks/225852 as mentioned by gmarik
