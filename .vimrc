@@ -174,29 +174,34 @@ let g:mapleader = ","
 " <Leader> followed by the, key to open NERDTree
 map <Leader>, :NERDTreeToggle<cr>
 
-
 " use macvim's three finger swipes to switch tabs
 if has("gui_macvim")
     " mappings for normal mode
     nmap <SwipeLeft> :tabp<CR>
     nmap <SwipeRight> :tabn<CR>
+    nmap <SwipeUp> :bp<CR>
+    nmap <SwipeDown> :bn<CR>
 
     " mappings for insert mode
     imap <SwipeLeft> <ESC>:tabp<CR>
     imap <SwipeRight> <ESC>:tabn<CR>
+    imap <SwipeUp> <ESC>:bp<CR>
+    imap <SwipeDown> <ESC>:bn<CR>
 endif
-
 
 " w!! to sudo-save
 cmap w!! %!sudo tee > /dev/null %
 
 
-"""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""
 " AFTER PARTY
 " I use this space to initiate stuff
 """"""""""""""""""""""""""""""""""""""
 
+" enable syntax highlighting
 syntax enable
+
+" check if Vim is running in CLI or in GUI mode for specific settings
 if has("gui_running")
     " VIM IS RUNNING IN GUI
 
@@ -211,10 +216,9 @@ else
     " set bg and fg of line numbering
     " for cmd-line, 8 is dark grey, and 7 is light grey
     highlight LineNr ctermfg=8 ctermbg=7
-    
+   
     "set color scheme to desert
     colorscheme desert
 endif
-
 
 " TODO Later on steal some tricks from http://stackoverflow.com/questions/95072/what-are-your-favorite-vim-tricks/225852 as mentioned by gmarik
