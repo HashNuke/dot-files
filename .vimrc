@@ -87,8 +87,10 @@ Bundle "gmarik/vundle"
 
 " I don't understand these, but it was there when I stole someone's vimrc
 Bundle "L9"
-Bundle "FuzzyFinder"
 Bundle "ack.vim"
+
+" The greatest finder for vim
+Bundle "FuzzyFinder"
 
 " NERDtree
 Bundle "scrooloose/nerdtree"
@@ -162,6 +164,26 @@ set statusline+=%{&fileformat}]\  " file format
 set ls=2
 
 
+"""""""""""""""""""""""
+" FUNCTIONS
+"""""""""""""""""""""""
+
+" SetGitWD()
+" will set the current working dir
+" to the root of the git repo that the current file belongs to
+" if it is a git repo, else it's set to the file
+" And this is my first function in vimscript
+function! SetGitWD()
+    try
+        let git_root = system("git rev-parse --show-toplevel")
+        execute "lcd " git_root
+        echo "wd is now" git_root
+    catch
+        "set working dir to current file
+    endtry
+endfunction
+
+
 """"""""""""""""""""""""""""
 " KEY AND COMMAND MAPPINGS
 """"""""""""""""""""""""""""
@@ -170,9 +192,11 @@ set ls=2
 let mapleader = ","
 let g:mapleader = ","
 
-
-" <Leader> followed by the, key to open NERDTree
+" <Leader> followed by the <comma> key to open NERDTree
 map <Leader>, :NERDTreeToggle<cr>
+
+" <Leader> followed by the <dot> key to open Buffer explorer
+map <Leader>. :FufFile<cr>
 
 " use macvim's three finger swipes to switch tabs
 if has("gui_macvim")
@@ -221,4 +245,8 @@ else
     colorscheme desert
 endif
 
+" set the working dir to the root of the git repo
+" autocmd BufEnter * call SetGitWD()
+
 " TODO Later on steal some tricks from http://stackoverflow.com/questions/95072/what-are-your-favorite-vim-tricks/225852 as mentioned by gmarik
+
