@@ -129,6 +129,9 @@ Bundle "actionscript.vim--Cuss"
 " Treetop
 Bundle "nanki/treetop.vim"
 
+" ZenCoding
+Bundle "mattn/zencoding-vim"
+
 " AutoCompleter
 Bundle "SuperTab"
 
