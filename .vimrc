@@ -65,7 +65,7 @@ set pastetoggle=<F2>
 " FILETYPES
 """"""""""""
 
-au BufRead,BufNewFile {Gemfile,Rakefile,Capfile,*.rake,config.ru}  set ft=ruby
+au BufRead,BufNewFile {Gemfile,Rakefile,Capfile,*.rb,*.rake,config.ru}  set ft=ruby
 au BufRead,BufNewFile {*.md,*.mkd,*.markdown}  set ft=markdown
 au Bufread,BufNewFile {*.as}  set filetype=actionscript
 au BufRead,BufNewFile {*.html.haml,*.haml}  set ft=haml
@@ -138,6 +138,8 @@ Bundle "SuperTab"
 " Used to format text into tables. Useless for me, but still fashionable.
 Bundle "godlygeek/tabular"
 
+Bundle "vim-scripts/Conque-Shell"
+
 " Solarized colors
 Bundle "altercation/vim-colors-solarized"
 
@@ -195,14 +197,20 @@ endfunction
 let mapleader = ","
 let g:mapleader = ","
 
-" <Leader> followed by the <comma> key to open NERDTree
-map <Leader>, :NERDTreeToggle<cr>
+" <Leader> followed by the / key to open NERDTree
+map <Leader>/ :NERDTreeToggle<cr>
 
-" <Leader> followed by the <dot> key to open Buffer explorer
-map <Leader>. :FufFile<cr>
+" <Leader> followed by the <comma> key to open file explorer
+map <Leader>, :FufFile<cr>
+
+" <Leader> followed by the <dot> key to list buffers
+map <Leader>. :FufBuffer<cr>
 
 " use macvim's three finger swipes to switch tabs
 if has("gui_macvim")
+    " DISABLED
+    " this is rendered useless by Lion's default gestures
+
     " mappings for normal mode
     nmap <SwipeLeft> :tabp<CR>
     nmap <SwipeRight> :tabn<CR>
@@ -231,20 +239,12 @@ syntax enable
 " check if Vim is running in CLI or in GUI mode for specific settings
 if has("gui_running")
     " VIM IS RUNNING IN GUI
-
     " set font and font size in macvim
     set guifont=Monaco:h13
-    
-    set background=dark
     colorscheme solarized
+    set background=light
 else
-    " VIM IS RUNNING IN COMMAND LINE
-    
-    " set bg and fg of line numbering
-    " for cmd-line, 8 is dark grey, and 7 is light grey
-    highlight LineNr ctermfg=8 ctermbg=7
-   
-    "set color scheme to desert
+    set background=light
     colorscheme desert
 endif
 
@@ -252,4 +252,3 @@ endif
 " autocmd BufEnter * call SetGitWD()
 
 " TODO Later on steal some tricks from http://stackoverflow.com/questions/95072/what-are-your-favorite-vim-tricks/225852 as mentioned by gmarik
-
