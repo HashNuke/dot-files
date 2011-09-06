@@ -105,7 +105,7 @@ Bundle "vim-scripts/kkruby.vim"
 Bundle "cucumber.zip"
 
 " rails
-Bundle "rails.vim"
+Bundle "tpope/vim-rails"
 
 " jquery
 Bundle "jQuery"
@@ -138,14 +138,20 @@ Bundle "SuperTab"
 " Used to format text into tables. Useless for me, but still fashionable.
 Bundle "godlygeek/tabular"
 
-Bundle "vim-scripts/Conque-Shell"
+" Command-T
+Bundle "wincent/Command-T"
+
+" NERDCommenter
+Bundle "scrooloose/nerdcommenter"
+
+" Gist
+Bundle "mattn/gist-vim"
 
 " Solarized colors
 Bundle "altercation/vim-colors-solarized"
 
 " end bundle list
 filetype plugin indent on
-
 
 """""""""""""""""
 " STATUS LINE 
@@ -189,6 +195,7 @@ function! SetGitWD()
 endfunction
 
 
+
 """"""""""""""""""""""""""""
 " KEY AND COMMAND MAPPINGS
 """"""""""""""""""""""""""""
@@ -208,7 +215,6 @@ map <Leader>. :FufBuffer<cr>
 
 " use macvim's three finger swipes to switch tabs
 if has("gui_macvim")
-    " DISABLED
     " this is rendered useless by Lion's default gestures
 
     " mappings for normal mode
@@ -247,6 +253,11 @@ else
     set background=light
     colorscheme desert
 endif
+
+function! Timeline()
+    echo "function called"
+endfunction
+
 
 " set the working dir to the root of the git repo
 " autocmd BufEnter * call SetGitWD()
