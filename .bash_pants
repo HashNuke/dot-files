@@ -1,2 +1,4 @@
 alias gl="git log --color --oneline --decorate"
 alias gs="git status -sb"
+alias gp="git push"
+alias gl="git pull"
