@@ -1,0 +1,2 @@
+alias gl="git log --color --oneline --decorate"
+alias gs="git status -sb"

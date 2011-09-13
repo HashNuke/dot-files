@@ -24,8 +24,8 @@ endif
 " TABing and INDENTing stuff
 """""""""""""""""""""""""""""
 
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 
 " tabs are actually multiple spaces
 set expandtab
@@ -71,7 +71,7 @@ au Bufread,BufNewFile {*.as}  set filetype=actionscript
 au BufRead,BufNewFile {*.html.haml,*.haml}  set ft=haml
 au BufRead,BufNewFile {*.rkt,*.scm,*.lp}  set ft=scheme
 au BufRead,BufNewFile {*.tt}  set ft=treetop
-
+au BufNewFile,BufRead *.less set filetype=less
 
 """"""""""
 " BUNDLES
@@ -248,9 +248,9 @@ if has("gui_running")
     " set font and font size in macvim
     set guifont=Monaco:h13
     colorscheme solarized
-    set background=light
+    set background=dark
 else
-    set background=light
+    set background=dark
     colorscheme desert
 endif
 
