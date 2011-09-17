@@ -4,7 +4,7 @@
 " no more compatible with vi (like I care ;)
 set nocompatible
 
-" stop beeping! STFU!
+" STFU! stop beeping!
 set vb
 
 " write no backup files (don't know what these do, I still have .swp files)
@@ -15,9 +15,9 @@ set nobackup
 set autoread
 
 " set the working directory to the current file's path
-if has('gui_running')
-    set autochdir
-endif
+" if has('gui_running')
+"    set autochdir
+" endif
 
 
 """""""""""""""""""""""""""""
@@ -69,7 +69,7 @@ au BufRead,BufNewFile {Gemfile,Rakefile,Capfile,*.rb,*.rake,config.ru}  set ft=r
 au BufRead,BufNewFile {*.md,*.mkd,*.markdown}  set ft=markdown
 au Bufread,BufNewFile {*.as}  set filetype=actionscript
 au BufRead,BufNewFile {*.html.haml,*.haml}  set ft=haml
-au BufRead,BufNewFile {*.rkt,*.scm,*.lp}  set ft=scheme
+au BufRead,BufNewFile {*.rkt,*.scm}  set ft=scheme
 au BufRead,BufNewFile {*.tt}  set ft=treetop
 au BufNewFile,BufRead *.less set filetype=less
 
@@ -85,15 +85,11 @@ call vundle#rc()
 " Vundle can manage vundle"
 Bundle "gmarik/vundle"
 
-" I don't understand these, but it was there when I stole someone's vimrc
+" Provides some functions to write in vimscript
 Bundle "L9"
+
+" Awk stuff in vim
 Bundle "ack.vim"
-
-" The greatest finder for vim
-Bundle "FuzzyFinder"
-
-" NERDtree
-Bundle "scrooloose/nerdtree"
 
 " markdown syntax
 Bundle "Markdown"
@@ -112,7 +108,6 @@ Bundle "jQuery"
 
 " git
 Bundle "git.zip"
-Bundle "fugitive.vim"
 
 " haml
 Bundle "tpope/vim-haml"
@@ -141,7 +136,11 @@ Bundle "godlygeek/tabular"
 " Command-T
 Bundle "wincent/Command-T"
 
-" NERDCommenter
+" NERDtree, another finder but I mostly use it when I need a file name
+" And this guy has a nice github username "scroo loose"
+Bundle "scrooloose/nerdtree"
+
+" NERDCommenter to comment out code
 Bundle "scrooloose/nerdcommenter"
 
 " Gist
@@ -179,22 +178,20 @@ set ls=2
 " FUNCTIONS
 """""""""""""""""""""""
 
-" SetGitWD()
-" will set the current working dir
+" SetGitWD() will set the current working dir
 " to the root of the git repo that the current file belongs to
-" if it is a git repo, else it's set to the file
 " And this is my first function in vimscript
+" TODO Borrow tricks from this function
+" https://github.com/vim-scripts/ctrlp.vim/blob/master/autoload/ctrlp.vim#L641
 function! SetGitWD()
     try
         let git_root = system("git rev-parse --show-toplevel")
         execute "lcd " git_root
-        echo "wd is now" git_root
+        " echo "working directory is now" git_root
     catch
-        "set working dir to current file
+        "Do nothing for now
     endtry
 endfunction
-
-
 
 """"""""""""""""""""""""""""
 " KEY AND COMMAND MAPPINGS
@@ -204,14 +201,11 @@ endfunction
 let mapleader = ","
 let g:mapleader = ","
 
+" Let CtrlP manage the working directory
+let g:ctrlp_working_path_mode = 2
+
 " <Leader> followed by the / key to open NERDTree
 map <Leader>/ :NERDTreeToggle<cr>
-
-" <Leader> followed by the <comma> key to open file explorer
-map <Leader>, :FufFile<cr>
-
-" <Leader> followed by the <dot> key to list buffers
-map <Leader>. :FufBuffer<cr>
 
 " use macvim's three finger swipes to switch tabs
 if has("gui_macvim")
@@ -250,16 +244,12 @@ if has("gui_running")
     colorscheme solarized
     set background=dark
 else
+    " i keep changing this, so let's keep this seperate
     set background=dark
     colorscheme desert
 endif
 
-function! Timeline()
-    echo "function called"
-endfunction
-
-
 " set the working dir to the root of the git repo
-" autocmd BufEnter * call SetGitWD()
+au BufEnter * call SetGitWD()
 
 " TODO Later on steal some tricks from http://stackoverflow.com/questions/95072/what-are-your-favorite-vim-tricks/225852 as mentioned by gmarik
