@@ -197,9 +197,12 @@ endfunction
 " KEY AND COMMAND MAPPINGS
 """"""""""""""""""""""""""""
 
-"Set Mapleader. Like Emacs's mod key.
+" Set Mapleader. Like Emacs's mod key.
 let mapleader = ","
 let g:mapleader = ","
+
+" matches in command-t are listed from top to bottom
+let g:CommandTMatchWindowReverse = 1
 
 " Let CtrlP manage the working directory
 let g:ctrlp_working_path_mode = 2
