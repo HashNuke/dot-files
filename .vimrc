@@ -14,6 +14,8 @@ set nobackup
 " autoread from disk when file is changed outside of vim
 set autoread
 
+set cursorline
+
 " set the working directory to the current file's path
 " if has('gui_running')
 "    set autochdir
@@ -149,6 +151,12 @@ Bundle "mattn/gist-vim"
 " Solarized colors
 Bundle "altercation/vim-colors-solarized"
 
+" Github vim theme
+Bundle "vim-scripts/github-theme"
+
+" Railscasts theme
+Bundle "jpo/vim-railscasts-theme"
+
 " end bundle list
 filetype plugin indent on
 
@@ -244,12 +252,12 @@ if has("gui_running")
     " VIM IS RUNNING IN GUI
     " set font and font size in macvim
     set guifont=Monaco:h13
-    colorscheme solarized
-    set background=dark
+    colorscheme github
+    set background=light
 else
     " i keep changing this, so let's keep this seperate
     set background=dark
-    colorscheme desert
+    colorscheme default
 endif
 
 " set the working dir to the root of the git repo
