@@ -117,6 +117,9 @@ Bundle "tpope/vim-haml"
 " scss
 Bundle "cakebaker/scss-syntax.vim"
 
+" lesscss
+Bundle "groenewege/vim-less"
+
 " coffeescript
 Bundle "kchmck/vim-coffee-script"
 
