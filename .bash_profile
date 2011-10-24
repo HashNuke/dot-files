@@ -7,3 +7,4 @@ source /Users/akashmanohar/.pythonbrew/etc/bashrc
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 PS1='$(rvm_version)::\W$(__git_ps1 "(%s)")⚡ '
+# PS1='$(rvm_version)$(__git_ps1 "(%s)")⚡ '

@@ -67,7 +67,7 @@ set pastetoggle=<F2>
 " FILETYPES
 """"""""""""
 
-au BufRead,BufNewFile {Gemfile,Rakefile,Capfile,*.rb,*.rake,config.ru}  set ft=ruby
+au BufRead,BufNewFile {Gemfile,Rakefile,Capfile,Vagrantfile,*.rb,*.rake,config.ru}  set ft=ruby
 au BufRead,BufNewFile {*.md,*.mkd,*.markdown}  set ft=markdown
 au Bufread,BufNewFile {*.as}  set filetype=actionscript
 au BufRead,BufNewFile {*.html.haml,*.haml}  set ft=haml
@@ -110,6 +110,7 @@ Bundle "jQuery"
 
 " git
 Bundle "git.zip"
+Bundle "tpope/vim-fugitive"
 
 " haml
 Bundle "tpope/vim-haml"
@@ -141,10 +142,6 @@ Bundle "godlygeek/tabular"
 " Command-T
 Bundle "wincent/Command-T"
 
-" NERDtree, another finder but I mostly use it when I need a file name
-" And this guy has a nice github username "scroo loose"
-Bundle "scrooloose/nerdtree"
-
 " NERDCommenter to comment out code
 Bundle "scrooloose/nerdcommenter"
 
@@ -159,6 +156,8 @@ Bundle "vim-scripts/github-theme"
 
 " Railscasts theme
 Bundle "jpo/vim-railscasts-theme"
+
+Bundle "airblade/vim-rooter"
 
 " end bundle list
 filetype plugin indent on
@@ -197,7 +196,7 @@ set ls=2
 function! SetGitWD()
     try
         let git_root = system("git rev-parse --show-toplevel")
-        execute "lcd " git_root
+        execute "cd! " git_root
         " echo "working directory is now" git_root
     catch
         "Do nothing for now
@@ -219,7 +218,7 @@ let g:CommandTMatchWindowReverse = 1
 let g:ctrlp_working_path_mode = 2
 
 " <Leader> followed by the / key to open NERDTree
-map <Leader>/ :NERDTreeToggle<cr>
+map <Leader>/ :Vex<cr>
 
 " use macvim's three finger swipes to switch tabs
 if has("gui_macvim")
@@ -255,8 +254,8 @@ if has("gui_running")
     " VIM IS RUNNING IN GUI
     " set font and font size in macvim
     set guifont=Monaco:h13
-    colorscheme github
-    set background=light
+    colorscheme solarized
+    set background=dark
 else
     " i keep changing this, so let's keep this seperate
     set background=dark
@@ -264,6 +263,7 @@ else
 endif
 
 " set the working dir to the root of the git repo
-au BufEnter * call SetGitWD()
+" au BufEnter * call SetGitWD()
 
 " TODO Later on steal some tricks from http://stackoverflow.com/questions/95072/what-are-your-favorite-vim-tricks/225852 as mentioned by gmarik
+
