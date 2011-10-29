@@ -158,9 +158,6 @@ Bundle "vim-scripts/github-theme"
 " Railscasts theme
 Bundle "jpo/vim-railscasts-theme"
 
-" Zenburn theme
-Bundle "vim-scripts/Zenburn"
-
 Bundle "airblade/vim-rooter"
 
 " end bundle list
