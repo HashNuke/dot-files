@@ -7,6 +7,9 @@ set nocompatible
 " STFU! stop beeping!
 set vb
 
+" enable trackpad/mouse scrolling
+set mouse=a
+
 " write no backup files (don't know what these do, I still have .swp files)
 set nowritebackup
 set nobackup
