@@ -152,12 +152,6 @@ Bundle "mattn/gist-vim"
 " Solarized colors
 Bundle "altercation/vim-colors-solarized"
 
-" Github vim theme
-Bundle "vim-scripts/github-theme"
-
-" Railscasts theme
-Bundle "jpo/vim-railscasts-theme"
-
 Bundle "airblade/vim-rooter"
 
 " end bundle list
