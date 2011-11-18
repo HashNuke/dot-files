@@ -267,4 +267,4 @@ endif
 " au BufEnter * call SetGitWD()
 
 " TODO Later on steal some tricks from http://stackoverflow.com/questions/95072/what-are-your-favorite-vim-tricks/225852 as mentioned by gmarik
-
+" and steal more from https://bitbucket.org/sjl/dotfiles/src/tip/vim/.vimrc
