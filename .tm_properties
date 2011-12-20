@@ -1,0 +1,6 @@
+softTabs = true
+fontName = "Menlo"
+fontSize = 14
+softWrap = true
+tabSize  = 2
+
