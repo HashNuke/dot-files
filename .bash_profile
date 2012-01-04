@@ -14,7 +14,10 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 # Displays [gemset dir:branch]
 #PS1="\\[$Cyan\][\[$Green\]$(~/.rvm/bin/rvm-prompt g | cut -c2-15) \[$IYellow\]\W\[$IPurple\]:$(__git_ps1 "%s")\[$Cyan\]] ⚡ \[$White\]"
 
-# Displays [Dir:branch]
-PS1="\\[$Cyan\][\[$IYellow\]\W\[$IPurple\]:$(__git_ps1 "%s")\[$Cyan\]] ⚡ \[$White\]"
+# Displays [dir:branch]
+PS1="\\[$Cyan\][\[$IYellow\]\W\[$IPurple\]$(__git_ps1 ":%s")\[$Cyan\]] ⚡ \[$White\]"
+
+# Buggy version doesnt work; was trying to hide branch if not a git repo
+#PS1="\\[$Cyan\][\[$IYellow\]\W\[$IPurple\]$(if [ ! -z $(__gitdir) ]; then __git_ps1 ":%s"; fi)\[$Cyan\]] ⚡ \[$White\]"
 
 alias re=rvm_version
