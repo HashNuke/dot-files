@@ -12,5 +12,9 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 # PS1='$(rvm_version)$(__git_ps1 "(%s)")⚡ '
 
 # Displays [gemset dir:branch]
-PS1="\\[$Cyan\][\[$Green\]$(~/.rvm/bin/rvm-prompt g | cut -c2-15) \[$IYellow\]\W\[$IPurple\]:$(__git_ps1 "%s")\[$Cyan\]] ⚡ \[$White\]"
+#PS1="\\[$Cyan\][\[$Green\]$(~/.rvm/bin/rvm-prompt g | cut -c2-15) \[$IYellow\]\W\[$IPurple\]:$(__git_ps1 "%s")\[$Cyan\]] ⚡ \[$White\]"
 
+# Displays [Dir:branch]
+PS1="\\[$Cyan\][\[$IYellow\]\W\[$IPurple\]:$(__git_ps1 "%s")\[$Cyan\]] ⚡ \[$White\]"
+
+alias re=rvm_version
