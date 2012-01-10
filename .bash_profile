@@ -5,6 +5,8 @@ source ~/dot-files/git-completion.sh
 source ~/dot-files/ruby_identifier.sh
 source /Users/akashmanohar/.pythonbrew/etc/bashrc
 
+alias ec="emacsclient -t"
+
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 # Displays 1.9.3@gemset::dir(branch)
