@@ -29,10 +29,16 @@ ZSH_THEME="HashNuke"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git osx rvm knife)
+plugins=(git osx rvm)
 
 source ~/dot-files/.cmd_profile
 source ~/.cmd_profile
 source $ZSH/oh-my-zsh.sh
 
+zstyle ':completion:*' accept-exact '*(N)'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+
 # Customize to your needs...
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
