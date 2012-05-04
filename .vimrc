@@ -144,7 +144,7 @@ Bundle "SuperTab"
 Bundle "godlygeek/tabular"
 
 " Command-T
-Bundle "wincent/Command-T"
+Bundle "kien/ctrlp.vim"
 
 " NERDCommenter to comment out code
 Bundle "scrooloose/nerdcommenter"
@@ -156,6 +156,8 @@ Bundle "mattn/gist-vim"
 Bundle "altercation/vim-colors-solarized"
 
 Bundle "airblade/vim-rooter"
+
+Bundle "nono/github_vim_theme"
 
 " end bundle list
 filetype plugin indent on
