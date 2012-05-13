@@ -17,6 +17,9 @@ set nobackup
 " autoread from disk when file is changed outside of vim
 set autoread
 
+" incrementally search while typing
+set incsearch
+
 " highlight current line
 set nocursorline
 
@@ -159,6 +162,8 @@ Bundle "airblade/vim-rooter"
 
 Bundle "nono/github_vim_theme"
 
+Bundle "tpope/vim-vividchalk"
+
 " end bundle list
 filetype plugin indent on
 
@@ -255,14 +260,14 @@ if has("gui_running")
     " set font and font size in macvim
     set guifont=Monaco:h13
     set background=dark
-    colorscheme desert
+    colorscheme vividchalk
 else
     " i keep changing this, so let's keep this seperate
     set background=dark
     "let g:solarized_termcolors = 256 
     let g:solarized_visibility = "high" 
     let g:solarized_contrast = "high" 
-    colorscheme desert
+    colorscheme vividchalk
 endif
 
 " set the working dir to the root of the git repo
