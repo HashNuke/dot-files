@@ -94,6 +94,10 @@ call vundle#rc()
 " Vundle can manage vundle"
 Bundle "gmarik/vundle"
 
+
+" PeepCode vividchalk theme
+Bundle "tpope/vim-vividchalk"
+
 " Provides some functions to write in vimscript
 Bundle "L9"
 
