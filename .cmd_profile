@@ -2,14 +2,16 @@ source ~/dot-files/color_names.sh
 source ~/dot-files/git-completion.sh
 source ~/dot-files/ruby_identifier.sh
 
-PS1='\n\[\e[32;1m\]\W\[\e[0m\]\[\e[30m\] ($(__git_ps1 "%s, ")$(echo $RUBY_VERSION)) \n\[\e[36m\]⚡ \[\e[0m\]'
+PS1='\n\[\e[32;1m\]\W\[\e[0m\]\[\e[35m\]$(__git_ps1 ":%s") \[\e[30m\]$(echo $RBFU_RUBY_VERSION) \n\[\e[36m\]⚡ \[\e[0m\]'
 
 [[ -s $HOME/.pythonbrew/etc/bashrc ]] && source $HOME/.pythonbrew/etc/bashrc
-[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=$PATH:$HOME/bin
 
+
+# Init rbfu
+eval "$(rbfu --init --auto)"
 
 # Emacs
 export PATH=$PATH:/usr/local/Cellar/emacs/24.1/bin
