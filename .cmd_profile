@@ -4,7 +4,7 @@ source $HOME/dot-files/git-completion.sh
 # Init rbenv
 eval "$(rbenv init -)"
 
-export PS1='\n\[\e[32;1m\]\W\[\e[0m\]\[\e[35m\]$(__git_ps1 ":%s") \[\e[30m\]$(rbenv version) \n\[\e[36m\]⚡ \[\e[0m\]'
+export PS1="\n\[\e[32;1m\]\W\[\e[0m\]\[\e[35m\]$(__git_ps1 ':%s') \[\e[30m\]$(rbenv version | awk '{print $1}') \n\[\e[36m\]⚡ \[\e[0m\]"
 
 export PATH=$HOME/bin:$HOME/.rbenv/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
