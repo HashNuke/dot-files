@@ -1,13 +1,13 @@
 [[ -s $HOME/.pythonbrew/etc/bashrc ]] && source $HOME/.pythonbrew/etc/bashrc
 source $HOME/dot-files/git-completion.sh
 
-export PS1='\n\[\e[32;1m\]\W\[\e[0m\]\[\e[35m\]$(__git_ps1 ":%s") \[\e[30m\]$(echo $RBFU_RUBY_VERSION) \n\[\e[36m\]⚡ \[\e[0m\]'
+# Init rbenv
+eval "$(rbenv init -)"
 
-export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
+export PS1='\n\[\e[32;1m\]\W\[\e[0m\]\[\e[35m\]$(__git_ps1 ":%s") \[\e[30m\]$(rbenv version) \n\[\e[36m\]⚡ \[\e[0m\]'
 
+export PATH=$HOME/bin:$HOME/.rbenv/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
-# Init rbfu
-eval "$(rbfu --init --auto)"
 
 # Emacs
 export PATH=$PATH:/usr/local/Cellar/emacs/24.1/bin
