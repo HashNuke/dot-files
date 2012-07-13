@@ -12,3 +12,5 @@
 	br = branch
 	rb = rebase
 	df = diff
+[push]
+	default = current
