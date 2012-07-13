@@ -1,0 +1,14 @@
+[core]
+	editor = /usr/bin/vim
+	excludesfile = /Users/akashmanohar/.gitignore_global
+[color]
+	ui = true
+[alias]
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+	st = status
+	co = checkout
+	dc = "diff --cached"
+	ci = "commit -s"
+	br = branch
+	rb = rebase
+	df = diff
