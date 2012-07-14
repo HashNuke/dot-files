@@ -5,7 +5,7 @@ export PATH=$HOME/bin:$HOME/.rbenv/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
 # Init rbenv
 eval "$(rbenv init -)"
-export PS1='\n\[\e[32;1m\]\W\[\e[0m\]\[\e[35m\]$(__git_ps1 ":%s") \[\e[30m\]$(rbenv version-name) \n\[\e[36m\]⚡ \[\e[0m\]'
+export PS1=$'\n\[\e[0;32m\]\W\[\e[1;31m\]$(__git_ps1 ":%s") \[\e[1;30m\]$(rbenv version-name) \n\[\e[0;36m\]\xe2\x98\x85 \[\e[0m\]'
 
 # Emacs
 export PATH=$PATH:/usr/local/Cellar/emacs/24.1/bin
