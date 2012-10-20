@@ -181,10 +181,10 @@ set modeline
 "Status line visual fluff
 set laststatus=2
 set statusline=
-set statusline+=%f " file name
+set statusline+=%f   " file name
 set statusline+=\ \  " some whitespace 
 set statusline+=%-14.(%l,%c%V%)%P\  " line, column number and percentage
-set statusline+=%= " right align
+set statusline+=%=   " right align
 set statusline+=%h%1*%m%r%w%0* " flags
 set statusline+=[%{strlen(&ft)?&ft:'none'}, " filetype
 set statusline+=%{&fileformat}]\  " file format
@@ -215,6 +215,11 @@ endfunction
 """"""""""""""""""""""""""""
 " KEY AND COMMAND MAPPINGS
 """"""""""""""""""""""""""""
+
+let g:ctrlp_prompt_mappings = {
+      \ 'AcceptSelection("e")': [],
+      \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
+      \ }
 
 " Set Mapleader. Like Emacs's mod key.
 let mapleader = ","
