@@ -129,7 +129,9 @@
 (setq el-get-sources
       '((:name el-get)
         (:name package)
+        (:name helm)
         (:name switch-window)
+        (:name ack)
         (:name smex
                :type elpa
                :after (progn
@@ -270,6 +272,10 @@
   (add-hook 'css-mode-hook '(lambda ()
                               (setq css-indent-level 2)
                               (setq css-indent-offset 2))))
+
+(helm-mode 1)
+(global-set-key (kbd "C-c h") 'helm-mini)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
 
 
 (custom-set-variables
