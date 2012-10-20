@@ -82,8 +82,8 @@
 (global-set-key (kbd "C-x B") 'ibuffer)
 
 ;; this takes care of the meta-key
-(global-set-key "\C-x\C-m" 'execute-extended-command)
-(global-set-key "\C-c\C-m" 'execute-extended-command)
+;; (global-set-key "\C-x\C-m" 'execute-extended-command)
+;; (global-set-key "\C-c\C-m" 'execute-extended-command)
 
 (defun kill-other-buffers ()
   "Kill all other buffers."
@@ -128,6 +128,33 @@
 
 (setq el-get-sources
       '((:name el-get)
+        (:name package)
+        (:name switch-window)
+        (:name smex
+               :type elpa
+               :after (progn
+                        (package-initialize)
+                        (setq smex-save-file (concat user-emacs-directory ".smex-items"))
+                        (smex-initialize)
+                        (global-set-key (kbd "C-x C-m") 'execute-extended-command)
+                        (global-set-key [remap execute-extended-command] 'smex)
+                        (global-set-key (kbd "M-X") 'smex-major-mode-commands)))
+
+        ;; base for all color themes
+        (:name color-theme
+               :after (progn
+                        (global-set-key (kbd "C-c t") 'color-theme-select)))
+
+        (:name color-theme-solarized
+               :type elpa)
+
+        (:name whole-line-or-region
+               :type elpa
+               ;; :features whole-line-or-region
+               :after (progn
+                        (package-initialize)
+                        (whole-line-or-region-mode t)))
+        
         (:name magit
                :after (global-set-key (kbd "C-x C-z") 'magit-status))
 	
