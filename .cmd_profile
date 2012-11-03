@@ -11,9 +11,8 @@ eval "$(rbenv init -)"
 export PS1=$'\n\[\e[0;32m\]\W\[\e[1;31m\]$(__git_ps1 ":%s") \[\e[1;30m\]$(rbenv version-name) \n\[\e[0;36m\]\xe2\x98\x85 \[\e[0m\]'
 
 # Emacs
-export PATH=$PATH:/usr/local/Cellar/emacs/24.1/bin
-alias emacs="/usr/local/Cellar/emacs/24.1/Emacs.app/Contents/MacOS/Emacs -nw"
-alias em="/usr/local/Cellar/emacs/24.1/bin/emacsclient -t"
+alias emacs="emacs -nw"
+alias em="emacsclient -t"
 
 # Java and JUBY
 export JAVA_OPTS="-Xms1024m -Xmx1024m -XX:MaxPermSize=256m -Djava.net.preferIPv4Stack=true -Dorg.jboss.resolver.warning=true -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 -Djboss.modules.system.pkgs=$JBOSS_MODULES_SYSTEM_PKGS -Djava.awt.headless=true -Djboss.server.default.config=standalone.xml"

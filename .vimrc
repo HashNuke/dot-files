@@ -1,6 +1,9 @@
 " Created on Akash Manohar's machine
 " This uses Vundle (https://github.com/gmarik/vundle) to manage vim scripts 
 
+" Gets powerline working under tmux
+set t_Co=256
+
 " no more compatible with vi (like I care ;)
 set nocompatible
 
@@ -167,6 +170,8 @@ Bundle "airblade/vim-rooter"
 Bundle "nono/github_vim_theme"
 
 Bundle "tpope/vim-vividchalk"
+
+Bundle "Lokaltog/vim-powerline"
 
 " end bundle list
 filetype plugin indent on
