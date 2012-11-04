@@ -97,15 +97,8 @@ call vundle#rc()
 " Vundle can manage vundle"
 Bundle "gmarik/vundle"
 
-
-" PeepCode vividchalk theme
-Bundle "tpope/vim-vividchalk"
-
 " Provides some functions to write in vimscript
 Bundle "L9"
-
-" Awk stuff in vim
-Bundle "ack.vim"
 
 " markdown syntax
 Bundle "Markdown"
@@ -113,14 +106,8 @@ Bundle "Markdown"
 " ruby bob, ruby! that should come first
 Bundle "vim-scripts/kkruby.vim"
 
-" cucumber
-Bundle "cucumber.zip"
-
 " rails
 Bundle "tpope/vim-rails"
-
-" jquery
-Bundle "jQuery"
 
 " git
 Bundle "git.zip"
@@ -138,20 +125,11 @@ Bundle "groenewege/vim-less"
 " coffeescript
 Bundle "kchmck/vim-coffee-script"
 
-" ActionScript
-Bundle "actionscript.vim--Cuss"
-
-" Treetop
-Bundle "nanki/treetop.vim"
-
 " ZenCoding
 Bundle "mattn/zencoding-vim"
 
 " AutoCompleter
 Bundle "SuperTab"
-
-" Used to format text into tables. Useless for me, but still fashionable.
-Bundle "godlygeek/tabular"
 
 " Command-T
 Bundle "kien/ctrlp.vim"
@@ -165,12 +143,7 @@ Bundle "mattn/gist-vim"
 " Solarized colors
 Bundle "altercation/vim-colors-solarized"
 
-Bundle "airblade/vim-rooter"
-
-Bundle "nono/github_vim_theme"
-
-Bundle "tpope/vim-vividchalk"
-
+" Vim powerline
 Bundle "Lokaltog/vim-powerline"
 
 " end bundle list
@@ -184,15 +157,15 @@ filetype plugin indent on
 set modeline
 
 "Status line visual fluff
-set laststatus=2
-set statusline=
-set statusline+=%f   " file name
-set statusline+=\ \  " some whitespace 
-set statusline+=%-14.(%l,%c%V%)%P\  " line, column number and percentage
-set statusline+=%=   " right align
-set statusline+=%h%1*%m%r%w%0* " flags
-set statusline+=[%{strlen(&ft)?&ft:'none'}, " filetype
-set statusline+=%{&fileformat}]\  " file format
+"set laststatus=2
+"set statusline=
+"set statusline+=%f   " file name
+"set statusline+=\ \  " some whitespace 
+"set statusline+=%-14.(%l,%c%V%)%P\  " line, column number and percentage
+"set statusline+=%=   " right align
+"set statusline+=%h%1*%m%r%w%0* " flags
+"set statusline+=[%{strlen(&ft)?&ft:'none'}, " filetype
+"set statusline+=%{&fileformat}]\  " file format
 
 " god knows what this is, I'll ask him later
 set ls=2
@@ -229,9 +202,6 @@ let g:ctrlp_prompt_mappings = {
 " Set Mapleader. Like Emacs's mod key.
 let mapleader = ","
 let g:mapleader = ","
-
-" matches in command-t are listed from top to bottom
-let g:CommandTMatchWindowReverse = 1
 
 " Let CtrlP manage the working directory
 let g:ctrlp_working_path_mode = 2
@@ -274,14 +244,14 @@ if has("gui_running")
     " set font and font size in macvim
     set guifont=Monaco:h13
     set background=dark
-    colorscheme vividchalk
+    colorscheme solarized
 else
     " i keep changing this, so let's keep this seperate
     set background=dark
     "let g:solarized_termcolors = 256 
     let g:solarized_visibility = "high" 
     let g:solarized_contrast = "high" 
-    colorscheme vividchalk
+    colorscheme solarized
 endif
 
 " set the working dir to the root of the git repo
