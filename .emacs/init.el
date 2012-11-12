@@ -165,10 +165,10 @@
         (:name css-mode :type elpa
                :after (progn (lambda () (rhtml-mode-hook))))
 
-        (:name js2-mode
+        (:name js3-mode
                :type git
-               :url "https://github.com/mooz/js2-mode.git"
-               :load "js2-mode.el")
+               :url "git://github.com/thomblake/js3-mode.git"
+               :load "js3.el")
 
         (:name haml-mode
                :type git
@@ -275,7 +275,7 @@
 
 (helm-mode 1)
 (global-set-key (kbd "C-c h") 'helm-mini)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
+;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
 
 (custom-set-variables
