@@ -73,6 +73,13 @@ set hlsearch
 " set key to toggle paste
 set pastetoggle=<F2>
 
+"""""""""
+" Ignores
+"""""""""
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*
+
+
 """"""""""""
 " FILETYPES
 """"""""""""
@@ -109,18 +116,11 @@ Bundle "vim-scripts/kkruby.vim"
 " rails
 Bundle "tpope/vim-rails"
 
-" git
-Bundle "git.zip"
-Bundle "tpope/vim-fugitive"
-
 " haml
 Bundle "tpope/vim-haml"
 
 " scss
 Bundle "cakebaker/scss-syntax.vim"
-
-" lesscss
-Bundle "groenewege/vim-less"
 
 " coffeescript
 Bundle "kchmck/vim-coffee-script"
@@ -128,10 +128,7 @@ Bundle "kchmck/vim-coffee-script"
 " ZenCoding
 Bundle "mattn/zencoding-vim"
 
-" AutoCompleter
-Bundle "SuperTab"
-
-" Command-T
+" Command-P
 Bundle "kien/ctrlp.vim"
 
 " NERDCommenter to comment out code
@@ -142,6 +139,9 @@ Bundle "mattn/gist-vim"
 
 " Solarized colors
 Bundle "altercation/vim-colors-solarized"
+
+" git
+Bundle "tpope/vim-fugitive"
 
 " Vim powerline
 Bundle "Lokaltog/vim-powerline"
@@ -244,7 +244,7 @@ if has("gui_running")
     " set font and font size in macvim
     set guifont=Monaco:h13
     set background=dark
-    colorscheme solarized
+    colorscheme railscasts
 else
     " i keep changing this, so let's keep this seperate
     set background=dark
