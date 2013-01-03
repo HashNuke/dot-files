@@ -118,122 +118,12 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 
-(unless (require 'el-get nil t)
-  (url-retrieve
-   "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
-   (lambda (s)
-     (let (el-get-master-branch)
-       (goto-char (point-max))
-       (eval-print-last-sexp)))))
+;; hooks
 
-(setq el-get-sources
-      '((:name el-get)
-        (:name package)
-        (:name helm)
-        (:name switch-window)
-        (:name ack)
-        (:name smex
-               :type elpa
-               :after (progn
-                        (package-initialize)
-                        (setq smex-save-file (concat user-emacs-directory ".smex-items"))
-                        (smex-initialize)
-                        (global-set-key (kbd "C-x C-m") 'execute-extended-command)
-                        (global-set-key [remap execute-extended-command] 'smex)
-                        (global-set-key (kbd "M-X") 'smex-major-mode-commands)))
-
-        ;; base for all color themes
-        (:name color-theme
-               :after (progn
-                        (global-set-key (kbd "C-c t") 'color-theme-select)))
-
-        (:name color-theme-solarized
-               :type elpa)
-
-        (:name whole-line-or-region
-               :type elpa
-               ;; :features whole-line-or-region
-               :after (progn
-                        (package-initialize)
-                        (whole-line-or-region-mode t)))
-        
-        (:name magit
-               :after (global-set-key (kbd "C-x C-z") 'magit-status))
-	
-	;; (:name lisppaste :type elpa)
-	(:name emacs-goodies-el)
-        (:name css-mode :type elpa
-               :after (progn (lambda () (rhtml-mode-hook))))
-
-        (:name js3-mode
-               :type git
-               :url "git://github.com/thomblake/js3-mode.git"
-               :load "js3.el")
-
-        (:name haml-mode
-               :type git
-               :url "git://github.com/nex3/haml-mode.git"
-               :load "haml-mode.el")
-
-        (:name markdown-mode
-               :type git
-               :url "git://github.com/defunkt/markdown-mode.git"
-               :load "markdown-mode.el")
-
-        (:name sass-mode
-               :type git
-               :url "git://github.com/nex3/sass-mode.git"
-               :load "sass-mode.el")
-
-        (:name ruby-mode
-               :type elpa
-               :after (progn (lambda () (ruby-mode-hook))))
-
-        (:name yaml-mode
-               :type git
-               :url "git://github.com/yoshiki/yaml-mode.git"
-               :after (progn (lambda () (yaml-mode-hook))))
-
-        (:name rhtml
-               :type git
-               :url "https://github.com/eschulte/rhtml.git"
-               :features rhtml-mode
-               :after (progn (lambda () (rhtml-mode-hook))))
-
-        (:name coffee-mode
-               :type git
-               :url "git://github.com/defunkt/coffee-mode.git"
-               :load "coffee-mode.el")
-
-        (:name goto-last-change    ; move pointer back to last change
-               :after (progn (lambda ()
-                               ;; when using AZERTY keyboard, consider C-x C-_
-                               (global-set-key (kbd "C-x C-/") 'goto-last-change))))
-        ))
-
-(setq
- my:el-get-packages
- '(el-get
-   css-mode
-   haml-mode
-   sass-mode
-   js2-mode
-   markdown-mode
-   color-theme
-   ruby-mode
-   yaml-mode
-   coffee-mode
-   rhtml-mode
-   ))
-
-(setq my:el-get-packages
-      (append
-       my:el-get-packages
-       (loop for src in el-get-sources collect (el-get-source-name src))))
-
-(el-get 'sync my:el-get-packages)
-
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(defun erlang-mode-hook ()
+  (autoload 'erlang-mode "erlang-mode" nil t)
+  (add-to-list 'auto-mode-alist '("\\.erl\\'" . erlang-mode))
+)
 
 (defun ruby-mode-hook ()
   (autoload 'ruby-mode "ruby-mode" nil t)
@@ -273,8 +163,149 @@
                               (setq css-indent-level 2)
                               (setq css-indent-offset 2))))
 
-(helm-mode 1)
-(global-set-key (kbd "C-c h") 'helm-mini)
+
+
+(unless (require 'el-get nil t)
+  (url-retrieve
+   "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
+   (lambda (s)
+     (let (el-get-master-branch)
+       (goto-char (point-max))
+       (eval-print-last-sexp)))))
+
+(setq el-get-sources
+      '((:name el-get)
+        (:name package)
+        (:name helm)
+        (:name switch-window)
+        (:name ack)
+        (:name smex
+               :type elpa
+               :after (progn
+                        (package-initialize)
+                        (setq smex-save-file (concat user-emacs-directory ".smex-items"))
+                        (smex-initialize)
+                        (global-set-key (kbd "C-x C-m") 'execute-extended-command)
+                        (global-set-key [remap execute-extended-command] 'smex)
+                        (global-set-key (kbd "M-X") 'smex-major-mode-commands)))
+
+        ;; base for all color themes
+        (:name color-theme
+               :after (progn
+                        (global-set-key (kbd "C-c t") 'color-theme-select)))
+
+        (:name color-theme-solarized
+               :type elpa)
+
+        (:name erlang
+               :type elpa
+               :after (progn (erlang-mode-hook)))
+
+        (:name whole-line-or-region
+               :type elpa
+               ;; :features whole-line-or-region
+               :after (progn
+                        (package-initialize)
+                        (whole-line-or-region-mode t)))
+        
+        (:name magit
+               :after (global-set-key (kbd "C-x C-z") 'magit-status))
+	
+      	;; (:name lisppaste :type elpa)
+      	(:name emacs-goodies-el)
+
+        (:name css-mode :type elpa
+               :after (progn (rhtml-mode-hook)))
+
+        (:name js3-mode
+               :type git
+               :url "git://github.com/thomblake/js3-mode.git"
+               :load "js3.el")
+
+        (:name haml-mode
+               :type git
+               :url "git://github.com/nex3/haml-mode.git"
+               :load "haml-mode.el")
+
+        (:name find-file-in-project
+               :type git
+               :url "git://github.com/technomancy/find-file-in-project.git"
+               :load "find-file-in-project.el")
+
+        (:name markdown-mode
+               :type git
+               :url "git://github.com/defunkt/markdown-mode.git"
+               :load "markdown-mode.el")
+
+        (:name scss-mode
+               :type git
+               :url "git://github.com/antonj/scss-mode.git"
+               :load "scss-mode.el")
+
+        (:name ruby-mode
+               :type elpa
+               :after (progn (ruby-mode-hook)))
+
+        (:name yaml-mode
+               :type git
+               :url "git://github.com/yoshiki/yaml-mode.git"
+               :after (progn (yaml-mode-hook)))
+
+        (:name rhtml
+               :type git
+               :url "https://github.com/eschulte/rhtml.git"
+               :features rhtml-mode
+               :after (progn (rhtml-mode-hook)))
+
+        (:name helm-cmd-t
+               :type git
+               :url "git://github.com/lewang/helm-cmd-t.git"
+               :load "helm-cmd-t.el")
+
+        (:name coffee-mode
+               :type git
+               :url "git://github.com/defunkt/coffee-mode.git"
+               :load "coffee-mode.el")
+
+        (:name goto-last-change    ; move pointer back to last change
+               :after (progn (lambda ()
+                               ;; when using AZERTY keyboard, consider C-x C-_
+                               (global-set-key (kbd "C-x C-/") 'goto-last-change))))
+        ))
+
+(setq
+ my:el-get-packages
+ '(el-get
+   css-mode
+   haml-mode
+   sass-mode
+   markdown-mode
+   color-theme
+   ruby-mode
+   yaml-mode
+   coffee-mode
+   rhtml-mode
+   js3-mode
+   erlang
+   find-file-in-project
+   ))
+
+(setq helm-ff-lynx-style-map nil
+      helm-input-idle-delay 0.1
+      helm-idle-delay 0.1
+      )
+
+(setq my:el-get-packages
+      (append
+       my:el-get-packages
+       (loop for src in el-get-sources collect (el-get-source-name src))))
+
+(el-get 'sync my:el-get-packages)
+
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+; (helm-mode 1)
+; (global-set-key (kbd "C-c h") 'helm-mini)
 ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
 
@@ -282,11 +313,14 @@
 '(js3-enter-indents-newline t) ; don't need to push tab before typing
 '(js3-indent-on-enter-key t)   ; fix indenting before moving on
 
+(global-linum-mode t)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(scss-compile-at-save nil)
  '(coffee-tab-width 2)
  '(column-number-mode t)
  '(cua-mode t nil (cua-base)))
