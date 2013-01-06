@@ -141,10 +141,11 @@
                                (setq ruby-deep-arglist t)
                                (setq ruby-deep-indent-paren nil)
                                (setq c-tab-always-indent nil)
-                                      ;; (rvm-activate-corresponding-ruby)
+                               ;; (rvm-activate-corresponding-ruby)
                                ;; (require 'inf-ruby)
                                ;; (require 'ruby-compilation)
-                                      )))
+                               )))
+
 (defun rhtml-mode-hook ()
   (autoload 'rhtml-mode "rhtml-mode" nil t)
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . rhtml-mode))
@@ -163,6 +164,22 @@
                               (setq css-indent-level 2)
                               (setq css-indent-offset 2))))
 
+(defun js3-mode-hook ()
+  '(js3-auto-indent-p t)         ; it's nice for commas to right themselves.
+  '(js3-enter-indents-newline t) ; don't need to push tab before typing
+  '(js3-indent-on-enter-key t)   ; fix indenting before moving on
+)
+
+(defun markdown-mode-hook ()
+  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+  )
+
+(defun helm-hook ()
+  (setq helm-ff-lynx-style-map nil
+        helm-input-idle-delay 0.1
+        helm-idle-delay 0.1
+        )
+  )
 
 
 (unless (require 'el-get nil t)
@@ -176,7 +193,10 @@
 (setq el-get-sources
       '((:name el-get)
         (:name package)
-        (:name helm)
+
+        (:name helm
+               :after (progn (helm-hook)))
+
         (:name switch-window)
         (:name ack)
         (:name smex
@@ -220,7 +240,8 @@
         (:name js3-mode
                :type git
                :url "git://github.com/thomblake/js3-mode.git"
-               :load "js3.el")
+               :load "js3.el"
+               :after (progn (js3-mode-hook)))
 
         (:name haml-mode
                :type git
@@ -235,7 +256,8 @@
         (:name markdown-mode
                :type git
                :url "git://github.com/defunkt/markdown-mode.git"
-               :load "markdown-mode.el")
+               :load "markdown-mode.el"
+               :after (progn (markdown-mode-hook)))
 
         (:name scss-mode
                :type git
@@ -257,11 +279,6 @@
                :features rhtml-mode
                :after (progn (rhtml-mode-hook)))
 
-        (:name helm-cmd-t
-               :type git
-               :url "git://github.com/lewang/helm-cmd-t.git"
-               :load "helm-cmd-t.el")
-
         (:name coffee-mode
                :type git
                :url "git://github.com/defunkt/coffee-mode.git"
@@ -269,7 +286,6 @@
 
         (:name goto-last-change    ; move pointer back to last change
                :after (progn (lambda ()
-                               ;; when using AZERTY keyboard, consider C-x C-_
                                (global-set-key (kbd "C-x C-/") 'goto-last-change))))
         ))
 
@@ -290,10 +306,6 @@
    find-file-in-project
    ))
 
-(setq helm-ff-lynx-style-map nil
-      helm-input-idle-delay 0.1
-      helm-idle-delay 0.1
-      )
 
 (setq my:el-get-packages
       (append
@@ -302,16 +314,9 @@
 
 (el-get 'sync my:el-get-packages)
 
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-
 ; (helm-mode 1)
 ; (global-set-key (kbd "C-c h") 'helm-mini)
 ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
-
-
-'(js3-auto-indent-p t)         ; it's nice for commas to right themselves.
-'(js3-enter-indents-newline t) ; don't need to push tab before typing
-'(js3-indent-on-enter-key t)   ; fix indenting before moving on
 
 (global-linum-mode t)
 
