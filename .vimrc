@@ -146,6 +146,9 @@ Bundle "tpope/vim-fugitive"
 " Vim powerline
 Bundle "Lokaltog/vim-powerline"
 
+" Erlang
+Bundle 'jimenezrick/vimerl'
+
 " end bundle list
 filetype plugin indent on
 
