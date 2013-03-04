@@ -114,7 +114,7 @@ Bundle "Markdown"
 Bundle "vim-scripts/kkruby.vim"
 
 " rails
-Bundle "tpope/vim-rails"
+" Bundle "tpope/vim-rails"
 
 " haml
 Bundle "tpope/vim-haml"
@@ -140,14 +140,14 @@ Bundle "mattn/gist-vim"
 " Solarized colors
 Bundle "altercation/vim-colors-solarized"
 
-" git
-Bundle "tpope/vim-fugitive"
-
 " Vim powerline
-Bundle "Lokaltog/vim-powerline"
+" Bundle "Lokaltog/vim-powerline"
 
 " Erlang
 Bundle 'jimenezrick/vimerl'
+
+" NERDCommenter
+Bundle 'scrooloose/nerdcommenter'
 
 " end bundle list
 filetype plugin indent on
@@ -160,15 +160,15 @@ filetype plugin indent on
 set modeline
 
 "Status line visual fluff
-"set laststatus=2
-"set statusline=
-"set statusline+=%f   " file name
-"set statusline+=\ \  " some whitespace 
-"set statusline+=%-14.(%l,%c%V%)%P\  " line, column number and percentage
-"set statusline+=%=   " right align
-"set statusline+=%h%1*%m%r%w%0* " flags
-"set statusline+=[%{strlen(&ft)?&ft:'none'}, " filetype
-"set statusline+=%{&fileformat}]\  " file format
+set laststatus=2
+set statusline=
+set statusline+=%f   " file name
+set statusline+=\ \  " some whitespace
+set statusline+=%-14.(%l,%c%V%)%P\  " line, column number and percentage
+set statusline+=%=   " right align
+set statusline+=%h%1*%m%r%w%0* " flags
+set statusline+=[%{strlen(&ft)?&ft:'none'}, " filetype
+set statusline+=%{&fileformat}]\  " file format
 
 " god knows what this is, I'll ask him later
 set ls=2
@@ -197,17 +197,18 @@ endfunction
 " KEY AND COMMAND MAPPINGS
 """"""""""""""""""""""""""""
 
-let g:ctrlp_prompt_mappings = {
-      \ 'AcceptSelection("e")': [],
-      \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
-      \ }
+"let g:ctrlp_prompt_mappings = {
+      "\ 'AcceptSelection("e")': [],
+      "\ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
+      "\ }
 
 " Set Mapleader. Like Emacs's mod key.
 let mapleader = ","
 let g:mapleader = ","
 
 " Let CtrlP manage the working directory
-let g:ctrlp_working_path_mode = 2
+let g:ctrlp_working_path_mode = 0
+
 
 " <Leader> followed by the / key to open NERDTree
 map <Leader>/ :Vex<cr>
@@ -247,14 +248,14 @@ if has("gui_running")
     " set font and font size in macvim
     set guifont=Monaco:h13
     set background=dark
-    colorscheme railscasts
+    colorscheme Tomorrow-Night
 else
     " i keep changing this, so let's keep this seperate
     set background=dark
     "let g:solarized_termcolors = 256 
     let g:solarized_visibility = "high" 
     let g:solarized_contrast = "high" 
-    colorscheme solarized
+    colorscheme Tomorrow-Night
 endif
 
 " set the working dir to the root of the git repo
