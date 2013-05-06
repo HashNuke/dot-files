@@ -91,6 +91,7 @@ au BufRead,BufNewFile {*.html.haml,*.haml}  set ft=haml
 au BufRead,BufNewFile {*.rkt,*.scm}  set ft=scheme
 au BufRead,BufNewFile {*.tt}  set ft=treetop
 au BufNewFile,BufRead *.less set filetype=less
+au BufNewFile,BufRead *.dtl set filetype=htmldjango
 
 """"""""""
 " BUNDLES
@@ -131,9 +132,6 @@ Bundle "mattn/zencoding-vim"
 " Command-P
 Bundle "kien/ctrlp.vim"
 
-" NERDCommenter to comment out code
-Bundle "scrooloose/nerdcommenter"
-
 " Gist
 Bundle "mattn/gist-vim"
 
@@ -144,10 +142,16 @@ Bundle "altercation/vim-colors-solarized"
 " Bundle "Lokaltog/vim-powerline"
 
 " Erlang
-Bundle 'jimenezrick/vimerl'
+Bundle "jimenezrick/vimerl"
 
 " NERDCommenter
-Bundle 'scrooloose/nerdcommenter'
+Bundle "scrooloose/nerdcommenter"
+
+" Git gutter
+Bundle "airblade/vim-gitgutter"
+
+" multiple cursors
+Bundle "terryma/vim-multiple-cursors"
 
 " end bundle list
 filetype plugin indent on
