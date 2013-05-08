@@ -134,6 +134,9 @@
   (add-to-list 'auto-mode-alist '("\\.gemspec\\'" . ruby-mode))
   (add-to-list 'auto-mode-alist '("\\.rb\\'" . ruby-mode))
   (add-to-list 'auto-mode-alist '("\\.ru\\'" . ruby-mode))
+  (add-hook 'ido-setup-hook
+            (lambda ()
+              (define-key ido-completion-map [tab] 'ido-complete)))
   (add-hook 'ruby-mode-hook '(lambda ()
                                (outline-minor-mode)
                                (local-set-key "\r" 'reindent-then-newline-and-indent)
@@ -227,7 +230,10 @@
                :after (progn
                         (package-initialize)
                         (whole-line-or-region-mode t)))
-        
+        (:name simp
+               :type git
+               :url "https://github.com/re5et/simp.git")
+
         (:name magit
                :after (global-set-key (kbd "C-x C-z") 'magit-status))
 	
@@ -247,6 +253,11 @@
                :type git
                :url "git://github.com/nex3/haml-mode.git"
                :load "haml-mode.el")
+
+        (:name textmate-el
+               :type git
+               :url "git://github.com/defunkt/textmate.el.git"
+               :load "textmate.el")
 
         (:name find-file-in-project
                :type git
@@ -313,6 +324,24 @@
        (loop for src in el-get-sources collect (el-get-source-name src))))
 
 (el-get 'sync my:el-get-packages)
+
+(require 'simp)
+
+(simp-project-define
+ '(:has (.git)
+        :ignore (tmp coverage log vendor .git public/system public/assets)))
+
+;; I bind the handy stuff like so:
+(global-set-key (kbd "C-c f") 'simp-project-find-file)
+(global-set-key (kbd "C-c d") 'simp-project-root-dired)
+(global-set-key (kbd "C-c s") 'simp-project-rgrep)
+(global-set-key (kbd "C-c S") 'simp-project-rgrep-dwim)
+(global-set-key (kbd "C-c b") 'simp-project-ibuffer-files-only)
+(global-set-key (kbd "C-c B") 'simp-project-ibuffer)
+(global-set-key (kbd "C-c C-f") 'simp-project-with-bookmark-find-file)
+(global-set-key (kbd "C-c C-s") 'simp-project-with-bookmark-rgrep)
+(global-set-key (kbd "C-c C-b") 'simp-project-with-bookmark-ibuffer)
+
 
 ; (helm-mode 1)
 ; (global-set-key (kbd "C-c h") 'helm-mini)
