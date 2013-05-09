@@ -1,4 +1,8 @@
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+(require 'package)
+(add-to-list 'package-archives
+  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+(package-initialize)
 
 ;; under mac, have Command as Meta and keep Option for localized input
 (when (string-match "apple-darwin" system-configuration)
@@ -101,7 +105,10 @@
   (interactive)
   (set-frame-parameter nil 'fullscreen
                        (if (frame-parameter nil 'fullscreen) nil 'fullboth)))
+
 (global-set-key [f11] 'fullscreen)
+
+(global-linum-mode t)
 
 (setq make-backup-files nil)
 (setq auto-save-default nil)
@@ -173,6 +180,14 @@
   '(js3-indent-on-enter-key t)   ; fix indenting before moving on
 )
 
+(defun smex-hook ()
+  (package-initialize)
+  (setq smex-save-file (concat user-emacs-directory ".smex-items"))
+  (smex-initialize)
+  (global-set-key (kbd "C-x C-m") 'execute-extended-command)
+  (global-set-key [remap execute-extended-command] 'smex)
+  (global-set-key (kbd "M-X") 'smex-major-mode-commands))
+
 (defun markdown-mode-hook ()
   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
   )
@@ -184,170 +199,72 @@
         )
   )
 
+(defun goto-last-change-hook
+  (global-set-key (kbd "C-x C-/") 'goto-last-change))
 
-(unless (require 'el-get nil t)
-  (url-retrieve
-   "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
-   (lambda (s)
-     (let (el-get-master-branch)
-       (goto-char (point-max))
-       (eval-print-last-sexp)))))
+(defun whole-line-or-region-hook 
+  (package-initialize)
+  (whole-line-or-region-mode t))
 
-(setq el-get-sources
-      '((:name el-get)
-        (:name package)
+(defun color-theme-hook
+  (global-set-key (kbd "C-c t") 'color-theme-select))
 
-        (:name helm
-               :after (progn (helm-hook)))
-
-        (:name switch-window)
-        (:name ack)
-        (:name smex
-               :type elpa
-               :after (progn
-                        (package-initialize)
-                        (setq smex-save-file (concat user-emacs-directory ".smex-items"))
-                        (smex-initialize)
-                        (global-set-key (kbd "C-x C-m") 'execute-extended-command)
-                        (global-set-key [remap execute-extended-command] 'smex)
-                        (global-set-key (kbd "M-X") 'smex-major-mode-commands)))
-
-        ;; base for all color themes
-        (:name color-theme
-               :after (progn
-                        (global-set-key (kbd "C-c t") 'color-theme-select)))
-
-        (:name color-theme-solarized
-               :type elpa)
-
-        (:name erlang
-               :type elpa
-               :after (progn (erlang-mode-hook)))
-
-        (:name whole-line-or-region
-               :type elpa
-               ;; :features whole-line-or-region
-               :after (progn
-                        (package-initialize)
-                        (whole-line-or-region-mode t)))
-        (:name simp
-               :type git
-               :url "https://github.com/re5et/simp.git")
-
-        (:name magit
-               :after (global-set-key (kbd "C-x C-z") 'magit-status))
-	
-      	;; (:name lisppaste :type elpa)
-      	(:name emacs-goodies-el)
-
-        (:name css-mode :type elpa
-               :after (progn (rhtml-mode-hook)))
-
-        (:name js3-mode
-               :type git
-               :url "git://github.com/thomblake/js3-mode.git"
-               :load "js3.el"
-               :after (progn (js3-mode-hook)))
-
-        (:name haml-mode
-               :type git
-               :url "git://github.com/nex3/haml-mode.git"
-               :load "haml-mode.el")
-
-        (:name textmate-el
-               :type git
-               :url "git://github.com/defunkt/textmate.el.git"
-               :load "textmate.el")
-
-        (:name find-file-in-project
-               :type git
-               :url "git://github.com/technomancy/find-file-in-project.git"
-               :load "find-file-in-project.el")
-
-        (:name markdown-mode
-               :type git
-               :url "git://github.com/defunkt/markdown-mode.git"
-               :load "markdown-mode.el"
-               :after (progn (markdown-mode-hook)))
-
-        (:name scss-mode
-               :type git
-               :url "git://github.com/antonj/scss-mode.git"
-               :load "scss-mode.el")
-
-        (:name ruby-mode
-               :type elpa
-               :after (progn (ruby-mode-hook)))
-
-        (:name yaml-mode
-               :type git
-               :url "git://github.com/yoshiki/yaml-mode.git"
-               :after (progn (yaml-mode-hook)))
-
-        (:name rhtml
-               :type git
-               :url "https://github.com/eschulte/rhtml.git"
-               :features rhtml-mode
-               :after (progn (rhtml-mode-hook)))
-
-        (:name coffee-mode
-               :type git
-               :url "git://github.com/defunkt/coffee-mode.git"
-               :load "coffee-mode.el")
-
-        (:name goto-last-change    ; move pointer back to last change
-               :after (progn (lambda ()
-                               (global-set-key (kbd "C-x C-/") 'goto-last-change))))
-        ))
-
-(setq
- my:el-get-packages
- '(el-get
-   css-mode
-   haml-mode
-   sass-mode
-   markdown-mode
-   color-theme
-   ruby-mode
-   yaml-mode
-   coffee-mode
-   rhtml-mode
-   js3-mode
-   erlang
-   find-file-in-project
-   ))
+(defun magit-hook
+  (global-set-key (kbd "C-x C-z") 'magit-status))
 
 
-(setq my:el-get-packages
-      (append
-       my:el-get-packages
-       (loop for src in el-get-sources collect (el-get-source-name src))))
+(defun simp-hook
+  (simp-project-define
+   '(:has (.git)
+          :ignore (tmp coverage log vendor .git public/system public/assets)))
 
-(el-get 'sync my:el-get-packages)
+  (global-set-key (kbd "C-c f") 'simp-project-find-file)
+  (global-set-key (kbd "C-c d") 'simp-project-root-dired)
+  (global-set-key (kbd "C-c s") 'simp-project-rgrep)
+  (global-set-key (kbd "C-c S") 'simp-project-rgrep-dwim)
+  (global-set-key (kbd "C-c b") 'simp-project-ibuffer-files-only)
+  (global-set-key (kbd "C-c B") 'simp-project-ibuffer)
+  (global-set-key (kbd "C-c C-f") 'simp-project-with-bookmark-find-file)
+  (global-set-key (kbd "C-c C-s") 'simp-project-with-bookmark-rgrep)
+  (global-set-key (kbd "C-c C-b") 'simp-project-with-bookmark-ibuffer)
+)
 
-(require 'simp)
 
-(simp-project-define
- '(:has (.git)
-        :ignore (tmp coverage log vendor .git public/system public/assets)))
+(setq my-packages
+'(
+    coffee-mode
+    helm  ;; helm-hook
+    switch-window
+    ack
+    smex ;;smex-hook
+    whole-line-or-region ;; whole-line-or-region-hook
+    color-theme ;; color-theme-hook
+    erlang ;; erlang-mode-hook
+    simp
+    magit ;; magit-hook
+    css-mode ;;css-mode-hook
+    js3-mode ;;js3-mode-hook
+    haml-mode
+    textmate
+    find-file-in-project
+    markdown-mode ;; markdown-mode-hook
+    scss-mode
+    ruby-mode   ;; ruby-mode-hook
+    yaml-mode   ;; yaml-mode-hook
+    rhtml-mode  ;; rhtml-mode-hook
+  )
+)
 
-;; I bind the handy stuff like so:
-(global-set-key (kbd "C-c f") 'simp-project-find-file)
-(global-set-key (kbd "C-c d") 'simp-project-root-dired)
-(global-set-key (kbd "C-c s") 'simp-project-rgrep)
-(global-set-key (kbd "C-c S") 'simp-project-rgrep-dwim)
-(global-set-key (kbd "C-c b") 'simp-project-ibuffer-files-only)
-(global-set-key (kbd "C-c B") 'simp-project-ibuffer)
-(global-set-key (kbd "C-c C-f") 'simp-project-with-bookmark-find-file)
-(global-set-key (kbd "C-c C-s") 'simp-project-with-bookmark-rgrep)
-(global-set-key (kbd "C-c C-b") 'simp-project-with-bookmark-ibuffer)
 
+(dolist (p my-packages)
+  (when (not (package-installed-p p))
+    (package-install p)
+  ))
 
 ; (helm-mode 1)
 ; (global-set-key (kbd "C-c h") 'helm-mini)
-;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
+; (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
-(global-linum-mode t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
