@@ -115,25 +115,32 @@
 
 (cua-mode)
 
+;; alias "yes" and "no" to "y" and "n"
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+
+;; Hooks
+
 ;; M-x shell is a nice shell interface to use, let's make it colorful.  If
 ;; you need a terminal emulator rather than just a shell, consider M-x term
 ;; instead.
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
-;; alias "yes" and "no" to "y" and "n"
-(defalias 'yes-or-no-p 'y-or-n-p)
+(defun cfg-ido-mode ()
+  (define-key ido-completion-map [tab] 'ido-complete))
+
+(add-hook 'ido-setup-hook 'cfg-ido-mode)
 
 
-;; hooks
-
-(defun erlang-mode-hook ()
-  (autoload 'erlang-mode "erlang-mode" nil t)
+(defun cfg-erlang-mode ()
   (add-to-list 'auto-mode-alist '("\\.erl\\'" . erlang-mode))
 )
 
-(defun ruby-mode-hook ()
-  (autoload 'ruby-mode "ruby-mode" nil t)
+(cfg-erlang-mode)
+
+
+(defun cfg-ruby-mode ()
   (add-to-list 'auto-mode-alist '("Capfile" . ruby-mode))
   (add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
   (add-to-list 'auto-mode-alist '("Rakefile" . ruby-mode))
@@ -141,79 +148,110 @@
   (add-to-list 'auto-mode-alist '("\\.gemspec\\'" . ruby-mode))
   (add-to-list 'auto-mode-alist '("\\.rb\\'" . ruby-mode))
   (add-to-list 'auto-mode-alist '("\\.ru\\'" . ruby-mode))
-  (add-hook 'ido-setup-hook
-            (lambda ()
-              (define-key ido-completion-map [tab] 'ido-complete)))
-  (add-hook 'ruby-mode-hook '(lambda ()
-                               (outline-minor-mode)
-                               (local-set-key "\r" 'reindent-then-newline-and-indent)
-                               (setq outline-regexp " *\\(def \\|class\\|module\\)")
-                               (setq ruby-deep-arglist t)
-                               (setq ruby-deep-indent-paren nil)
-                               (setq c-tab-always-indent nil)
-                               ;; (rvm-activate-corresponding-ruby)
-                               ;; (require 'inf-ruby)
-                               ;; (require 'ruby-compilation)
-                               )))
 
-(defun rhtml-mode-hook ()
-  (autoload 'rhtml-mode "rhtml-mode" nil t)
+  (add-hook 'ruby-mode-hook (lambda
+    (outline-minor-mode)
+    (local-set-key "\r" 'reindent-then-newline-and-indent)
+    (setq outline-regexp " *\\(def \\|class\\|module\\)")
+    (setq ruby-deep-arglist t)
+    (setq ruby-deep-indent-paren nil)
+    (setq c-tab-always-indent nil)
+  ))
+
+)
+
+(cfg-ruby-mode)
+
+
+(defun cfg-rhtml-mode ()
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . rhtml-mode))
   (add-to-list 'auto-mode-alist '("\\.rjs\\'" . rhtml-mode))
-  (add-hook 'rhtml-mode '(lambda ()
-                           (define-key rhtml-mode-map (kbd "M-s") 'save-buffer))))
+)
 
-(defun yaml-mode-hook ()
-  (autoload 'yaml-mode "yaml-mode" nil t)
+(cfg-rhtml-mode)
+
+
+(defun cfg-yaml-mode ()
   (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
-  (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode)))
+  (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
+)
 
-(defun css-mode-hook ()
-  (autoload 'css-mode "css-mode" nil t)
-  (add-hook 'css-mode-hook '(lambda ()
-                              (setq css-indent-level 2)
-                              (setq css-indent-offset 2))))
+(cfg-yaml-mode)
 
-(defun js3-mode-hook ()
+
+(defun cfg-css-mode ()
+  (setq css-indent-level 2)
+  (setq css-indent-offset 2)
+)
+
+(add-hook 'css-mode-hook 'cfg-css-mode)
+
+
+(defun cfg-js3-mode ()
   '(js3-auto-indent-p t)         ; it's nice for commas to right themselves.
   '(js3-enter-indents-newline t) ; don't need to push tab before typing
   '(js3-indent-on-enter-key t)   ; fix indenting before moving on
 )
 
-(defun smex-hook ()
-  (package-initialize)
+(add-hook 'js3-mode-hook 'cfg-js3-mode)
+
+
+(defun cfg-smex ()
+  (require 'smex)
   (setq smex-save-file (concat user-emacs-directory ".smex-items"))
   (smex-initialize)
   (global-set-key (kbd "C-x C-m") 'execute-extended-command)
   (global-set-key [remap execute-extended-command] 'smex)
-  (global-set-key (kbd "M-X") 'smex-major-mode-commands))
+  (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+)
 
-(defun markdown-mode-hook ()
+(cfg-smex)
+
+(defun cfg-markdown-mode ()
   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-  )
+  (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
+)
 
-(defun helm-hook ()
-  (setq helm-ff-lynx-style-map nil
-        helm-input-idle-delay 0.1
-        helm-idle-delay 0.1
-        )
-  )
+(cfg-markdown-mode)
 
-(defun goto-last-change-hook
+
+(defun cfg-helm ()
+  (setq
+    helm-ff-lynx-style-map nil
+    helm-input-idle-delay 0.1
+    helm-idle-delay 0.1
+  )
+)
+
+(cfg-helm)
+
+
+(defun cfg-goto-last-change ()
   (global-set-key (kbd "C-x C-/") 'goto-last-change))
 
-(defun whole-line-or-region-hook 
-  (package-initialize)
+(cfg-goto-last-change)
+
+
+(defun cfg-whole-line-or-region ()
   (whole-line-or-region-mode t))
 
-(defun color-theme-hook
+(cfg-whole-line-or-region)
+
+
+(defun cfg-color-theme ()
   (global-set-key (kbd "C-c t") 'color-theme-select))
 
-(defun magit-hook
+(cfg-color-theme)
+
+
+(defun cfg-magit ()
   (global-set-key (kbd "C-x C-z") 'magit-status))
 
+(cfg-magit)
 
-(defun simp-hook
+
+(defun cfg-simp ()
+  (require 'simp)
   (simp-project-define
    '(:has (.git)
           :ignore (tmp coverage log vendor .git public/system public/assets)))
@@ -228,6 +266,8 @@
   (global-set-key (kbd "C-c C-s") 'simp-project-with-bookmark-rgrep)
   (global-set-key (kbd "C-c C-b") 'simp-project-with-bookmark-ibuffer)
 )
+
+(cfg-simp)
 
 
 (setq my-packages
