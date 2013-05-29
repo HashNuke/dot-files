@@ -153,6 +153,9 @@ Bundle "airblade/vim-gitgutter"
 " multiple cursors
 Bundle "terryma/vim-multiple-cursors"
 
+" A better erlang plugin
+Bundle "jimenezrick/vimerl"
+
 " end bundle list
 filetype plugin indent on
 
