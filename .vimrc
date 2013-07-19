@@ -1,11 +1,20 @@
-" Created on Akash Manohar's machine
-" This uses Vundle (https://github.com/gmarik/vundle) to manage vim scripts 
+" Created on HashNuke's machine
+" This uses NeoBundle (https://github.com/Shougo/neobundle.vim) to manage vim scripts
+
+set nocompatible
+
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+call neobundle#rc(expand('~/.vim/bundle/'))
+
+"" Let NeoBundle manage NeoBundle
+NeoBundleFetch 'Shougo/neobundle.vim'
+
 
 " Gets powerline working under tmux
 set t_Co=256
-
-" no more compatible with vi (like I care ;)
-set nocompatible
 
 " STFU! stop beeping!
 set vb
@@ -99,62 +108,76 @@ au BufNewFile,BufRead *.dtl set filetype=htmldjango
 
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/ 
-call vundle#rc()
+" Recommended to install
+" After install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
+NeoBundle 'Shougo/vimproc', {
+      \ 'build' : {
+      \     'windows' : 'make -f make_mingw32.mak',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
 
-" Vundle can manage vundle"
-Bundle "gmarik/vundle"
+" unite.vim
+NeoBundle "https://github.com/Shougo/unite.vim.git"
+
+" Vimshell
+NeoBundle "shougo/vimshell"
+
 
 " Provides some functions to write in vimscript
-Bundle "L9"
+NeoBundle "L9"
 
 " markdown syntax
-Bundle "Markdown"
+NeoBundle "Markdown"
+
+" Clojure
+NeoBundle "vim-scripts/VimClojure"
 
 " ruby bob, ruby! that should come first
-Bundle "vim-scripts/kkruby.vim"
+NeoBundle "vim-scripts/kkruby.vim"
 
 " rails
-" Bundle "tpope/vim-rails"
+" NeoBundle "tpope/vim-rails"
+
+NeoBundle "othree/html5.vim"
 
 " haml
-Bundle "tpope/vim-haml"
+NeoBundle "tpope/vim-haml"
 
 " scss
-Bundle "cakebaker/scss-syntax.vim"
+NeoBundle "cakebaker/scss-syntax.vim"
 
 " coffeescript
-Bundle "kchmck/vim-coffee-script"
+NeoBundle "kchmck/vim-coffee-script"
 
 " ZenCoding
-Bundle "mattn/zencoding-vim"
-
-" Command-P
-Bundle "kien/ctrlp.vim"
+NeoBundle "mattn/zencoding-vim"
 
 " Gist
-Bundle "mattn/gist-vim"
+NeoBundle "mattn/gist-vim"
 
 " Solarized colors
-Bundle "altercation/vim-colors-solarized"
+NeoBundle "altercation/vim-colors-solarized"
 
 " Vim powerline
-" Bundle "Lokaltog/vim-powerline"
+" NeoBundle "Lokaltog/vim-powerline"
 
 " Erlang
-Bundle "jimenezrick/vimerl"
+NeoBundle "jimenezrick/vimerl"
 
 " NERDCommenter
-Bundle "scrooloose/nerdcommenter"
+NeoBundle "scrooloose/nerdcommenter"
 
 " Git gutter
-Bundle "airblade/vim-gitgutter"
+NeoBundle "airblade/vim-gitgutter"
 
 " multiple cursors
-Bundle "terryma/vim-multiple-cursors"
+NeoBundle "terryma/vim-multiple-cursors"
 
 " A better erlang plugin
-Bundle "jimenezrick/vimerl"
+NeoBundle "jimenezrick/vimerl"
 
 " end bundle list
 filetype plugin indent on
@@ -214,7 +237,21 @@ let mapleader = ","
 let g:mapleader = ","
 
 " Let CtrlP manage the working directory
-let g:ctrlp_working_path_mode = 0
+" let g:ctrlp_working_path_mode = 0
+
+" Unite bindings
+" file search
+nnoremap <C-p> :Unite file_rec/async<cr>
+
+" content search like ack.vim
+nnoremap <space>/ :Unite grep:.<cr>
+
+" history yanking like yankring/yankstack
+let g:unite_source_history_yank_enable = 1
+nnoremap <space>y :Unite history/yank<cr>
+
+" buffer switching like lustyjuggler
+nnoremap <space>s :Unite -quick-match buffer<cr>
 
 
 " <Leader> followed by the / key to open NERDTree
