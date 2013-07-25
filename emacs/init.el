@@ -1,6 +1,7 @@
 (require 'package)
+
 (add-to-list 'package-archives
-  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 (package-initialize)
 
@@ -69,6 +70,7 @@
 ;; use ido for minibuffer completion
 (require 'ido)
 (ido-mode t)
+
 (setq ido-save-directory-list-file "~/.emacs.d/.ido.last")
 (setq ido-enable-flex-matching t)
 (setq ido-use-filename-at-point 'guess)
@@ -148,16 +150,6 @@
   (add-to-list 'auto-mode-alist '("\\.gemspec\\'" . ruby-mode))
   (add-to-list 'auto-mode-alist '("\\.rb\\'" . ruby-mode))
   (add-to-list 'auto-mode-alist '("\\.ru\\'" . ruby-mode))
-
-  (add-hook 'ruby-mode-hook (lambda
-    (outline-minor-mode)
-    (local-set-key "\r" 'reindent-then-newline-and-indent)
-    (setq outline-regexp " *\\(def \\|class\\|module\\)")
-    (setq ruby-deep-arglist t)
-    (setq ruby-deep-indent-paren nil)
-    (setq c-tab-always-indent nil)
-  ))
-
 )
 
 (cfg-ruby-mode)
@@ -292,6 +284,8 @@
     ruby-mode   ;; ruby-mode-hook
     yaml-mode   ;; yaml-mode-hook
     rhtml-mode  ;; rhtml-mode-hook
+    clojure-mode
+    yasnippet
   )
 )
 
@@ -304,6 +298,11 @@
 ; (helm-mode 1)
 ; (global-set-key (kbd "C-c h") 'helm-mini)
 ; (global-set-key (kbd "C-x C-f") 'helm-find-files)
+
+
+(textmate-mode) ;; oh dear life saver
+(global-set-key (kbd "C-x f") 'textmate-goto-file)
+(electric-indent-mode)
 
 
 (custom-set-variables
