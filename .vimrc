@@ -120,7 +120,10 @@ NeoBundle 'Shougo/vimproc', {
       \ }
 
 " unite.vim
-NeoBundle "https://github.com/Shougo/unite.vim.git"
+" NeoBundle "https://github.com/Shougo/unite.vim.git"
+
+" ctrlp
+NeoBundle "ctrlp.vim"
 
 " Vimshell
 NeoBundle "shougo/vimshell"
@@ -237,21 +240,21 @@ let mapleader = ","
 let g:mapleader = ","
 
 " Let CtrlP manage the working directory
-" let g:ctrlp_working_path_mode = 0
+let g:ctrlp_working_path_mode = 0
 
 " Unite bindings
 " file search
-nnoremap <C-p> :Unite file_rec/async<cr>
+" nnoremap <C-p> :Unite file_rec/async<cr>
 
 " content search like ack.vim
-nnoremap <space>/ :Unite grep:.<cr>
+" nnoremap <space>/ :Unite grep:.<cr>
 
 " history yanking like yankring/yankstack
-let g:unite_source_history_yank_enable = 1
-nnoremap <space>y :Unite history/yank<cr>
+" let g:unite_source_history_yank_enable = 1
+" nnoremap <space>y :Unite history/yank<cr>
 
 " buffer switching like lustyjuggler
-nnoremap <space>s :Unite -quick-match buffer<cr>
+" nnoremap <space>s :Unite -quick-match buffer<cr>
 
 
 " <Leader> followed by the / key to open NERDTree
