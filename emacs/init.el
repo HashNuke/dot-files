@@ -301,7 +301,16 @@
 
 
 (textmate-mode) ;; oh dear life saver
-(global-set-key (kbd "C-x f") 'textmate-goto-file)
+
+;; My first custom Emacs lisp function
+(defun find-file-with-fresh-cache ()
+  (interactive)
+  (textmate-clear-cache)
+  (textmate-goto-file)
+  )
+
+(global-set-key (kbd "C-x C-f") 'find-file-with-fresh-cache)
+(global-set-key (kbd "C-x f") 'ido-find-file)
 (electric-indent-mode)
 
 
