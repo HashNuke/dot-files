@@ -207,17 +207,6 @@
 (cfg-markdown-mode)
 
 
-(defun cfg-helm ()
-  (setq
-    helm-ff-lynx-style-map nil
-    helm-input-idle-delay 0.1
-    helm-idle-delay 0.1
-  )
-)
-
-(cfg-helm)
-
-
 (defun cfg-goto-last-change ()
   (global-set-key (kbd "C-x C-/") 'goto-last-change))
 
@@ -262,31 +251,30 @@
 (cfg-simp)
 
 
-(setq my-packages
-'(
-    coffee-mode
-    helm  ;; helm-hook
-    switch-window
-    ack
-    smex ;;smex-hook
-    whole-line-or-region ;; whole-line-or-region-hook
-    color-theme ;; color-theme-hook
-    erlang ;; erlang-mode-hook
-    simp
-    magit ;; magit-hook
-    css-mode ;;css-mode-hook
-    js3-mode ;;js3-mode-hook
-    haml-mode
-    textmate
-    find-file-in-project
-    markdown-mode ;; markdown-mode-hook
-    scss-mode
-    ruby-mode   ;; ruby-mode-hook
-    yaml-mode   ;; yaml-mode-hook
-    rhtml-mode  ;; rhtml-mode-hook
-    clojure-mode
-    yasnippet
-  )
+(setq my-packages '(
+  coffee-mode
+  elixir-mode
+  elixir-mix
+  smex  ;;smex-hook
+  switch-window
+  ack
+  whole-line-or-region ;; whole-line-or-region-hook
+  markdown-mode        ;; markdown-mode-hook
+  color-theme          ;; color-theme-hook
+  erlang               ;; erlang-mode-hook
+  simp
+  magit                ;; magit-hook
+  css-mode             ;; css-mode-hook
+  js3-mode             ;; js3-mode-hook
+  haml-mode
+  textmate
+  find-file-in-project
+  scss-mode
+  ruby-mode     ;; ruby-mode-hook
+  yaml-mode     ;; yaml-mode-hook
+  rhtml-mode    ;; rhtml-mode-hook
+  clojure-mode
+  yasnippet)
 )
 
 
@@ -294,11 +282,6 @@
   (when (not (package-installed-p p))
     (package-install p)
   ))
-
-; (helm-mode 1)
-; (global-set-key (kbd "C-c h") 'helm-mini)
-; (global-set-key (kbd "C-x C-f") 'helm-find-files)
-
 
 (textmate-mode) ;; oh dear life saver
 
@@ -309,8 +292,7 @@
   (textmate-goto-file)
   )
 
-(global-set-key (kbd "C-x C-f") 'find-file-with-fresh-cache)
-(global-set-key (kbd "C-x f") 'ido-find-file)
+(global-set-key (kbd "C-x f") 'find-file-with-fresh-cache)
 (electric-indent-mode)
 
 
