@@ -1,18 +1,3 @@
-" Created on HashNuke's machine
-" This uses NeoBundle (https://github.com/Shougo/neobundle.vim) to manage vim scripts
-
-set nocompatible
-
-if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
-
-call neobundle#rc(expand('~/.vim/bundle/'))
-
-"" Let NeoBundle manage NeoBundle
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-
 " Gets powerline working under tmux
 set t_Co=256
 
@@ -108,79 +93,71 @@ au BufNewFile,BufRead *.dtl set filetype=htmldjango
 
 filetype off
 
-" Recommended to install
-" After install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
-NeoBundle 'Shougo/vimproc', {
-      \ 'build' : {
-      \     'windows' : 'make -f make_mingw32.mak',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
-" unite.vim
-" NeoBundle "https://github.com/Shougo/unite.vim.git"
+" Vundle
+Bundle "gmarik/vundle"
 
 " ctrlp
-NeoBundle "ctrlp.vim"
+Bundle "ctrlp.vim"
 
-" Vimshell
-NeoBundle "shougo/vimshell"
+" Elixir
+Bundle "elixir-lang/vim-elixir"
 
 
 " Provides some functions to write in vimscript
-NeoBundle "L9"
+Bundle "L9"
 
 " markdown syntax
-NeoBundle "Markdown"
+Bundle "Markdown"
 
 " Clojure
-NeoBundle "vim-scripts/VimClojure"
+Bundle "vim-scripts/VimClojure"
 
 " ruby bob, ruby! that should come first
-NeoBundle "vim-scripts/kkruby.vim"
+Bundle "vim-scripts/kkruby.vim"
 
 " rails
-" NeoBundle "tpope/vim-rails"
+Bundle "tpope/vim-rails"
 
-NeoBundle "othree/html5.vim"
+Bundle "othree/html5.vim"
 
 " haml
-NeoBundle "tpope/vim-haml"
+Bundle "tpope/vim-haml"
 
 " scss
-NeoBundle "cakebaker/scss-syntax.vim"
+Bundle "cakebaker/scss-syntax.vim"
 
 " coffeescript
-NeoBundle "kchmck/vim-coffee-script"
+Bundle "kchmck/vim-coffee-script"
 
 " ZenCoding
-NeoBundle "mattn/zencoding-vim"
+Bundle "mattn/zencoding-vim"
 
 " Gist
-NeoBundle "mattn/gist-vim"
+Bundle "mattn/gist-vim"
 
 " Solarized colors
-NeoBundle "altercation/vim-colors-solarized"
+Bundle "altercation/vim-colors-solarized"
 
 " Vim powerline
-" NeoBundle "Lokaltog/vim-powerline"
+Bundle "Lokaltog/vim-powerline"
 
 " Erlang
-NeoBundle "jimenezrick/vimerl"
+Bundle "jimenezrick/vimerl"
 
 " NERDCommenter
-NeoBundle "scrooloose/nerdcommenter"
+Bundle "scrooloose/nerdcommenter"
 
 " Git gutter
-NeoBundle "airblade/vim-gitgutter"
+Bundle "airblade/vim-gitgutter"
 
 " multiple cursors
-NeoBundle "terryma/vim-multiple-cursors"
+Bundle "terryma/vim-multiple-cursors"
 
 " A better erlang plugin
-NeoBundle "jimenezrick/vimerl"
+Bundle "jimenezrick/vimerl"
 
 " end bundle list
 filetype plugin indent on
