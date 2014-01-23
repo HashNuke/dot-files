@@ -81,6 +81,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*
 au BufRead,BufNewFile {Gemfile,Rakefile,Capfile,Vagrantfile,*.rb,*.rake,config.ru}  set ft=ruby
 au BufRead,BufNewFile {*.md,*.mkd,*.markdown}  set ft=markdown
 au Bufread,BufNewFile {*.as}  set filetype=actionscript
+au BufRead,BufNewFile {*.html.eex}  set ft=html
 au BufRead,BufNewFile {*.html.haml,*.haml}  set ft=haml
 au BufRead,BufNewFile {*.rkt,*.scm}  set ft=scheme
 au BufRead,BufNewFile {*.tt}  set ft=treetop
