@@ -1,4 +1,4 @@
-source $HOME/projects/dot-files/git-completion.bash
+source $HOME/projects/dot-files/git-prompt.sh
 
 export PATH=$HOME/bin:$PATH
 
