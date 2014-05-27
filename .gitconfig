@@ -1,6 +1,9 @@
 [core]
 	editor = /usr/bin/vim
-	excludesfile = /Users/akashmanohar/.gitignore_global
+	excludesfile = ~/.gitignore_global
+[user]
+	name = Akash Manohar J
+	email = akash@akash.im
 [color]
 	ui = true
 [alias]
