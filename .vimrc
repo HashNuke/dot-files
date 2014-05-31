@@ -94,77 +94,68 @@ au BufNewFile,BufRead *.dtl set filetype=htmldjango
 
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " Vundle
-Bundle "gmarik/vundle"
+Plugin 'gmarik/Vundle.vim'
 
 " ctrlp
-Bundle "ctrlp.vim"
+Plugin 'ctrlp.vim'
 
 " Elixir
-Bundle "elixir-lang/vim-elixir"
-
+Plugin 'elixir-lang/vim-elixir'
 
 " Provides some functions to write in vimscript
-Bundle "L9"
+Plugin 'L9'
 
 " markdown syntax
-Bundle "Markdown"
-
-" Clojure
-Bundle "vim-scripts/VimClojure"
+Plugin 'Markdown'
 
 " ruby bob, ruby! that should come first
-Bundle "vim-scripts/kkruby.vim"
+Plugin 'vim-scripts/kkruby.vim'
 
-" rails
-Bundle "tpope/vim-rails"
-
-Bundle "othree/html5.vim"
+Plugin 'othree/html5.vim'
 
 " haml
-Bundle "tpope/vim-haml"
+Plugin 'tpope/vim-haml'
 
 " scss
-Bundle "cakebaker/scss-syntax.vim"
+Plugin 'cakebaker/scss-syntax.vim'
 
 " coffeescript
-Bundle "kchmck/vim-coffee-script"
+Plugin 'kchmck/vim-coffee-script'
 
 " ZenCoding
-Bundle "mattn/zencoding-vim"
+Plugin 'mattn/zencoding-vim'
 
 " Gist
-Bundle "mattn/gist-vim"
+Plugin 'mattn/gist-vim'
 
 " Solarized colors
-Bundle "altercation/vim-colors-solarized"
+" Plugin 'altercation/vim-colors-solarized'
 
 " Vim powerline
-Bundle "Lokaltog/vim-powerline"
+Plugin 'Lokaltog/vim-powerline'
 
 " Erlang
-Bundle "jimenezrick/vimerl"
+Plugin 'jimenezrick/vimerl'
 
 " NERDCommenter
-Bundle "scrooloose/nerdcommenter"
+Plugin 'scrooloose/nerdcommenter'
 
 " Git gutter
-Bundle "airblade/vim-gitgutter"
+Plugin 'airblade/vim-gitgutter'
 
 " multiple cursors
-Bundle "terryma/vim-multiple-cursors"
+Plugin 'terryma/vim-multiple-cursors'
 
-" A better erlang plugin
-Bundle "jimenezrick/vimerl"
-
-" end bundle list
+" end Plugin list
+call vundle#end()
 filetype plugin indent on
 
 """""""""""""""""
-" STATUS LINE 
+" STATUS LINE
 """""""""""""""""
 
 " make filename and status always visible
@@ -277,9 +268,9 @@ if has("gui_running")
 else
     " i keep changing this, so let's keep this seperate
     set background=dark
-    "let g:solarized_termcolors = 256 
-    let g:solarized_visibility = "high" 
-    let g:solarized_contrast = "high" 
+    "let g:solarized_termcolors = 256
+    let g:solarized_visibility = "high"
+    let g:solarized_contrast = "high"
     colorscheme Tomorrow-Night
 endif
 
