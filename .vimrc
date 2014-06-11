@@ -126,9 +126,6 @@ Plugin 'cakebaker/scss-syntax.vim'
 " coffeescript
 Plugin 'kchmck/vim-coffee-script'
 
-" ZenCoding
-Plugin 'mattn/zencoding-vim'
-
 " Gist
 Plugin 'mattn/gist-vim'
 
@@ -267,10 +264,10 @@ if has("gui_running")
     colorscheme Tomorrow-Night
 else
     " i keep changing this, so let's keep this seperate
-    set background=dark
+    " set background=dark
     "let g:solarized_termcolors = 256
-    let g:solarized_visibility = "high"
-    let g:solarized_contrast = "high"
+    " let g:solarized_visibility = "high"
+    " let g:solarized_contrast = "high"
     colorscheme Tomorrow-Night
 endif
 

@@ -3,6 +3,7 @@
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
+;; (setq package-enable-at-startup nil)
 (package-initialize)
 
 ;; under mac, have Command as Meta and keep Option for localized input
@@ -94,8 +95,8 @@
 (defun kill-other-buffers ()
   "Kill all other buffers."
   (interactive)
-  (mapc 'kill-buffer 
-        (delq (current-buffer) 
+  (mapc 'kill-buffer
+        (delq (current-buffer)
           (remove-if-not 'buffer-file-name (buffer-list)))))
 
 (defun kill-all-buffers ()
@@ -273,7 +274,6 @@
   ruby-mode     ;; ruby-mode-hook
   yaml-mode     ;; yaml-mode-hook
   rhtml-mode    ;; rhtml-mode-hook
-  clojure-mode
   yasnippet)
 )
 
