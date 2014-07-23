@@ -147,6 +147,9 @@ Plugin 'airblade/vim-gitgutter'
 " multiple cursors
 Plugin 'terryma/vim-multiple-cursors'
 
+" monokai theme
+Plugin 'sickill/vim-monokai'
+
 " end Plugin list
 call vundle#end()
 filetype plugin indent on
@@ -268,7 +271,7 @@ else
     "let g:solarized_termcolors = 256
     " let g:solarized_visibility = "high"
     " let g:solarized_contrast = "high"
-    colorscheme Tomorrow-Night
+    colorscheme monokai
 endif
 
 " set the working dir to the root of the git repo
