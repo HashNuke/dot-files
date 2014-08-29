@@ -4,6 +4,9 @@ set t_Co=256
 " STFU! stop beeping!
 set vb
 
+" Hidden buffers enabled
+set hidden
+
 " enable trackpad/mouse scrolling
 set mouse=a
 
