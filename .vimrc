@@ -4,6 +4,8 @@ set t_Co=256
 " STFU! stop beeping!
 set vb
 
+set ruler
+
 " Hidden buffers enabled
 set hidden
 
@@ -46,11 +48,14 @@ set smartindent
 " C-style indentation
 set cindent
 
-" backspacing
+" backspacing:
+" indent can delete past auto-indent
+" eol can delete past prev line
+" start allows deleting beyond start of current session's edit
 set backspace=indent,eol,start
 
 " turn line numbering on
-set number
+"set number
 
 
 """""""""""
@@ -135,9 +140,6 @@ Plugin 'mattn/gist-vim'
 " Solarized colors
 " Plugin 'altercation/vim-colors-solarized'
 
-" Vim powerline
-Plugin 'Lokaltog/vim-powerline'
-
 " Erlang
 Plugin 'jimenezrick/vimerl'
 
@@ -165,15 +167,15 @@ filetype plugin indent on
 set modeline
 
 "Status line visual fluff
-set laststatus=2
-set statusline=
-set statusline+=%f   " file name
-set statusline+=\ \  " some whitespace
-set statusline+=%-14.(%l,%c%V%)%P\  " line, column number and percentage
-set statusline+=%=   " right align
-set statusline+=%h%1*%m%r%w%0* " flags
-set statusline+=[%{strlen(&ft)?&ft:'none'}, " filetype
-set statusline+=%{&fileformat}]\  " file format
+"set laststatus=2
+"set statusline=
+"set statusline+=%f   " file name
+"set statusline+=\ \  " some whitespace
+"set statusline+=%-14.(%l,%c%V%)%P\  " line, column number and percentage
+"set statusline+=%=   " right align
+"set statusline+=%h%1*%m%r%w%0* " flags
+"set statusline+=[%{strlen(&ft)?&ft:'none'}, " filetype
+"set statusline+=%{&fileformat}]\  " file format
 
 " god knows what this is, I'll ask him later
 set ls=2
@@ -270,10 +272,7 @@ if has("gui_running")
     colorscheme Tomorrow-Night
 else
     " i keep changing this, so let's keep this seperate
-    " set background=dark
-    "let g:solarized_termcolors = 256
-    " let g:solarized_visibility = "high"
-    " let g:solarized_contrast = "high"
+    set background=dark
     colorscheme monokai
 endif
 
