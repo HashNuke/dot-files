@@ -1,10 +1,60 @@
 (require 'package)
+(require 'cl)
 
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
-;; (setq package-enable-at-startup nil)
 (package-initialize)
+
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+;; (setq package-enable-at-startup nil)
+
+
+(defvar required-packages
+  '(
+    coffee-mode
+    elixir-mode
+    smex  ;;smex-hook
+    switch-window
+    ack
+    whole-line-or-region ;; whole-line-or-region-hook
+    markdown-mode        ;; markdown-mode-hook
+    color-theme          ;; color-theme-hook
+    erlang               ;; erlang-mode-hook
+    simp
+    magit                ;; magit-hook
+    css-mode             ;; css-mode-hook
+    js3-mode             ;; js3-mode-hook
+    haml-mode
+    textmate
+    find-file-in-project
+    scss-mode
+    ruby-mode     ;; ruby-mode-hook
+    yaml-mode     ;; yaml-mode-hook
+    rhtml-mode
+   ) "a list of packages to ensure are installed at launch.")
+
+
+; method to check if all packages are installed
+(defun packages-installed-p ()
+  (loop for p in required-packages
+        when (not (package-installed-p p)) do (return nil)
+        finally (return t)))
+
+; if not all packages are installed, check one by one and install the missing ones.
+(unless (packages-installed-p)
+  ; check for new packages (package versions)
+  (message "%s" "Emacs is now refreshing its package database...")
+  (package-refresh-contents)
+  (message "%s" " done.")
+  ; install the missing packages
+  (dolist (p required-packages)
+    (when (not (package-installed-p p))
+      (package-install p))))
+
+
+
 
 ;; under mac, have Command as Meta and keep Option for localized input
 (when (string-match "apple-darwin" system-configuration)
@@ -14,10 +64,6 @@
 
 ;; Highlight matching paranthesis
 (show-paren-mode t)
-
-;; Navigate windows with M-<arrows>
-(windmove-default-keybindings 'meta)
-(setq windmove-wrap-around t)
 
 ;; spaces, not tabs
 (setq-default indent-tabs-mode nil)
@@ -39,19 +85,12 @@
 
 (blink-cursor-mode t)
 
-;; No scrollbar
-(scroll-bar-mode -1)
-
 ;; Highlight current line
 (global-hl-line-mode)
 
 ;; Auto-revert changed files to on-disk state
 (global-auto-revert-mode 1)
 
-;; backward word kill
-(global-set-key "\C-w" 'backward-kill-word)
-(global-set-key "\C-x\C-k" 'kill-region)
-(global-set-key "\C-c\C-k" 'kill-region)
 
 ;; If you do use M-x term, you will notice there's line mode that acts like
 ;; emacs buffers, and there's the default char mode that will send your
@@ -130,20 +169,19 @@
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
-(defun cfg-ido-mode ()
+(defun config-ido-mode ()
   (define-key ido-completion-map [tab] 'ido-complete))
 
-(add-hook 'ido-setup-hook 'cfg-ido-mode)
+(add-hook 'ido-setup-hook 'config-ido-mode)
 
 
-(defun cfg-erlang-mode ()
+(defun config-syntax ()
   (add-to-list 'auto-mode-alist '("\\.erl\\'" . erlang-mode))
-)
+  (add-to-list 'auto-mode-alist '("rebar.config" . erlang-mode))
 
-(cfg-erlang-mode)
+  (add-to-list 'auto-mode-alist '("\\.erb\\'" . rhtml-mode))
+  (add-to-list 'auto-mode-alist '("\\.rjs\\'" . rhtml-mode))
 
-
-(defun cfg-ruby-mode ()
   (add-to-list 'auto-mode-alist '("Capfile" . ruby-mode))
   (add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
   (add-to-list 'auto-mode-alist '("Rakefile" . ruby-mode))
@@ -151,45 +189,30 @@
   (add-to-list 'auto-mode-alist '("\\.gemspec\\'" . ruby-mode))
   (add-to-list 'auto-mode-alist '("\\.rb\\'" . ruby-mode))
   (add-to-list 'auto-mode-alist '("\\.ru\\'" . ruby-mode))
-)
 
-(cfg-ruby-mode)
-
-
-(defun cfg-rhtml-mode ()
-  (add-to-list 'auto-mode-alist '("\\.erb\\'" . rhtml-mode))
-  (add-to-list 'auto-mode-alist '("\\.rjs\\'" . rhtml-mode))
-)
-
-(cfg-rhtml-mode)
-
-
-(defun cfg-yaml-mode ()
   (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
   (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
 )
 
-(cfg-yaml-mode)
+(config-syntax)
 
 
-(defun cfg-css-mode ()
+(defun config-css-mode ()
   (setq css-indent-level 2)
   (setq css-indent-offset 2)
 )
 
-(add-hook 'css-mode-hook 'cfg-css-mode)
+(add-hook 'css-mode-hook 'config-css-mode)
 
 
-(defun cfg-js3-mode ()
+(defun config-js3-mode ()
   '(js3-auto-indent-p t)         ; it's nice for commas to right themselves.
   '(js3-enter-indents-newline t) ; don't need to push tab before typing
   '(js3-indent-on-enter-key t)   ; fix indenting before moving on
 )
 
-(add-hook 'js3-mode-hook 'cfg-js3-mode)
 
-
-(defun cfg-smex ()
+(defun config-smex ()
   (require 'smex)
   (setq smex-save-file (concat user-emacs-directory ".smex-items"))
   (smex-initialize)
@@ -198,90 +221,33 @@
   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 )
 
-(cfg-smex)
+(config-smex)
 
-(defun cfg-markdown-mode ()
+(defun config-markdown-mode ()
   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
 )
 
-(cfg-markdown-mode)
+(config-markdown-mode)
 
 
-(defun cfg-goto-last-change ()
-  (global-set-key (kbd "C-x C-/") 'goto-last-change))
-
-(cfg-goto-last-change)
-
-
-(defun cfg-whole-line-or-region ()
-  (whole-line-or-region-mode t))
-
-(cfg-whole-line-or-region)
+(defun config-editor ()
+  (global-set-key (kbd "C-x C-/") 'goto-last-change)
+  (whole-line-or-region-mode t)
+  (global-set-key (kbd "C-c t") 'color-theme-select)
+  (global-set-key (kbd "C-x C-z") 'magit-status)
 
 
-(defun cfg-color-theme ()
-  (global-set-key (kbd "C-c t") 'color-theme-select))
-
-(cfg-color-theme)
-
-
-(defun cfg-magit ()
-  (global-set-key (kbd "C-x C-z") 'magit-status))
-
-(cfg-magit)
-
-
-(defun cfg-simp ()
-  (require 'simp)
-  (simp-project-define
-   '(:has (.git)
-          :ignore (tmp coverage log vendor .git public/system public/assets)))
-
-  (global-set-key (kbd "C-c f") 'simp-project-find-file)
-  (global-set-key (kbd "C-c d") 'simp-project-root-dired)
-  (global-set-key (kbd "C-c s") 'simp-project-rgrep)
-  (global-set-key (kbd "C-c S") 'simp-project-rgrep-dwim)
-  (global-set-key (kbd "C-c b") 'simp-project-ibuffer-files-only)
-  (global-set-key (kbd "C-c B") 'simp-project-ibuffer)
-  (global-set-key (kbd "C-c C-f") 'simp-project-with-bookmark-find-file)
-  (global-set-key (kbd "C-c C-s") 'simp-project-with-bookmark-rgrep)
-  (global-set-key (kbd "C-c C-b") 'simp-project-with-bookmark-ibuffer)
+  ;; backward word kill
+  (global-set-key "\C-w" 'backward-kill-word)
+  (global-set-key "\C-x\C-k" 'kill-region)
+  (global-set-key "\C-c\C-k" 'kill-region)
 )
 
-(cfg-simp)
+(config-editor)
 
 
-(setq my-packages '(
-  coffee-mode
-  elixir-mode
-  elixir-mix
-  smex  ;;smex-hook
-  switch-window
-  ack
-  whole-line-or-region ;; whole-line-or-region-hook
-  markdown-mode        ;; markdown-mode-hook
-  color-theme          ;; color-theme-hook
-  erlang               ;; erlang-mode-hook
-  simp
-  magit                ;; magit-hook
-  css-mode             ;; css-mode-hook
-  js3-mode             ;; js3-mode-hook
-  haml-mode
-  textmate
-  find-file-in-project
-  scss-mode
-  ruby-mode     ;; ruby-mode-hook
-  yaml-mode     ;; yaml-mode-hook
-  rhtml-mode    ;; rhtml-mode-hook
-  yasnippet)
-)
 
-
-(dolist (p my-packages)
-  (when (not (package-installed-p p))
-    (package-install p)
-  ))
 
 (textmate-mode) ;; oh dear life saver
 
@@ -294,8 +260,6 @@
 
 (global-set-key (kbd "C-x f") 'find-file-with-fresh-cache)
 (electric-indent-mode)
-
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
