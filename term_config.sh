@@ -11,7 +11,7 @@ alias em="emacsclient -t"
 alias jr="jruby -S"
 alias jrbe="jruby -S bundle exec"
 
-# Rails
+# Ruby
 alias be="bundle exec"
 
 alias gl="git lg"
