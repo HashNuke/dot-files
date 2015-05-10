@@ -1,20 +1,10 @@
 # Akash's dot files
 
+Just my config files. My preferences & opinions may change over time.
 
 ### Install
 
-```sh-session
-git clone git@github.com:HashNuke/dot-files.git ~/projects/dot-files
-
-ln -s $HOME/projects/dot-files/.vimrc $HOME/.vimrc
-ln -s $HOME/projects/dot-files/.tmux.conf $HOME/.tmux.conf
-ln -s $HOME/projects/dot-files/.gitconfig $HOME/.gitconfig
-ln -s $HOME/projects/dot-files/.gitignore $HOME/.gitignore_global
-
-git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-```
-
-
+Check `install.sh`
 
 ### Themes I use
 
