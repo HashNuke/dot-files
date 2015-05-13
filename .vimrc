@@ -263,18 +263,9 @@ cmap w!! %!sudo tee > /dev/null %
 " enable syntax highlighting
 syntax enable
 
-" check if Vim is running in CLI or in GUI mode for specific settings
-if has("gui_running")
-    " VIM IS RUNNING IN GUI
-    " set font and font size in macvim
-    set guifont=Monaco:h13
-    set background=dark
-    colorscheme Tomorrow-Night
-else
-    " i keep changing this, so let's keep this seperate
-    set background=dark
-    colorscheme monokai
-endif
+set background=dark
+set guifont=Monaco:h13
+colorscheme monokai
 
 " set the working dir to the root of the git repo
 " au BufEnter * call SetGitWD()
