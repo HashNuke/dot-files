@@ -1,0 +1,43 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/Users/HashNuke/.asdf/" . "bin/")
+ ("/Users/HashNuke/.asdf/bin/" . "private/")
+ ("/Users/HashNuke/.asdf/lib/" . "commands/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/Users/HashNuke/"
+ "/Users/HashNuke/.asdf/bin/"
+ "/Users/HashNuke/.asdf/lib/commands/"
+ "/Users/HashNuke/.asdf/bin/private/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ ".tool-versions"
+ "asdf"
+ "plugin-add.sh"
+ "asdf-exec"
+ "which.sh"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/Users/HashNuke/" (21861 26333 0 0) "VirtualBox VMs/" "tryout/" "torrents/" "tool.log" "setup-pipe.retry" "setup-camaro2.retry" "setup-camaro2-non-prod.retry" "setup-camaro-dashboard.retry" "Public/" "projects/" "pipe-vagrant-setup.log" "Pictures/" "Music/" "Movies/" "Library/" "Dropbox/" "Downloads/" "Documents/" "Desktop/" "deploy-pipe.retry" "deploy-camaro2-non-prod.retry" "deploy-camaro-agent-portal.retry" "Creative Cloud Files (unknown)/" "Creative Cloud Files/" "clutch/" "Applications/" "akash.log" ".zshrc" ".zlogin" ".vimrc" ".viminfo" ".vim/" ".vagrant.d/" ".v8flags.4.2.77.18.HashNuke.json" ".v8flags.4.1.0.27.HashNuke.json" ".v8flags.3.28.73.HashNuke.json" ".v8flags.3.28.71.19.HashNuke.json" ".Trash/" ".tool-versions.swp" ".tool-versions" ".tmux.conf" ".subversion/" ".ssh/" ".sh_history" ".profile" ".nvm/" ".npm/" ".node-gyp/" ".mkshrc" ".mix/" ".local/" ".irb-history" ".hex/" ".gnupg/" ".gitignore_global" ".gitconfig" ".gemrc" ".gem/" ".emacs.d/" ".DS_Store" ".dropbox/" ".config/" ".CFUserTextEncoding" ".cache/" ".bashrc" ".bash_profile" ".bash_history" ".atom/" ".asdf/" ".ansible/" "../" "./")
+
+ ("/Users/HashNuke/.asdf/bin/" (21861 26270 0 0) "private/" "asdf" "../" "./")
+
+ ("/Users/HashNuke/.asdf/lib/commands/" (21861 26201 0 0) "which.sh~" "which.sh" "uninstall.sh" "reshim.sh" "plugin-update.sh" "plugin-remove.sh" "plugin-push.sh" "plugin-add.sh" "list.sh" "list-all.sh" "install.sh" "help.sh" "../" "./")
+
+ ("/Users/HashNuke/.asdf/bin/private/" (21858 47740 0 0) "asdf-exec" "../" "./")
+
+ ("/Users/HashNuke/.asdf/lib/" (21848 28887 0 0) "utils.sh" "commands/" "../" "./")
+
+ ("/Users/HashNuke/.asdf/" (21858 49523 0 0) "Vagrantfile" "shims/" "README.md" "plugins/" "lib/" "installs/" "help.txt" "docs/" "bin/" "ballad-of-asdf.md" "asdf.sh" ".vagrant/" ".gitignore" ".git/" ".DS_Store" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t

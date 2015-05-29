@@ -4,5 +4,5 @@
 	("melpa" . "http://melpa.milkbox.net/packages/")))
 
 (ido-mode)
-(ido-enable-flex-matching)
+(setq ido-enable-flex-matching t)
 (setq auto-save-default nil)
