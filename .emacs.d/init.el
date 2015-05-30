@@ -12,3 +12,7 @@
 
 ;; disable menu bar
 (menu-bar-mode -1)
+
+;; Don't start with the "GNU Emacs" buffer
+(setq inhibit-start-screen t)
+(setq inhibit-splash-screen t)
