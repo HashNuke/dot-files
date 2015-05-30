@@ -5,4 +5,10 @@
 
 (ido-mode)
 (setq ido-enable-flex-matching t)
+
+;; Disable backup file creation
 (setq auto-save-default nil)
+(setq make-backup-files nil)
+
+;; disable menu bar
+(menu-bar-mode -1)
