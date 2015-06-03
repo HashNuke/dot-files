@@ -28,7 +28,7 @@
 (package-initialize)
 
 ;; My list of packages
-(setq package-list '(helm))
+(setq package-list '(helm js2-mode))
 
 ;; Refresh package archive contents
 (unless package-archive-contents
@@ -41,3 +41,20 @@
     (package-install package)))
 
 (require 'helm-config)
+
+(setq-default indent-tabs-mode nil)
+(setq tab-width 2)
+(defvaralias 'c-basic-offset 'tab-width)
+(defvaralias 'cperl-indent-level 'tab-width)
+
+;; for default javascript mode
+(setq js-indent-level 2)
+
+(defun js2-mode-hook ()
+  (setq-default js2-basic-offset 2)
+  )
+
+(add-hook 'js2-mode-hook 'js2-mode-hook)
+
+
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
