@@ -34,9 +34,6 @@
 ;; My list of packages
 (setq package-list '(helm js2-mode magit scss-mode projectile))
 
-(require 'helm-projectile)
-(helm-projectile-on)
-
 ;; Refresh package archive contents
 (unless package-archive-contents
   (package-refresh-contents))
@@ -51,10 +48,12 @@
 (setq magit-last-seen-setup-instructions "1.4.0")
 
 ;; require packages
-(setq require-list '(helm-config magit projectile))
+(setq require-list '(helm-config magit projectile helm-projectile))
 
 (dolist (require-item require-list)
   (require require-item))
+
+(helm-projectile-on)
 
 ;; Global key bindings
 (global-set-key (kbd "M-i") 'imenu)
