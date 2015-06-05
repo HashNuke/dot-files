@@ -23,6 +23,7 @@
 
 ;; Global key bindings
 (global-set-key (kbd "M-i") 'imenu)
+(global-set-key (kbd "C-x f") 'helm-find)
 
 ;; Activate all the packages
 (package-initialize)
@@ -47,6 +48,7 @@
 (defvaralias 'c-basic-offset 'tab-width)
 (defvaralias 'cperl-indent-level 'tab-width)
 
+
 ;; for default javascript mode
 (setq js-indent-level 2)
 
@@ -58,3 +60,5 @@
 
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
