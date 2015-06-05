@@ -3,6 +3,8 @@
 	("marmalage" . "http://marmalde-repo.org/packages/")
 	("melpa" . "http://melpa.milkbox.net/packages/")))
 
+;;;;;;;;;;;;;;;; GLOBAL CONFIG ;;;;;;;;;;;;;;;;
+
 (ido-mode 1)
 (setq ido-everywhere 1)
 (setq ido-enable-flex-matching t)
@@ -24,15 +26,16 @@
 ;; "Yes" or "No" should be "y" or "n"
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;; Global key bindings
-(global-set-key (kbd "M-i") 'imenu)
-(global-set-key (kbd "C-x f") 'helm-find)
+;;;;;;;;;;;; PACKAGE INSTALL/REQUIRE ;;;;;;;;;;;
 
 ;; Activate all the packages
 (package-initialize)
 
 ;; My list of packages
-(setq package-list '(helm js2-mode magit scss-mode))
+(setq package-list '(helm js2-mode magit scss-mode projectile))
+
+(require 'helm-projectile)
+(helm-projectile-on)
 
 ;; Refresh package archive contents
 (unless package-archive-contents
@@ -44,8 +47,18 @@
   (unless (package-installed-p package)
     (package-install package)))
 
-(require 'helm-config)
-(require 'magit)
+;; quiet magit
+(setq magit-last-seen-setup-instructions "1.4.0")
+
+;; require packages
+(setq require-list '(helm-config magit projectile))
+
+(dolist (require-item require-list)
+  (require require-item))
+
+;; Global key bindings
+(global-set-key (kbd "M-i") 'imenu)
+(global-set-key (kbd "C-x f") 'helm-find)
 
 ;; tabs and indentation
 (setq-default indent-tabs-mode nil)
@@ -75,4 +88,3 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-(setq magit-last-seen-setup-instructions "1.4.0")
