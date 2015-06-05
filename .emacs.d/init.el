@@ -32,7 +32,7 @@
 (package-initialize)
 
 ;; My list of packages
-(setq package-list '(helm js2-mode magit))
+(setq package-list '(helm js2-mode magit scss-mode))
 
 ;; Refresh package archive contents
 (unless package-archive-contents
@@ -62,6 +62,14 @@
   )
 
 (add-hook 'js2-mode-hook 'js2-mode-hook)
+
+
+(defun config-css-mode ()
+  (setq css-indent-level 2)
+  (setq css-indent-offset 2)
+  )
+
+(add-hook 'css-mode-hook 'config-css-mode)
 
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
