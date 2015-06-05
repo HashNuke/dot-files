@@ -18,6 +18,9 @@
 (setq inhibit-start-screen t)
 (setq inhibit-splash-screen t)
 
+;; enable column numbers
+(column-number-mode)
+
 ;; "Yes" or "No" should be "y" or "n"
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -28,7 +31,7 @@
 (package-initialize)
 
 ;; My list of packages
-(setq package-list '(helm js2-mode))
+(setq package-list '(helm js2-mode magit))
 
 ;; Refresh package archive contents
 (unless package-archive-contents
@@ -41,7 +44,9 @@
     (package-install package)))
 
 (require 'helm-config)
+(require 'magit)
 
+;; tabs and indentation
 (setq-default indent-tabs-mode nil)
 (setq tab-width 2)
 (defvaralias 'c-basic-offset 'tab-width)
@@ -58,3 +63,5 @@
 
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+(setq magit-last-seen-setup-instructions "1.4.0")
