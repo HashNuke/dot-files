@@ -32,7 +32,7 @@
 (package-initialize)
 
 ;; My list of packages
-(setq package-list '(helm js2-mode magit scss-mode projectile))
+(setq package-list '(helm js2-mode magit scss-mode projectile helm-projectile))
 
 ;; Refresh package archive contents
 (unless package-archive-contents
