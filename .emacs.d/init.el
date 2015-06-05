@@ -53,6 +53,7 @@
 (dolist (require-item require-list)
   (require require-item))
 
+(projectile-global-mode)
 (helm-projectile-on)
 
 ;; Global key bindings
