@@ -32,7 +32,16 @@
 (package-initialize)
 
 ;; My list of packages
-(setq package-list '(helm js2-mode magit scss-mode projectile helm-projectile))
+(setq package-list
+      '(
+        helm
+        js2-mode magit
+        scss-mode
+        projectile
+        helm-projectile
+        markdown-mode
+        elixir-mode
+        alchemist))
 
 ;; Refresh package archive contents
 (unless package-archive-contents
@@ -48,7 +57,14 @@
 (setq magit-last-seen-setup-instructions "1.4.0")
 
 ;; require packages
-(setq require-list '(helm-config magit projectile helm-projectile))
+(setq require-list
+      '(helm-config
+        magit
+        projectile
+        helm-projectile
+        markdown-mode
+        elixir-mode
+        alchemist))
 
 (dolist (require-item require-list)
   (require require-item))
