@@ -108,3 +108,7 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+(add-hook 'find-file-hook
+          (lambda ()
+            (setq default-directory command-line-default-directory)))
