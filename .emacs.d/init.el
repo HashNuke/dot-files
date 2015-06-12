@@ -109,6 +109,7 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+;; when opening a file, don't change working dir to parent dir of the file
 (add-hook 'find-file-hook
           (lambda ()
             (setq default-directory command-line-default-directory)))
