@@ -38,6 +38,7 @@
 ;; My list of packages
 (setq package-list
       '(
+        yaml-mode
         helm
         js2-mode magit
         scss-mode
@@ -62,7 +63,8 @@
 
 ;; require packages
 (setq require-list
-      '(helm-config
+      '(yaml-mode
+        helm-config
         magit
         projectile
         helm-projectile
