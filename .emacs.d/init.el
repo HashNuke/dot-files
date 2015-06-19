@@ -38,6 +38,9 @@
 ;; My list of packages
 (setq package-list
       '(
+        ;; color-theme-solarized
+        monokai-theme
+        tangotango-theme
         yaml-mode
         helm
         js2-mode magit
@@ -63,7 +66,11 @@
 
 ;; require packages
 (setq require-list
-      '(yaml-mode
+      '(
+        ;; color-theme-solarized
+        monokai-theme
+        tangotango-theme
+        yaml-mode
         helm-config
         magit
         projectile
@@ -75,8 +82,14 @@
 (dolist (require-item require-list)
   (require require-item))
 
+
+(load-theme 'monokai t)
+
 (projectile-global-mode)
 (helm-projectile-on)
+
+;; disable vc-git because magit is enabled
+(setq vc-handled-backends ())
 
 ;; Global key bindings
 (global-set-key (kbd "M-i") 'imenu)
@@ -115,3 +128,5 @@
 (add-hook 'find-file-hook
           (lambda ()
             (setq default-directory command-line-default-directory)))
+
+
