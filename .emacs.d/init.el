@@ -9,13 +9,13 @@
 (setq ido-everywhere 1)
 (setq ido-enable-flex-matching t)
 
-
 ;; change buffers when files change on disk
 (global-auto-revert-mode t)
 
 ;; Disable backup file creation
 (setq auto-save-default nil)
 (setq make-backup-files nil)
+(setq create-lockfiles nil)
 
 ;; Disable menu bar
 (menu-bar-mode -1)
