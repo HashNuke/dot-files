@@ -105,11 +105,19 @@
 ;; for default javascript mode
 (setq js-indent-level 2)
 
-(defun js2-mode-hook ()
+(defun config-js2-mode ()
   (setq-default js2-basic-offset 2)
   )
 
-(add-hook 'js2-mode-hook 'js2-mode-hook)
+(add-hook 'js2-mode-hook 'config-js2-mode)
+
+
+(defun config-shell-mode ()
+  (setq sh-basic-offset 2
+        sh-indentation 2)
+  )
+
+(add-hook 'sh-mode-hook 'config-shell-mode)
 
 
 (defun config-css-mode ()
@@ -128,5 +136,3 @@
 (add-hook 'find-file-hook
           (lambda ()
             (setq default-directory command-line-default-directory)))
-
-
