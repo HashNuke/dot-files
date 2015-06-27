@@ -38,9 +38,6 @@
 ;; My list of packages
 (setq package-list
       '(
-        ;; color-theme-solarized
-        monokai-theme
-        tangotango-theme
         yaml-mode
         helm
         js2-mode magit
@@ -67,9 +64,6 @@
 ;; require packages
 (setq require-list
       '(
-        ;; color-theme-solarized
-        monokai-theme
-        tangotango-theme
         yaml-mode
         helm-config
         magit
@@ -81,9 +75,6 @@
 
 (dolist (require-item require-list)
   (require require-item))
-
-
-(load-theme 'monokai t)
 
 (projectile-global-mode)
 (helm-projectile-on)
