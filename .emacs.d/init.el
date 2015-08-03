@@ -46,6 +46,8 @@
         helm-projectile
         markdown-mode
         elixir-mode
+        web-mode
+        emmet-mode
         alchemist))
 
 ;; Refresh package archive contents
@@ -71,6 +73,8 @@
         helm-projectile
         markdown-mode
         elixir-mode
+        web-mode
+        emmet-mode
         alchemist))
 
 (dolist (require-item require-list)
@@ -119,6 +123,16 @@
 (add-hook 'css-mode-hook 'config-css-mode)
 
 
+(defun config-web-mode ()
+  ;; (setq web-mode-style-padding 2
+  ;;       web-mode-script-padding 2
+  ;;       web-mode-css-indent-offset 2
+  ;;       web-mode-block-padding 2)
+  )
+
+(add-hook 'sh-mode-hook 'config-web-mode)
+
+
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -127,3 +141,15 @@
 ;; (add-hook 'find-file-hook
 ;;          (lambda ()
 ;;            (setq default-directory command-line-default-directory)))
+
+
+(defun orgtbl-to-gfm (table params)
+  "Convert the Orgtbl mode TABLE to GitHub Flavored Markdown."
+  (let* ((alignment (mapconcat (lambda (x) (if x "|--:" "|---"))
+                               org-table-last-alignment ""))
+         (params2
+          (list
+           :splice t
+           :hline (concat alignment "|")
+           :lstart "| " :lend " |" :sep " | ")))
+    (orgtbl-to-generic table (org-combine-plists params2 params))))
