@@ -1,0 +1,17 @@
+http {
+  upstream app_server {
+    server localhost:3000;
+  }
+
+  server {
+    listen 80;
+    server_name rails.dev;
+
+
+    location / {
+      proxy_pass http://app_server;
+      proxy_set_header Host $host;
+    }
+
+  }
+}
