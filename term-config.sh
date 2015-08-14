@@ -18,3 +18,5 @@ alias gl="git lg"
 alias gs="git status -sb"
 alias gp="git push"
 alias gu="git pull"
+
+alias n=nano
