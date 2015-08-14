@@ -1,0 +1,17 @@
+http {
+  upstream app_server {
+    server localhost:4200;
+  }
+
+  server {
+    listen 80;
+    server_name ember.dev;
+
+
+    location / {
+      proxy_pass http://app_server;
+      proxy_set_header Host $host;
+    }
+
+  }
+}
