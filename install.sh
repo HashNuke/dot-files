@@ -7,6 +7,8 @@ ln -s $HOME/projects/dot-files/.tmux.conf $HOME/.tmux.conf
 ln -s $HOME/projects/dot-files/.gitconfig $HOME/.gitconfig
 ln -s $HOME/projects/dot-files/.gitignore $HOME/.gitignore_global
 ln -s $HOME/projects/dot-files/.emacs.d $HOME/.emacs.d
-echo "source $HOME/projects/dot-files/term-config.sh" >> ~/.bash_profile
+printf "\nsource $HOME/projects/dot-files/term-config.sh" >> ~/.bash_profile
 
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+printf "\ninclude $HOME/projects/dot-files/nginx-servers/*;" >> /usr/local/etc/nginx/nginx.conf
