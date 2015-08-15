@@ -1,3 +1,6 @@
 [submodule ".emacs.d/themes/emacs-color-theme-solarized"]
 	path = .emacs.d/themes/emacs-color-theme-solarized
 	url = https://github.com/sellout/emacs-color-theme-solarized
+[submodule "osx-terminal.app-colors-solarized"]
+	path = osx-terminal.app-colors-solarized
+	url = git@github.com:tomislav/osx-terminal.app-colors-solarized.git
