@@ -3,6 +3,12 @@
 	("marmalage" . "http://marmalde-repo.org/packages/")
 	("melpa" . "http://melpa.milkbox.net/packages/")))
 
+(set-terminal-parameter nil 'background-mode 'dark)
+
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
+(load-theme 'solarized t)
+
+
 ;;;;;;;;;;;;;;;; GLOBAL CONFIG ;;;;;;;;;;;;;;;;
 
 (ido-mode 1)
@@ -62,6 +68,9 @@
 
 ;; quiet magit
 (setq magit-last-seen-setup-instructions "1.4.0")
+
+
+;;(set-face-foreground 'minibuffer-prompt "white")
 
 ;; require packages
 (setq require-list
