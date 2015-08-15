@@ -13,4 +13,4 @@ sudo printf "\n127.0.0.1 rails.dev\n127.0.0.1 ember.dev\n127.0.0.1 phoenix.dev\n
 
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-printf "\ninclude $HOME/projects/dot-files/nginx-servers/*;" >> /usr/local/etc/nginx/nginx.conf
+sed '$s|\}|'"    include $HOME/projects/dot-files/nginx-servers/*;"'}|g'
