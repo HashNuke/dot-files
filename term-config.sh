@@ -20,3 +20,4 @@ alias gp="git push"
 alias gu="git pull"
 
 alias n=nano
+alias ia="open $1 -a /Applications/iA\ Writer\ Pro.app"
