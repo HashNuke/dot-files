@@ -5,8 +5,8 @@
 
 (set-terminal-parameter nil 'background-mode 'dark)
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
-(load-theme 'solarized t)
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
+;; (load-theme 'solarized t)
 
 
 ;;;;;;;;;;;;;;;; GLOBAL CONFIG ;;;;;;;;;;;;;;;;
