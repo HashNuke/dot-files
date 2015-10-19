@@ -46,7 +46,8 @@
       '(
         yaml-mode
         helm
-        js2-mode magit
+        js2-mode
+        magit
         scss-mode
         projectile
         helm-projectile
@@ -67,6 +68,7 @@
     (package-install package)))
 
 ;; quiet magit
+(setq magit-emacsclient-executable "emacsclient")
 (setq magit-last-seen-setup-instructions "1.4.0")
 
 
@@ -105,7 +107,6 @@
 (defvaralias 'c-basic-offset 'tab-width)
 (defvaralias 'cperl-indent-level 'tab-width)
 
-
 ;; for default javascript mode
 (setq js-indent-level 2)
 
@@ -114,6 +115,14 @@
   )
 
 (add-hook 'js2-mode-hook 'config-js2-mode)
+
+
+(defun config-markdown-mode ()
+  (setq tab-width 2)
+  )
+
+(add-hook 'markdown-mode-hook 'config-markdown-mode)
+(add-hook 'gfm-mode-hook 'config-markdown-mode)
 
 
 (defun config-shell-mode ()
