@@ -98,6 +98,8 @@
 (dolist (require-item require-list)
   (require require-item))
 
+(yas-global-mode t)
+
 (projectile-global-mode)
 (helm-projectile-on)
 
