@@ -48,6 +48,7 @@
 ;; My list of packages
 (setq package-list
       '(
+        yasnippet
         yaml-mode
         helm
         js2-mode
@@ -59,6 +60,7 @@
         elixir-mode
         web-mode
         emmet-mode
+        writeroom-mode
         alchemist))
 
 ;; Refresh package archive contents
@@ -81,6 +83,7 @@
 ;; require packages
 (setq require-list
       '(
+        yasnippet
         yaml-mode
         helm-config
         magit
