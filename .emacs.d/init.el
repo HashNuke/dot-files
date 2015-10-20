@@ -1,7 +1,7 @@
 (setq package-archives
       `(("gnu" . "http://elpa.gnu.org/packages")
-	("marmalade" . "http://marmalde-repo.org/packages/")
-	("melpa" . "http://melpa.milkbox.net/packages/")))
+        ("marmalade" . "http://marmalde-repo.org/packages/")
+        ("melpa" . "http://melpa.milkbox.net/packages/")))
 
 (set-terminal-parameter nil 'background-mode 'dark)
 
