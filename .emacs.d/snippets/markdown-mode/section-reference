@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# key: secref
+# contributor: Akash Manohar <akash@akash.im>
+# --
+Section~\ref{sec:$1}

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# key: chapref
+# contributor: Akash Manohar <akash@akash.im>
+# --
+Chapter~\ref{chap:$1}

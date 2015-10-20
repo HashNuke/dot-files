@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# key: cbox
+# contributor: Akash Manohar <akash@akash.im>
+# --
+\begin{codelisting}
+\codecaption{$1}
+\label{code:$2}
+\`\`\`
+$3
+\`\`\`
+\end{codelisting}

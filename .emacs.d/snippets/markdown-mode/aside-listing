@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# key: abox
+# contributor: Akash Manohar <akash@akash.im>
+# --
+\begin{aside}
+\heading{$1}
+\label{aside:$2}
+\`\`\`
+$3
+\`\`\`
+\end{aside}

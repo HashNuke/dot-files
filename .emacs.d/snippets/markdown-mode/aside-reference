@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# key: asideref
+# contributor: Akash Manohar <akash@akash.im>
+# --
+Listing~\ref{aside:$1}
