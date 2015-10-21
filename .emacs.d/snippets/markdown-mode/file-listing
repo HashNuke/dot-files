@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# key: fbox
+# contributor: Akash Manohar <akash@akash.im>
+# --
+\begin{codelisting}
+\codecaption{$1}
+\label{code:$2}
+<<(source/$3, lang: $4)
+\end{codelisting}
