@@ -3,9 +3,7 @@
 # contributor: Akash Manohar <akash@akash.im>
 # --
 \begin{aside}
-\heading{$1}
 \label{aside:$2}
-\`\`\`
+\heading{$1}
 $3
-\`\`\`
 \end{aside}

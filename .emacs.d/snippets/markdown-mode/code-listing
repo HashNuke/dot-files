@@ -3,8 +3,8 @@
 # contributor: Akash Manohar <akash@akash.im>
 # --
 \begin{codelisting}
-\codecaption{$1}
 \label{code:$2}
+\codecaption{$1}
 \`\`\`
 $3
 \`\`\`
