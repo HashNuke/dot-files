@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# key: figref
+# contributor: Akash Manohar <akash@akash.im>
+# --
+Figure~\ref{fig:$1}

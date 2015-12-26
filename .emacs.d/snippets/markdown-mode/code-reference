@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# key: coderef
+# contributor: Akash Manohar <akash@akash.im>
+# --
+Listing~\ref{code:$1}

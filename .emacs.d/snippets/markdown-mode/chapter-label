@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# key: chalabel
+# contributor: Akash Manohar <akash@akash.im>
+# --
+\label{cha:$1}

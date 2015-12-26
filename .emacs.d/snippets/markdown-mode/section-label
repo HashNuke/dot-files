@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# key: seclabel
+# contributor: Akash Manohar <akash@akash.im>
+# --
+\label{sec:$1}

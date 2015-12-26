@@ -1,15 +1,19 @@
 (setq package-archives
       `(("gnu" . "http://elpa.gnu.org/packages")
-	("marmalage" . "http://marmalde-repo.org/packages/")
-	("melpa" . "http://melpa.milkbox.net/packages/")))
+        ("marmalade" . "http://marmalde-repo.org/packages/")
+        ("melpa" . "http://melpa.milkbox.net/packages/")))
 
 (set-terminal-parameter nil 'background-mode 'dark)
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
-(load-theme 'solarized t)
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
+;; (load-theme 'solarized t)
 
 
 ;;;;;;;;;;;;;;;; GLOBAL CONFIG ;;;;;;;;;;;;;;;;
+
+
+(set-face-attribute 'default nil :font  "Monaco 14")
+(set-frame-font "Monaco 16" nil t)
 
 (ido-mode 1)
 (setq ido-everywhere 1)
@@ -44,9 +48,11 @@
 ;; My list of packages
 (setq package-list
       '(
+        yasnippet
         yaml-mode
         helm
-        js2-mode magit
+        js2-mode
+        magit
         scss-mode
         projectile
         helm-projectile
@@ -54,6 +60,7 @@
         elixir-mode
         web-mode
         emmet-mode
+        writeroom-mode
         alchemist))
 
 ;; Refresh package archive contents
@@ -67,6 +74,7 @@
     (package-install package)))
 
 ;; quiet magit
+(setq magit-emacsclient-executable "emacsclient")
 (setq magit-last-seen-setup-instructions "1.4.0")
 
 
@@ -75,6 +83,7 @@
 ;; require packages
 (setq require-list
       '(
+        yasnippet
         yaml-mode
         helm-config
         magit
@@ -88,6 +97,8 @@
 
 (dolist (require-item require-list)
   (require require-item))
+
+(yas-global-mode t)
 
 (projectile-global-mode)
 (helm-projectile-on)
@@ -105,7 +116,6 @@
 (defvaralias 'c-basic-offset 'tab-width)
 (defvaralias 'cperl-indent-level 'tab-width)
 
-
 ;; for default javascript mode
 (setq js-indent-level 2)
 
@@ -114,6 +124,14 @@
   )
 
 (add-hook 'js2-mode-hook 'config-js2-mode)
+
+
+(defun config-markdown-mode ()
+  (setq tab-width 2)
+  )
+
+(add-hook 'markdown-mode-hook 'config-markdown-mode)
+(add-hook 'gfm-mode-hook 'config-markdown-mode)
 
 
 (defun config-shell-mode ()
@@ -162,3 +180,20 @@
            :hline (concat alignment "|")
            :lstart "| " :lend " |" :sep " | ")))
     (orgtbl-to-generic table (org-combine-plists params2 params))))
+
+
+(when (display-graphic-p)
+  (tool-bar-mode -1)
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(custom-enabled-themes (quote (tango-dark))))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   )
+  )
