@@ -114,6 +114,7 @@
 (setq-default indent-tabs-mode nil)
 (setq tab-width 2)
 (defvaralias 'c-basic-offset 'tab-width)
+(setq-default c-basic-offset 4)
 (defvaralias 'cperl-indent-level 'tab-width)
 
 ;; for default javascript mode
