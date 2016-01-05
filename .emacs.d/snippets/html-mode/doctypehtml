@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# key: doctypehtml
+# contributor: Akash Manohar <akash@akash.im>
+# --
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>$1</title>
+</head>
+<body>
+  $2
+</body>
+</html>

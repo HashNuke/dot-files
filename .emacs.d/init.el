@@ -58,9 +58,9 @@
         helm-projectile
         markdown-mode
         elixir-mode
-        web-mode
         emmet-mode
         writeroom-mode
+        web-mode
         alchemist))
 
 ;; Refresh package archive contents
@@ -91,8 +91,8 @@
         helm-projectile
         markdown-mode
         elixir-mode
-        web-mode
         emmet-mode
+        web-mode
         alchemist))
 
 (dolist (require-item require-list)
@@ -152,13 +152,14 @@
 
 
 (defun config-web-mode ()
-  ;; (setq web-mode-style-padding 2
-  ;;       web-mode-script-padding 2
-  ;;       web-mode-css-indent-offset 2
-  ;;       web-mode-block-padding 2)
+  (setq web-mode-code-indent-offset 2)
+  ;;(setq web-mode-style-padding 2)
+  ;;(setq web-mode-script-padding 2
+  ;;(setq web-mode-css-indent-offset 2)
+  ;;(setq web-mode-block-padding 2)
   )
 
-(add-hook 'sh-mode-hook 'config-web-mode)
+(add-hook 'web-mode-hook 'config-web-mode)
 
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
