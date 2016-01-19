@@ -12,6 +12,7 @@
 	co = checkout
 	dc = "diff --cached"
 	ci = "commit -s"
+	clean-all = !git reset --hard && git clean -fd
 	br = branch
 	rb = rebase
 	df = diff
