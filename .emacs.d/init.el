@@ -101,6 +101,8 @@
 (yas-global-mode t)
 
 (projectile-global-mode)
+(setq projectile-switch-project-action 'helm-projectile-find-file)
+(setq projectile-use-git-grep 1)
 (helm-projectile-on)
 
 ;; disable vc-git because magit is enabled
