@@ -6,7 +6,7 @@ export PS1=$'\n\[\e[0;32m\]\w\[\e[1;31m\]$(__git_ps1 ":%s") \n\[\e[0;36m\]\xe2\x
 
 # Emacs
 # alias emacs="emacs -nw"
-alias ec="emacsclient -t"
+alias ec="emacsclient -nw"
 
 alias jr="jruby -S"
 alias jrbe="jruby -S bundle exec"
