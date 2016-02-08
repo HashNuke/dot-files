@@ -34,6 +34,10 @@
 (setq inhibit-start-screen t)
 (setq inhibit-splash-screen t)
 
+
+;; always open buffer on the bottom instead of the right
+(setq split-width-threshold most-positive-fixnum)
+
 ;; enable column numbers
 (column-number-mode)
 
@@ -104,6 +108,29 @@
 (setq projectile-switch-project-action 'helm-projectile-find-file)
 (setq projectile-use-git-grep 1)
 (helm-projectile-on)
+
+;;enable line numbers globally
+(global-linum-mode t)
+
+
+;; space after line number
+;; copied from http://ask.systutorials.com/666/how-add-space-between-the-line-numbers-and-text-content-emacs
+;; needs to be rewritten to be made readable
+(setq linum-format (lambda (line)
+                     (propertize
+                      (format
+                       (let ((
+                              w
+                              (
+                               length
+                               (
+                                number-to-string
+                                (count-lines (point-min) (point-max))
+                                )
+                               )
+                              )
+                             )
+                         (concat "%" \ (number-to-string w) "d ")) line) 'face 'linum)))
 
 ;; disable vc-git because magit is enabled
 (setq vc-handled-backends ())
