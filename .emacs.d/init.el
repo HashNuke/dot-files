@@ -114,23 +114,7 @@
 
 
 ;; space after line number
-;; copied from http://ask.systutorials.com/666/how-add-space-between-the-line-numbers-and-text-content-emacs
-;; needs to be rewritten to be made readable
-(setq linum-format (lambda (line)
-                     (propertize
-                      (format
-                       (let ((
-                              w
-                              (
-                               length
-                               (
-                                number-to-string
-                                (count-lines (point-min) (point-max))
-                                )
-                               )
-                              )
-                             )
-                         (concat "%" \ (number-to-string w) "d ")) line) 'face 'linum)))
+(setq linum-format "%d ")
 
 ;; disable vc-git because magit is enabled
 (setq vc-handled-backends ())
@@ -200,6 +184,11 @@
 ;;          (lambda ()
 ;;            (setq default-directory command-line-default-directory)))
 
+
+
+;; let the terminal decide the color scheme
+(custom-set-faces (if (not window-system) '(default ((t (:background "nil"))))))
+(load-theme 'atom-one-dark t)
 
 (defun orgtbl-to-gfm (table params)
   "Convert the Orgtbl mode TABLE to GitHub Flavored Markdown."
