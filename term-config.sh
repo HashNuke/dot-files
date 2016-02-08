@@ -2,7 +2,11 @@ source $HOME/projects/dot-files/git-prompt.sh
 
 export PATH=$HOME/bin:$PATH
 
-export PS1=$'\n\[\e[0;32m\]\w\[\e[1;31m\]$(__git_ps1 ":%s") \n\[\e[0;36m\]\xe2\x98\x85 \[\e[0m\]'
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+  export PS1=$'\n\[\e[0;32m\]\w\[\e[1;31m\]$(__git_ps1 ":%s") \n\[\e[0;36m\]\xe2\x98\x85 \[\e[0m\]'  
+# elif [[ "$unamestr" == 'FreeBSD' ]]; then
+fi
 
 # Emacs
 # alias emacs="emacs -nw"
