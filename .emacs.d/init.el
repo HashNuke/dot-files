@@ -64,6 +64,7 @@
         elixir-mode
         emmet-mode
         writeroom-mode
+        atom-one-dark-theme
         web-mode
         alchemist))
 
