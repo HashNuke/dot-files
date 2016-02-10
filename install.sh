@@ -10,6 +10,15 @@ ln -s $HOME/projects/dot-files/.gitignore $HOME/.gitignore_global
 ln -s $HOME/projects/dot-files/.emacs.d $HOME/.emacs.d
 echo "source $HOME/projects/dot-files/term-config.sh" >> ~/.bash_profile
 
+sudo apt-get install -y automake autoconf libreadline-dev libncurses-dev libssl-dev libyaml-dev libxslt-dev libffi-dev libtool unixodbc-dev
+
+git clone git@github.com:HashNuke/asdf.git $HOME/.asdf
+asdf plugin-add erlang git@github.com:HashNuke/asdf-erlang.git
+asdf plugin-add elixir git@github.com:HashNuke/asdf-elixir.git
+asdf plugin-add nodejs git@github.com:HashNuke/asdf-nodejs.git
+asdf plugin-add ruby git@github.com:HashNuke/asdf-ruby.git
+
+
 sudo printf "\n127.0.0.1 rails.dev\n127.0.0.1 ember.dev\n127.0.0.1 phoenix.dev\n127.0.0.1 jekyll.dev" >> /etc/hosts
 
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
