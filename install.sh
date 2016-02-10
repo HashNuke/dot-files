@@ -14,6 +14,8 @@ echo "source $HOME/projects/dot-files/term-config.sh" >> ~/.bashrc
 sudo apt-get install -y automake autoconf libreadline-dev libncurses-dev libssl-dev libyaml-dev libxslt-dev libffi-dev libtool unixodbc-dev
 sudo apt-get install -y openjdk-8-jdk
 
+wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+
 git clone git@github.com:HashNuke/asdf.git $HOME/.asdf
 echo '. $HOME/.asdf/asdf.sh' >> ~/.bashrc
 echo '. $HOME/.asdf/asdf.sh' >> ~/.bash_profile
