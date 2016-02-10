@@ -1,10 +1,13 @@
 source $HOME/projects/dot-files/git-prompt.sh
 
 # export TERM=xterm-256color
+unamestr=`uname`
 
 export PATH=$HOME/bin:$PATH
+if [[ "$unamestr" == 'Linux' ]]; then
+  export LC_ALL="en_US.UTF-8"
+fi
 
-unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]] || [[ "$unamestr" == 'Darwin' ]]; then
   export PS1=$'\n\[\e[0;32m\]\w\[\e[1;31m\]$(__git_ps1 ":%s") \n\[\e[0;36m\]\xe2\x98\x85 \[\e[0m\]'
 # elif [[ "$unamestr" == 'FreeBSD' ]]; then
