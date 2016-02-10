@@ -11,6 +11,7 @@ ln -s $HOME/projects/dot-files/.emacs.d $HOME/.emacs.d
 echo "source $HOME/projects/dot-files/term-config.sh" >> ~/.bash_profile
 
 sudo apt-get install -y automake autoconf libreadline-dev libncurses-dev libssl-dev libyaml-dev libxslt-dev libffi-dev libtool unixodbc-dev
+sudo apt-get install -y openjdk-8-jdk
 
 git clone git@github.com:HashNuke/asdf.git $HOME/.asdf
 asdf plugin-add erlang git@github.com:HashNuke/asdf-erlang.git
