@@ -1,6 +1,7 @@
 
-sudo pkg install -y bash vim ediors/emacs git tmux gmake automake autoconf openssl libyaml readline libxslt libtool unixodbc gcc
+sudo pkg install -y bash vim ediors/emacs git tmux gmake automake autoconf openssl libyaml readline libxslt libtool unixodbc gcc libexecinfo
 
+sudo pkg install -y gnupg
 sudo pkg install -y openjdk8
 
 
