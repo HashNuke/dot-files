@@ -1,5 +1,6 @@
 #/usr/bin/env bash
 
+mkdir -p ~/projects
 git clone git@github.com:HashNuke/dot-files.git ~/projects/dot-files
 
 ln -s $HOME/projects/dot-files/.vimrc $HOME/.vimrc
