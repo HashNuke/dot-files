@@ -1,5 +1,5 @@
 [core]
-	editor = /usr/bin/vim
+	editor = /usr/bin/vi
 	excludesfile = /Users/HashNuke/.gitignore_global
 	pager = less -r
 [user]
