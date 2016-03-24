@@ -9,7 +9,7 @@ if [[ "$unamestr" == 'Linux' ]]; then
 fi
 
 if [[ "$unamestr" == 'Linux' ]] || [[ "$unamestr" == 'Darwin' ]]; then
-  export PS1=$'\n\[\e[0;32m\]\w\[\e[1;31m\]$(__git_ps1 ":%s") \n\[\e[0;36m\]\xe2\x98\x85 \[\e[0m\]'
+  export PS1=$'\n\[\e[0;32m\]\h:\w\[\e[1;31m\]$(__git_ps1 ":%s") \n\[\e[0;36m\]\xe2\x98\x85 \[\e[0m\]'
 # elif [[ "$unamestr" == 'FreeBSD' ]]; then
 fi
 
