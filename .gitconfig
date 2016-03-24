@@ -16,7 +16,9 @@
 	clean-all = !git reset --hard && git clean -fd
 	br = branch
 	rb = rebase
-	df = diff
+  df = diff
+  cp = cherry-pick
+  ll = "log --oneline"
 [push]
 	default = current
 [filter "lfs"]
