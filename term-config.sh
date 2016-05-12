@@ -16,6 +16,7 @@ fi
 # Emacs
 # alias emacs="emacs -nw"
 alias ec="emacsclient -nw"
+alias em="emacs -nw"
 
 alias jr="jruby -S"
 alias jrbe="jruby -S bundle exec"
