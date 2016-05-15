@@ -1,6 +1,7 @@
 [core]
-	editor = /usr/bin/vim
 	excludesfile = /Users/HashNuke/.gitignore_global
+	pager = less -r
+	editor = /usr/bin/vim
 [user]
 	name = Akash Manohar J
 	email = akash@akash.im
@@ -15,7 +16,9 @@
 	clean-all = !git reset --hard && git clean -fd
 	br = branch
 	rb = rebase
-	df = diff
+  df = diff
+  cp = cherry-pick
+  ll = "log --oneline"
 [push]
 	default = current
 [filter "lfs"]

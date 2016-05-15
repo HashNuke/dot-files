@@ -1,12 +1,22 @@
 source $HOME/projects/dot-files/git-prompt.sh
 
-export PATH=$HOME/bin:$PATH
+# export TERM=xterm-256color
+unamestr=`uname`
 
-export PS1=$'\n\[\e[0;32m\]\w\[\e[1;31m\]$(__git_ps1 ":%s") \n\[\e[0;36m\]\xe2\x98\x85 \[\e[0m\]'
+export PATH=$HOME/bin:$PATH
+if [[ "$unamestr" == 'Linux' ]]; then
+  export LC_ALL="en_US.UTF-8"
+fi
+
+if [[ "$unamestr" == 'Linux' ]] || [[ "$unamestr" == 'Darwin' ]]; then
+  export PS1=$'\n\[\e[0;32m\]\h:\w\[\e[1;31m\]$(__git_ps1 ":%s") \n\[\e[0;36m\]\xe2\x98\x85 \[\e[0m\]'
+# elif [[ "$unamestr" == 'FreeBSD' ]]; then
+fi
 
 # Emacs
 # alias emacs="emacs -nw"
 alias ec="emacsclient -nw"
+alias em="emacs -nw"
 
 alias jr="jruby -S"
 alias jrbe="jruby -S bundle exec"

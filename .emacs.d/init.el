@@ -22,6 +22,10 @@
 ;; change buffers when files change on disk
 (global-auto-revert-mode t)
 
+
+(custom-set-variables
+  '(with-editor-emacsclient-executable "emacsclient"))
+
 ;; Disable backup file creation
 (setq auto-save-default nil)
 (setq make-backup-files nil)
@@ -33,6 +37,10 @@
 ;; Don't start with the "GNU Emacs" buffer
 (setq inhibit-start-screen t)
 (setq inhibit-splash-screen t)
+
+
+;; always open buffer on the bottom instead of the right
+(setq split-width-threshold most-positive-fixnum)
 
 ;; enable column numbers
 (column-number-mode)
@@ -60,6 +68,7 @@
         elixir-mode
         emmet-mode
         writeroom-mode
+        atom-one-dark-theme
         web-mode
         alchemist))
 
@@ -104,6 +113,13 @@
 (setq projectile-switch-project-action 'helm-projectile-find-file)
 (setq projectile-use-git-grep 1)
 (helm-projectile-on)
+
+;;enable line numbers globally
+(global-linum-mode t)
+
+
+;; space after line number
+(setq linum-format "%d ")
 
 ;; disable vc-git because magit is enabled
 (setq vc-handled-backends ())
@@ -173,6 +189,11 @@
 ;;          (lambda ()
 ;;            (setq default-directory command-line-default-directory)))
 
+
+
+;; let the terminal decide the color scheme
+(custom-set-faces (if (not window-system) '(default ((t (:background "nil"))))))
+(load-theme 'atom-one-dark t)
 
 (defun orgtbl-to-gfm (table params)
   "Convert the Orgtbl mode TABLE to GitHub Flavored Markdown."
