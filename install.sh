@@ -2,6 +2,9 @@
 
 git clone git@github.com:HashNuke/dot-files.git ~/projects/dot-files
 
+mkdir -p ~/bin
+ln -s $HOME/projects/dot-files/start-tmux $HOME/bin/start-tmux
+
 ln -s $HOME/projects/dot-files/.vimrc $HOME/.vimrc
 ln -s $HOME/projects/dot-files/.tmux.conf $HOME/.tmux.conf
 ln -s $HOME/projects/dot-files/.gitconfig $HOME/.gitconfig

@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+session_name="play"
+work_dir="~/projects"
+
+echo "Starting $session_name"
+tmux new-session -s $session_name -n editor -d
+tmux send-keys -t $session_name "cd $work_dir" C-m
+
+tmux new-window -n servers -t $session_name
+tmux new-window -n console -t $session_name
+
+tmux select-window -t "${session_name}:1"
+tmux send-keys -t $session_name "cd $work_dir" C-m
+tmux send-keys -t $session_name "emacs -nw" C-m
+
+tmux select-window -t "${session_name}:2"
+tmux send-keys -t $session_name "cd $work_dir" C-m
+
+tmux select-window -t "${session_name}:3"
+tmux send-keys -t $session_name "cd ${work_dir}" C-m
