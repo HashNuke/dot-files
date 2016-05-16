@@ -1,7 +1,7 @@
 [core]
-	editor = /usr/bin/nano
 	excludesfile = /Users/HashNuke/.gitignore_global
 	pager = less -r
+	editor = /usr/bin/vim
 [user]
 	name = Akash Manohar J
 	email = akash@akash.im

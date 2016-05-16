@@ -22,6 +22,10 @@
 ;; change buffers when files change on disk
 (global-auto-revert-mode t)
 
+
+(custom-set-variables
+  '(with-editor-emacsclient-executable "emacsclient"))
+
 ;; Disable backup file creation
 (setq auto-save-default nil)
 (setq make-backup-files nil)
