@@ -12,6 +12,8 @@ ln -s $HOME/projects/dot-files/.tmux.conf $HOME/.tmux.conf
 ln -s $HOME/projects/dot-files/.gitconfig $HOME/.gitconfig
 ln -s $HOME/projects/dot-files/.gitignore $HOME/.gitignore_global
 ln -s $HOME/projects/dot-files/.emacs.d $HOME/.emacs.d
+ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ~/bin/subl
+
 echo "source $HOME/projects/dot-files/term-config.sh" >> ~/.bash_profile
 echo "source $HOME/projects/dot-files/term-config.sh" >> ~/.bashrc
 
