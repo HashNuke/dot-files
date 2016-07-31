@@ -1,11 +1,14 @@
 #/usr/bin/env bash
 
 mkdir -p ~/bin
+
+ln -s $HOME/projects/dot-files/.vimrc $HOME/.vimrc
+git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+ln -s $HOME/projects/dot-files/.tmux.conf $HOME/.tmux.conf
 ln -s $HOME/projects/dot-files/start-tmux $HOME/bin/start-tmux
 
 ln -s $HOME/projects/dot-files/.gdbinit $HOME/.gdbinit
-ln -s $HOME/projects/dot-files/.vimrc $HOME/.vimrc
-ln -s $HOME/projects/dot-files/.tmux.conf $HOME/.tmux.conf
 ln -s $HOME/projects/dot-files/.gitconfig $HOME/.gitconfig
 ln -s $HOME/projects/dot-files/.gitignore $HOME/.gitignore_global
 ln -s $HOME/projects/dot-files/.emacs.d $HOME/.emacs.d
@@ -27,6 +30,3 @@ asdf plugin-add erlang git@github.com:HashNuke/asdf-erlang.git
 asdf plugin-add elixir git@github.com:HashNuke/asdf-elixir.git
 asdf plugin-add nodejs git@github.com:HashNuke/asdf-nodejs.git
 asdf plugin-add ruby git@github.com:HashNuke/asdf-ruby.git
-
-
-git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
