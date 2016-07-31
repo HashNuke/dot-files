@@ -1,8 +1,5 @@
 #/usr/bin/env bash
 
-mkdir -p ~/projects
-git clone git@github.com:HashNuke/dot-files.git ~/projects/dot-files
-
 mkdir -p ~/bin
 ln -s $HOME/projects/dot-files/start-tmux $HOME/bin/start-tmux
 
