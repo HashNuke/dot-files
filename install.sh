@@ -32,8 +32,4 @@ asdf plugin-add nodejs git@github.com:HashNuke/asdf-nodejs.git
 asdf plugin-add ruby git@github.com:HashNuke/asdf-ruby.git
 
 
-sudo printf "\n127.0.0.1 rails.dev\n127.0.0.1 ember.dev\n127.0.0.1 phoenix.dev\n127.0.0.1 jekyll.dev" >> /etc/hosts
-
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
-sed '$s|\}|'"    include $HOME/projects/dot-files/nginx-servers/*;"'}|g'
