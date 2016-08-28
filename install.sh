@@ -2,6 +2,8 @@
 
 mkdir -p ~/bin
 
+git clone git@github.com:HashNuke/dot-files.git
+
 ln -s $HOME/projects/dot-files/.vimrc $HOME/.vimrc
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
@@ -22,8 +24,9 @@ ln -s $HOME/projects/dot-files/.emacs.d $HOME/.emacs.d
 echo "source $HOME/projects/dot-files/term-config.sh" >> ~/.zshrc
 
 ## Ubuntu
-# sudo apt-get install -y automake autoconf libreadline-dev libncurses-dev libssl-dev libyaml-dev libxslt-dev libffi-dev libtool unixodbc-dev
+# sudo apt-get install -y zsh git-core automake autoconf libreadline-dev libncurses-dev libssl-dev libyaml-dev libxslt-dev libffi-dev libtool unixodbc-dev
 # sudo apt-get install -y openjdk-8-jdk
+# chsh -s `which zsh`
 
 # wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 
