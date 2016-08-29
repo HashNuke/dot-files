@@ -24,7 +24,7 @@ ln -s $HOME/projects/dot-files/.emacs.d $HOME/.emacs.d
 echo "source $HOME/projects/dot-files/term-config.sh" >> ~/.zshrc
 
 ## Ubuntu
-# sudo apt-get install -y zsh git-core make automake autoconf build-essential libreadline-dev libncurses-dev libssl-dev libyaml-dev libxslt-dev libffi-dev libtool unixodbc-dev
+# sudo apt-get install -y zsh git-core make automake autoconf build-essential libreadline-dev libncurses-dev libssl-dev libyaml-dev libxslt-dev libffi-dev libtool unixodbc-dev unzip wget tshark
 # sudo apt-get install -y openjdk-8-jdk
 # chsh -s `which zsh`
 
