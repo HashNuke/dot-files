@@ -55,7 +55,7 @@ set cindent
 set backspace=indent,eol,start
 
 " turn line numbering on
-"set number
+set number
 
 
 """""""""""
