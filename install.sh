@@ -7,6 +7,7 @@ git clone git@github.com:HashNuke/dot-files.git
 ln -s $HOME/projects/dot-files/.vimrc $HOME/.vimrc
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
+ln -s $HOME/projects/dot-files/.psqlrc $HOME/.psqlrc
 ln -s $HOME/projects/dot-files/.tmux.conf $HOME/.tmux.conf
 ln -s $HOME/projects/dot-files/start-tmux $HOME/bin/start-tmux
 
