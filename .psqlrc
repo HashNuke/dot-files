@@ -18,3 +18,33 @@
 
 -- To include another psqlrc file
 -- \i ~/some/file/path
+
+-- https://www.postgresql.org/docs/9.5/static/monitoring-stats.html
+-- https://www.postgresql.org/docs/9.5/static/dynamic-trace.html
+-- https://www.postgresql.org/docs/9.5/static/disk-usage.html
+-- https://www.postgresql.org/docs/9.5/static/view-pg-locks.html
+
+-- To list queries
+-- SELECT * into queries FROM pg_stat_activity;
+
+-- To kill the query
+-- SELECT pg_cancel_backend(pid);
+
+-- To kill the connection
+-- SELECT pg_terminate_backend(pid);
+
+-- To show db-wide stats
+-- SELECT * FROM pg_stat_database;
+
+-- To show background writer's db activity
+-- select * from pg_stat_bgwriter;
+
+-- To show table stats for current db
+-- select * from pg_stat_all_tables;
+
+-- user functions: pg_stat_user_functions
+
+-- To show index stats for current db
+-- select * from pg_stat_all_indexes;
+
+-- locks: pg_locks
