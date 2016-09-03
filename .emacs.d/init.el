@@ -12,8 +12,8 @@
 ;;;;;;;;;;;;;;;; GLOBAL CONFIG ;;;;;;;;;;;;;;;;
 
 
-;; (set-face-attribute 'default nil :font  "Monaco 14")
-;; (set-frame-font "Monaco 16" nil t)
+(set-face-attribute 'default nil :font "14")
+(set-frame-font "16" nil t)
 
 (ido-mode 1)
 (setq ido-everywhere 1)
