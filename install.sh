@@ -9,7 +9,8 @@ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 ln -s $HOME/projects/dot-files/.psqlrc $HOME/.psqlrc
 ln -s $HOME/projects/dot-files/.tmux.conf $HOME/.tmux.conf
-ln -s $HOME/projects/dot-files/start-tmux $HOME/bin/start-tmux
+ln -s $HOME/projects/dot-files/bin/start-tmux $HOME/bin/start-tmux
+ln -s $HOME/projects/dot-files/bin/psqlc $HOME/bin/psqlc
 
 # Install oh-my-zsh
 # sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
