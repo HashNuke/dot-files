@@ -23,6 +23,7 @@
 -- https://www.postgresql.org/docs/9.5/static/dynamic-trace.html
 -- https://www.postgresql.org/docs/9.5/static/disk-usage.html
 -- https://www.postgresql.org/docs/9.5/static/view-pg-locks.html
+-- https://www.postgresql.org/docs/9.5/static/storage-toast.html
 
 -- To list queries
 -- SELECT * into queries FROM pg_stat_activity;

@@ -2,7 +2,7 @@
 
 # USAGE
 # Add the name of the environment separated by the postgres url to a $HOME/.pghosts file (I prefer to not pass the database in the url)
-# $ echo "staging postgres://postgres:postgres@example.com:5432" > $HOME/.pghosts
+# $ echo "staging postgres://user:password@example.com:5432" > $HOME/.pghosts
 # You can add more. One per line.
 #
 # To connect to "staging"
