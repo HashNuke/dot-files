@@ -23,7 +23,13 @@ alias gp="git push"
 alias gu="git pull"
 
 alias n=nano
-alias ia="open $1 -a /Applications/iA\ Writer\ Pro.app"
+
+function iawriter {
+  if [ ! -f $1 ]; then
+    touch $1
+  fi
+  open -a iA\ Writer $1
+}
 
 
 # Steve Losh's ZSH colors
