@@ -39,3 +39,8 @@ asdf plugin-add erlang git@github.com:HashNuke/asdf-erlang.git
 asdf plugin-add elixir git@github.com:HashNuke/asdf-elixir.git
 asdf plugin-add nodejs git@github.com:HashNuke/asdf-nodejs.git
 asdf plugin-add ruby git@github.com:HashNuke/asdf-ruby.git
+
+
+
+mkdir /Library/Scripts/screencasting
+ln -s $HOME/projects/dot-files/scripts/terminal-resize.scpt /Library/Scripts/screencasting/terminal-resize.scpt
