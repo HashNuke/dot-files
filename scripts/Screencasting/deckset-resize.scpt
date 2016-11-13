@@ -6,6 +6,6 @@ tell application "System Events"
 end tell
 
 tell application "SizeUp"
-  resize to {1350, 760}
+  resize to {1280, 720}
   do action Center
 end tell
