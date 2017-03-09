@@ -19,6 +19,7 @@ ln -s $HOME/projects/dot-files/bin/psqlc $HOME/bin/psqlc
 ln -s $HOME/projects/dot-files/honukai.zsh-theme $HOME/.oh-my-zsh/themes/honukai.zsh-theme
 
 ln -s $HOME/projects/dot-files/.gdbinit $HOME/.gdbinit
+touch $HOME/.gitconfig.local
 ln -s $HOME/projects/dot-files/.gitconfig $HOME/.gitconfig
 ln -s $HOME/projects/dot-files/.gitignore $HOME/.gitignore_global
 ln -s $HOME/projects/dot-files/.emacs.d $HOME/.emacs.d
