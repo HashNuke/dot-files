@@ -1,6 +1,6 @@
 # Akash's dot files
 
-Just my config files. My preferences & opinions may change over time.
+My preferences & opinions may change over time.
 
 ## Install
 
