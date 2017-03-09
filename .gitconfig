@@ -4,7 +4,7 @@
 	editor = /usr/bin/vim
 [user]
 	name = Akash Manohar J
-	email = akash@akash.im
+  email = akash@akash.im
 [color]
 	ui = true
 [alias]
@@ -26,4 +26,8 @@
 	smudge = git-lfs smudge %f
 	required = true
 [commit]
-	gpgsign = true
+[gpg]
+[commit]
+  gpgsign = true
+[include]
+  path = ~/.gitconfig.local
