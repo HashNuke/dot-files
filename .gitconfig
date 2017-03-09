@@ -25,9 +25,5 @@
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
-[commit]
-[gpg]
-[commit]
-  gpgsign = true
 [include]
   path = ~/.gitconfig.local
