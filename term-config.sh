@@ -70,3 +70,6 @@ $(virtualenv_info)$(prompt_char) '
 
 GPG_TTY=$(tty)
 export GPG_TTY
+
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
