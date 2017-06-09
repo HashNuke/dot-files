@@ -6,6 +6,8 @@ My preferences & opinions may change over time.
 
 Check `install.sh`
 
+Ensure `gpg-agent` is installed.
+
 ## Themes I use
 
 * [Monokai Soda](https://github.com/lysyi3m/osx-terminal-themes/blob/master/schemes/Monokai%20Soda.terminal)
