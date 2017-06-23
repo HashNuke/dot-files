@@ -24,7 +24,14 @@
 
 
 (custom-set-variables
-  '(with-editor-emacsclient-executable "emacsclient"))
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (hackernews yasnippet yaml-mode writeroom-mode web-mode scss-mode markdown-mode magit js2-mode helm-projectile emmet-mode atom-one-dark-theme alchemist)))
+ '(with-editor-emacsclient-executable "emacsclient"))
 
 ;; Disable backup file creation
 (setq auto-save-default nil)
@@ -192,7 +199,12 @@
 
 
 ;; let the terminal decide the color scheme
-(custom-set-faces (if (not window-system) '(default ((t (:background "nil"))))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 (load-theme 'atom-one-dark t)
 
 (defun orgtbl-to-gfm (table params)
