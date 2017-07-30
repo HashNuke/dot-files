@@ -28,9 +28,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("1160f5fc215738551fce39a67b2bcf312ed07ef3568d15d53c87baa4fd1f4d4e" default)))
+ '(fci-rule-color "#3E4451")
  '(package-selected-packages
    (quote
-    (hackernews yasnippet yaml-mode writeroom-mode web-mode scss-mode markdown-mode magit js2-mode helm-projectile emmet-mode atom-one-dark-theme alchemist)))
+    (swiper helm-ag hackernews yasnippet yaml-mode writeroom-mode web-mode scss-mode markdown-mode magit js2-mode helm-projectile emmet-mode alchemist)))
  '(with-editor-emacsclient-executable "emacsclient"))
 
 ;; Disable backup file creation
@@ -63,6 +67,9 @@
 ;; My list of packages
 (setq package-list
       '(
+        iedit
+        swiper
+        helm-ag
         yasnippet
         yaml-mode
         helm
@@ -75,7 +82,6 @@
         elixir-mode
         emmet-mode
         writeroom-mode
-        atom-one-dark-theme
         web-mode
         alchemist))
 
@@ -99,6 +105,9 @@
 ;; require packages
 (setq require-list
       '(
+        iedit
+        swiper
+        helm-ag
         yasnippet
         yaml-mode
         helm-config
@@ -134,6 +143,7 @@
 ;; Global key bindings
 (global-set-key (kbd "M-i") 'imenu)
 (global-set-key (kbd "C-x f") 'helm-find)
+(global-set-key (kbd "C-s") 'swiper-all)
 
 ;; tabs and indentation
 (setq-default indent-tabs-mode nil)
@@ -158,6 +168,9 @@
 
 (add-hook 'markdown-mode-hook 'config-markdown-mode)
 (add-hook 'gfm-mode-hook 'config-markdown-mode)
+
+(add-hook 'html-mode-hook 'emmet-mode)
+(add-hook 'css-mode-hook  'emmet-mode)
 
 
 (defun config-shell-mode ()
@@ -205,7 +218,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-(load-theme 'atom-one-dark t)
+(load-theme 'wombat t)
 
 (defun orgtbl-to-gfm (table params)
   "Convert the Orgtbl mode TABLE to GitHub Flavored Markdown."
