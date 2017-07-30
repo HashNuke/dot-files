@@ -265,7 +265,8 @@ syntax enable
 
 set background=dark
 set guifont=Monaco:h13
-colorscheme monokai
+" colorscheme monokai
+colorscheme default
 
 " set the working dir to the root of the git repo
 " au BufEnter * call SetGitWD()
