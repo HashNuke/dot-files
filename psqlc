@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# USAGE
+# Add the name of the environment separated by the postgres url to a $HOME/.pghosts file (I prefer to not pass the database in the url)
+# $ echo "staging postgres://user:password@example.com:5432" > $HOME/.pghosts
+# You can add more. One per line.
+#
+# To connect to "staging"
+# $ psqlc staging
+#
+# To connect to "foobar" database on "staging"
+# $ psqlc staging foobar
+
+
+dbenv=$1
+dbname=$2
+
+if [[ -z "$dbenv" ]]; then
+  echo "No dbenv name passed as first argument"
+  exit 1
+fi
+
+# We use an extra space for exact match
+pg_host=$(cat $HOME/.pghosts | grep "$dbenv " | cut -d ' ' -f 2)
+
+if [[ -z "$pg_host" ]]; then
+  echo "No host defined for $dbenv"
+  exit 1
+fi
+
+psql $pg_host/$dbname
