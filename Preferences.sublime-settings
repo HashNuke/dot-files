@@ -1,17 +1,21 @@
 {
-	"color_scheme": "Packages/Color Scheme - Default/Dawn.tmTheme",
-	"font_size": 15.0,
-	"ignored_packages":
-	[
-		"Vintage",
-		"ActionScript",
-		"RubyMotion Autocomplete"
-	],
-	"tab_size": 2,
-	"translate_tabs_to_spaces": true,
-
-  "hot_exit": false,
-  "open_files_in_new_window": false,
-  "remember_open_files": false,
-  "file_exclude_patterns": [".dat*"]
+  "auto_complete": false,
+  "codeintel_live_disabled_languages": "elixir",
+  "color_scheme": "Packages/Boxy Theme/schemes/Boxy Tomorrow.tmTheme",
+  "font_size": 15,
+  "highlight_line": true,
+  "ignored_packages":
+  [
+    "Vintage"
+  ],
+  "tab_size": 2,
+  "theme": "Boxy Tomorrow.sublime-theme",
+  "theme_sidebar_border": true,
+  "theme_sidebar_font_lg": true,
+  "theme_sidebar_indent_xl": true,
+  "theme_tab_selected_filled": true,
+  "theme_tab_selected_label_bold": true,
+  "theme_tab_selected_underlined": true,
+  "theme_tab_size_xl": true,
+  "translate_tabs_to_spaces": true
 }
