@@ -23,6 +23,7 @@ touch $HOME/.gitconfig.local
 ln -s $HOME/projects/dot-files/.gitconfig $HOME/.gitconfig
 ln -s $HOME/projects/dot-files/.gitignore $HOME/.gitignore_global
 ln -s $HOME/projects/dot-files/.emacs.d $HOME/.emacs.d
+ln -s $HOME/projects/dot-files/.zshrc $HOME/.zshrc
 
 echo "source $HOME/projects/dot-files/term-config.sh" >> ~/.zshrc
 
