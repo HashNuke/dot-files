@@ -17,12 +17,6 @@ alias jrbe="jruby -S bundle exec"
 # Ruby
 alias be="bundle exec"
 
-alias gl="git lg"
-alias gs="git status -sb"
-alias gp="git push"
-alias gu="git pull"
-alias gc="git commit -sam"
-
 alias n=nano
 
 function iawriter {
