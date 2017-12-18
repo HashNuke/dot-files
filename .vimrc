@@ -105,8 +105,16 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+" Javascript
+Plugin 'pangloss/vim-javascript'
+
 " Vundle
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
+
+""
+
+" jsx
+Plugin 'mxw/vim-jsx'
 
 " ctrlp
 Plugin 'ctrlp.vim'
@@ -154,6 +162,8 @@ Plugin 'terryma/vim-multiple-cursors'
 
 " monokai theme
 Plugin 'sickill/vim-monokai'
+
+Plugin 'dracula/vim'
 
 " end Plugin list
 call vundle#end()
@@ -273,3 +283,5 @@ colorscheme default
 
 " TODO Later on steal some tricks from http://stackoverflow.com/questions/95072/what-are-your-favorite-vim-tricks/225852 as mentioned by gmarik
 " and steal more from https://bitbucket.org/sjl/dotfiles/src/tip/vim/.vimrc
+
+set rtp+=/Users/HashNuke/.opam/system/share/merlin/vim
