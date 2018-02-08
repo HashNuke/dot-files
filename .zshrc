@@ -59,9 +59,9 @@ export ZSH=/Users/HashNuke/.oh-my-zsh
 # Add wisely, as too many plugins slow down shell startup.
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  plugins=(git dotenv z bundler sublime git-flow jsontools osx)
+  plugins=(git dotenv z bundler sublime git-flow jsontools osx urltools)
 else
-  plugins=(git dotenv z bundler sublime git-flow jsontools ubuntu)
+  plugins=(git dotenv z bundler sublime git-flow jsontools ubuntu urltools)
 fi
 
 
