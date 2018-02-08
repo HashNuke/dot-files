@@ -28,4 +28,4 @@
 [include]
   path = ~/.gitconfig.local
 [pull]
-	rebase = preserve
+	rebase = true
