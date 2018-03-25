@@ -1,7 +1,10 @@
-(setq package-archives
-      `(("gnu" . "http://elpa.gnu.org/packages")
-        ("marmalade" . "http://marmalde-repo.org/packages/")
-        ("melpa" . "http://melpa.milkbox.net/packages/")))
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/package") t)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  (add-to-list 'package-archives '("marlalade" . "https://marmalde-repo.org/packages/") t)
+  )
 
 (set-terminal-parameter nil 'background-mode 'dark)
 
@@ -96,8 +99,8 @@
     (package-install package)))
 
 ;; quiet magit
-(setq magit-emacsclient-executable "emacsclient")
-(setq magit-last-seen-setup-instructions "1.4.0")
+;; (setq magit-emacsclient-executable "emacsclient")
+;; (setq magit-last-seen-setup-instructions "1.4.0")
 
 
 ;;(set-face-foreground 'minibuffer-prompt "white")
