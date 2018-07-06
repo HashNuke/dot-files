@@ -3,8 +3,8 @@
 	pager = less -r
 	editor = /usr/bin/vim
 [user]
-	name = Akash Manohar J
-  email = akash@akash.im
+	name = Akash Manohar
+	email = akash@akash.im
 [color]
 	ui = true
 [alias]
@@ -22,9 +22,10 @@
 [push]
 	default = current
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
 	required = true
+	process = git-lfs filter-process
 [include]
   path = ~/.gitconfig.local
 [pull]
