@@ -11,16 +11,13 @@ ruby add-to-things.rb SomeBook 5
 "
 
 project = ARGV[0]
-titles = (1..11).map {|i| "Chapter-#{i}"}
-
-puts "#{ARGV.inspect}"
 unit_count = (ARGV[1] || 3).to_i
+todo_prefix = ARGV[2] || "Chapter"
 
-titles = (1..unit_count).map {|i| "Chapter-#{i}"}
-
+titles = (1..unit_count).map {|i| "#{todo_prefix}-#{i}"}
 titles = URI.encode titles.join("\n")
 project = URI.encode project
 
-things_url = "things:///add?titles=#{titles}&list=#{project}&reveal=true"
+things_url = "things:///add-project?to-dos=#{titles}&title=#{project}&reveal=true"
 puts things_url
 
