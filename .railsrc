@@ -1,0 +1,4 @@
+--skip-coffee
+--skip-turbolinks
+--database=postgresql
+
