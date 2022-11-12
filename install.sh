@@ -36,13 +36,12 @@ echo "source $HOME/${PROJECTS_DIR}/dot-files/term-config.sh" >> ~/.zshrc
 
 # wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 
-git clone git@github.com:HashNuke/asdf.git $HOME/.asdf
+git clone git@github.com:asdf-vm/asdf.git $HOME/.asdf
 echo '. $HOME/.asdf/asdf.sh' >> ~/.zshrc
 source ~/.zshrc
-asdf plugin-add erlang git@github.com:HashNuke/asdf-erlang.git
-asdf plugin-add elixir git@github.com:HashNuke/asdf-elixir.git
-asdf plugin-add nodejs git@github.com:HashNuke/asdf-nodejs.git
-asdf plugin-add ruby git@github.com:HashNuke/asdf-ruby.git
-
+asdf plugin-add erlang git@github.com:asdf-vm/asdf-erlang.git
+asdf plugin-add elixir git@github.com:asdf-vm/asdf-elixir.git
+asdf plugin-add nodejs git@github.com:asdf-vm/asdf-nodejs.git
+asdf plugin-add ruby git@github.com:asdf-vm/asdf-ruby.git
 
 cp -R ~/${PROJECTS_DIR}/dot-files/scripts/Screencasting $HOME/Library/Scripts/Screencasting
