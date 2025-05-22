@@ -24,5 +24,7 @@ first_commit_days=$(( ($(date +%s) - $(date -j -f "%Y-%m-%d" "$first_commit_date
 days_of_effort=$(git log --date=short --pretty=format:"%ad" | sort -u | wc -l | xargs)
 
 # Print the results
+echo ""
 echo "🏁 First commit $first_commit_days days ago"
 echo "👷 $days_of_effort days of effort. Make money yet?"
+echo ""
