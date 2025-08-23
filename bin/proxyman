@@ -1,0 +1,52 @@
+#!/bin/bash
+
+PROXYMAN_CLI="/Applications/Setapp/Proxyman.app/Contents/MacOS/proxyman-cli"
+PROXY_URL="http://127.0.0.1:9090"
+
+proxyman_on() {
+    echo "Turning Proxyman on..."
+    
+    # Enable Proxyman proxy
+    "$PROXYMAN_CLI" proxy on
+    
+    # Set environment variables
+    export http_proxy="$PROXY_URL"
+    export https_proxy="$PROXY_URL"
+    export NODE_TLS_REJECT_UNAUTHORIZED=0
+    
+    echo "Proxyman is now ON"
+    echo "Environment variables set:"
+    echo "  http_proxy=$http_proxy"
+    echo "  https_proxy=$https_proxy"
+    echo "  NODE_TLS_REJECT_UNAUTHORIZED=$NODE_TLS_REJECT_UNAUTHORIZED"
+}
+
+proxyman_off() {
+    echo "Turning Proxyman off..."
+    
+    # Disable Proxyman proxy
+    "$PROXYMAN_CLI" proxy off
+    
+    # Unset environment variables
+    unset http_proxy
+    unset https_proxy
+    unset NODE_TLS_REJECT_UNAUTHORIZED
+    
+    echo "Proxyman is now OFF"
+    echo "Environment variables unset"
+}
+
+case "$1" in
+    on)
+        proxyman_on
+        ;;
+    off)
+        proxyman_off
+        ;;
+    *)
+        echo "Usage: $0 {on|off}"
+        echo "  on  - Enable Proxyman proxy and set environment variables"
+        echo "  off - Disable Proxyman proxy and unset environment variables"
+        exit 1
+        ;;
+esac
