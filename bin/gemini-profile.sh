@@ -3,54 +3,98 @@ set -euo pipefail
 
 GEMINI_DIR="$HOME/.gemini"
 PROFILE_DIR="$HOME/.config/gemini-profiles"
-FILES=(google_accounts.json installation_id oauth_creds.json user_id)
+# Exclude user_id + installation_id
+FILES=(google_accounts.json oauth_creds.json)
 
+# Convert email to safe dir name
+email_to_dir() {
+    echo "$1" | tr '@' '-' | sed 's/-/---/1'
+}
+
+# Read active email from google_accounts.json
+get_active_email() {
+    local acct_file="$GEMINI_DIR/google_accounts.json"
+    if [[ ! -f "$acct_file" ]]; then
+        echo "No google_accounts.json found in $GEMINI_DIR" >&2
+        return 1
+    fi
+    jq -r '.active' "$acct_file"
+}
+
+# Ensure profile dir exists and back up
 ensure_profile_dir() {
-    local uid="$1"
-    mkdir -p "$PROFILE_DIR/$uid"
+    local email="$1"
+    local dir
+    dir=$(email_to_dir "$email")
+    mkdir -p "$PROFILE_DIR/$dir"
+
+    # Force "old" to [] before backing up
+    jq '.old=[]' "$GEMINI_DIR/google_accounts.json" > "$PROFILE_DIR/$dir/google_accounts.json"
+
     for f in "${FILES[@]}"; do
+        [[ "$f" == "google_accounts.json" ]] && continue
         if [[ -f "$GEMINI_DIR/$f" ]]; then
-            cp "$GEMINI_DIR/$f" "$PROFILE_DIR/$uid/"
+            cp "$GEMINI_DIR/$f" "$PROFILE_DIR/$dir/"
         fi
     done
 }
 
-rotate_profile() {
-    # 1. Identify current user ID
-    if [[ ! -f "$GEMINI_DIR/user_id" ]]; then
-        echo "No user_id found in $GEMINI_DIR"
-        exit 1
+backup_profile() {
+    local mode="${1:-strict}"
+
+    local email
+    email=$(get_active_email) || { [[ "$mode" == "strict" ]] && exit 1 || return 1; }
+
+    if [[ ! -f "$GEMINI_DIR/oauth_creds.json" ]]; then
+        if [[ "$mode" == "strict" ]]; then
+            echo "Error: oauth_creds.json missing in $GEMINI_DIR, cannot back up"
+            exit 1
+        else
+            echo "Skipping backup: oauth_creds.json missing in $GEMINI_DIR"
+            return 0
+        fi
     fi
-    read -r current_id < "$GEMINI_DIR/user_id"
 
-    # 2. Ensure current profile is saved
-    ensure_profile_dir "$current_id"
+    echo "Backing up profile: $email"
+    ensure_profile_dir "$email"
+    echo "Backup completed for $email"
+}
 
-    # 3. Get list of profile IDs sorted
-    mapfile -t ids < <(find "$PROFILE_DIR" -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | sort)
+rotate_profile() {
+    local email
+    email=$(get_active_email) || exit 1
+    local current_dir
+    current_dir=$(email_to_dir "$email")
+
+    # Save current profile (lenient mode, so it won’t bail if creds missing)
+    backup_profile lenient || true
+
+    ids=()
+    while IFS= read -r dir; do
+        ids+=("$(basename "$dir")")
+    done < <(find "$PROFILE_DIR" -mindepth 1 -maxdepth 1 -type d | sort)
+
     if [[ ${#ids[@]} -eq 0 ]]; then
         echo "No profiles found in $PROFILE_DIR"
         exit 1
     fi
 
-    # 4. Find the next ID in order
     next_id=""
     for i in "${!ids[@]}"; do
-        if [[ "${ids[$i]}" == "$current_id" ]]; then
+        if [[ "${ids[$i]}" == "$current_dir" ]]; then
             next_index=$(( (i + 1) % ${#ids[@]} ))
             next_id="${ids[$next_index]}"
             break
         fi
     done
 
-    if [[ -z "$next_id" ]]; then
-        echo "No next profile found."
-        exit 1
-    fi
+    [[ -z "$next_id" ]] && { echo "No next profile found."; exit 1; }
 
-    echo "Switching profile: $current_id -> $next_id"
+    echo "Switching profile: $email -> $next_id"
 
-    # 5. Copy files into ~/.gemini
+    # 🚨 Remove user_id and installation_id before rotation
+    rm -f "$GEMINI_DIR/user_id" "$GEMINI_DIR/installation_id"
+
     for f in "${FILES[@]}"; do
         src="$PROFILE_DIR/$next_id/$f"
         if [[ -f "$src" ]]; then
@@ -60,44 +104,72 @@ rotate_profile() {
         fi
     done
 
-    # 6. Confirm feedback
     echo "Now using profile: $next_id"
 }
 
-status_profile() {
-    local acct_file="$GEMINI_DIR/google_accounts.json"
-    if [[ ! -f "$acct_file" ]]; then
-        echo "No google_accounts.json found"
+restore_profile() {
+    local email
+    email=$(get_active_email) || exit 1
+    local dir
+    dir=$(email_to_dir "$email")
+
+    profile_dir="$PROFILE_DIR/$dir"
+    if [[ ! -d "$profile_dir" ]]; then
+        echo "No backup found for profile: $email"
         exit 1
     fi
-    active=$(jq -r '.active' "$acct_file")
-    echo "Active profile: $active"
+
+    echo "Restoring profile: $email"
+
+    # 🚨 Remove user_id and installation_id before restoring
+    rm -f "$GEMINI_DIR/user_id" "$GEMINI_DIR/installation_id"
+
+    for f in "${FILES[@]}"; do
+        src="$profile_dir/$f"
+        if [[ -f "$src" ]]; then
+            cp "$src" "$GEMINI_DIR/$f"
+        else
+            echo "Warning: $src not found in backup for $email"
+        fi
+    done
+    echo "Restore completed for $email"
 }
 
-backup_profile() {
-    if [[ ! -f "$GEMINI_DIR/user_id" ]]; then
-        echo "No user_id found in $GEMINI_DIR"
-        exit 1
+status_profile() {
+    local email
+    email=$(get_active_email) || exit 1
+    echo "Active profile: $email"
+}
+
+list_profiles() {
+    ids=()
+    while IFS= read -r dir; do
+        ids+=("$(basename "$dir")")
+    done < <(find "$PROFILE_DIR" -mindepth 1 -maxdepth 1 -type d | sort)
+
+    if [[ ${#ids[@]} -eq 0 ]]; then
+        echo "No profiles found in $PROFILE_DIR"
+        exit 0
     fi
-    read -r current_id < "$GEMINI_DIR/user_id"
-    echo "Backing up profile: $current_id"
-    ensure_profile_dir "$current_id"
-    echo "Backup completed for $current_id"
+
+    echo "Available profiles:"
+    for id in "${ids[@]}"; do
+        acct_file="$PROFILE_DIR/$id/google_accounts.json"
+        if [[ -f "$acct_file" ]]; then
+            email=$(jq -r '.active' "$acct_file" 2>/dev/null || echo "unknown")
+        else
+            email="missing google_accounts.json"
+        fi
+        echo "$id - $email"
+    done
 }
 
 cmd="${1:-}"
 case "$cmd" in
-    rotate)
-        rotate_profile
-        ;;
-    status)
-        status_profile
-        ;;
-    backup)
-        backup_profile
-        ;;
-    *)
-        echo "Usage: $0 {rotate|status|backup}"
-        exit 1
-        ;;
+    rotate)  rotate_profile ;;
+    restore) restore_profile ;;
+    status)  status_profile ;;
+    backup)  backup_profile strict ;;
+    list)    list_profiles ;;
+    *) echo "Usage: $0 {rotate|restore|status|backup|list}"; exit 1 ;;
 esac
