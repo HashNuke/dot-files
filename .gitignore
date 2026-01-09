@@ -3,3 +3,4 @@
 .projectile
 .idea
 .ipynb_checkpoints
+*.code-workspace

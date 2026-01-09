@@ -1,10 +1,10 @@
 [core]
-	excludesfile = /Users/HashNuke/.gitignore_global
+	excludesfile = /Users/akash/.gitignore_global
 	pager = less -r
 	editor = /usr/bin/vim
 [user]
 	name = Akash Manohar
-	email = akash@akash.im
+	email = 84005+HashNuke@users.noreply.github.com
 [color]
 	ui = true
 [alias]
@@ -32,3 +32,9 @@
 	rebase = true
 [init]
 	defaultBranch = main
+[credential]
+	helper = store
+[lfs "customtransfer.xet"]
+	path = git-xet
+	args = transfer
+	concurrent = true
