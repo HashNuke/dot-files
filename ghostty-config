@@ -1,0 +1,10 @@
+font-family = "Menlo Regular"
+font-size = 16
+split-divider-color=ffffff
+
+keybind = shift+enter=text:\x1b\r
+
+macos-option-as-alt = true
+
+keybind = alt+left=unbind
+keybind = alt+right=unbind
