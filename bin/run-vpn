@@ -1,0 +1,296 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+readonly SCRIPT_DIR
+VPN_DIR="$(cd -- "$SCRIPT_DIR/../vpn" && pwd -P)"
+readonly VPN_DIR
+readonly IMAGE="${CONTAINER_VPN_IMAGE:-tinyvpn:local}"
+readonly CONTAINER_CLI="${CONTAINER_VPN_CLI:-container}"
+readonly DNS_SERVER="${CONTAINER_VPN_DNS:-1.1.1.1}"
+
+usage() {
+  cat <<'EOF'
+Run named WireGuard HTTP proxies with Apple container.
+
+Usage:
+  run-vpn start NAME
+  run-vpn stop NAME
+  run-vpn stop --all
+  run-vpn build
+  run-vpn list
+  run-vpn configs
+  run-vpn --help
+
+Commands:
+  start NAME  Start tinyvpn-NAME with NAME.conf.
+  stop NAME   Stop tinyvpn-NAME.
+  stop --all  Stop all running tinyvpn-* containers.
+  build       Build the shared TinyVPN image.
+  list        List running TinyVPN containers.
+  configs     List configuration names that can be started.
+
+Environment:
+  CONTAINER_VPN_CONF_PATH  Directory that contains the WireGuard .conf files.
+                           This variable is required by start.
+  CONTAINER_VPN_IMAGE      Image name. Default: tinyvpn:local.
+  CONTAINER_VPN_DNS        Container DNS server. Default: 1.1.1.1.
+
+Examples:
+  run-vpn start spain
+  run-vpn start singapore
+  run-vpn configs
+  run-vpn list
+  run-vpn stop spain
+  run-vpn stop --all
+
+Each proxy has its own VM address. The start command prints the HTTP_PROXY URL.
+EOF
+}
+
+fail() {
+  printf 'Error: %s\n' "$*" >&2
+  exit 1
+}
+
+require_container_cli() {
+  command -v "$CONTAINER_CLI" >/dev/null 2>&1 || \
+    fail "Apple container is not installed: $CONTAINER_CLI"
+}
+
+start_container_system() {
+  require_container_cli
+  "$CONTAINER_CLI" system start >/dev/null
+}
+
+validate_name() {
+  local name="$1"
+
+  [[ "$name" =~ ^[A-Za-z0-9][A-Za-z0-9-]*$ ]] || \
+    fail "NAME must contain only letters, numbers, and hyphens: $name"
+}
+
+configuration_dir() {
+  local configured_path="${CONTAINER_VPN_CONF_PATH:-}"
+
+  [[ -n "$configured_path" ]] || \
+    fail "CONTAINER_VPN_CONF_PATH is not set"
+  [[ -d "$configured_path" ]] || \
+    fail "configuration directory does not exist: $configured_path"
+  [[ "$configured_path" != *,* ]] || \
+    fail "configuration directory cannot contain a comma"
+
+  (cd -- "$configured_path" && pwd -P)
+}
+
+container_exists() {
+  local container_name="$1"
+  local existing_name
+
+  while IFS= read -r existing_name; do
+    [[ "$existing_name" == "$container_name" ]] && return 0
+  done < <("$CONTAINER_CLI" list --all --quiet)
+
+  return 1
+}
+
+container_running() {
+  local container_name="$1"
+  local running_name
+
+  while IFS= read -r running_name; do
+    [[ "$running_name" == "$container_name" ]] && return 0
+  done < <("$CONTAINER_CLI" list --quiet)
+
+  return 1
+}
+
+build_image() {
+  start_container_system
+  "$CONTAINER_CLI" build \
+    --file "$VPN_DIR/tinyvpn.dockerfile" \
+    --tag "$IMAGE" \
+    "$VPN_DIR"
+}
+
+ensure_image() {
+  if ! "$CONTAINER_CLI" image inspect "$IMAGE" >/dev/null 2>&1; then
+    printf 'Image %s is not present. Building it now.\n' "$IMAGE" >&2
+    build_image >&2
+  fi
+}
+
+print_proxy_details() {
+  local name="$1"
+  local container_name="$2"
+  local address
+  local proxy_url
+
+  command -v jq >/dev/null 2>&1 || \
+    fail "jq is required to read the container proxy address"
+
+  address="$(
+    "$CONTAINER_CLI" inspect "$container_name" |
+      jq -r '[.status.networks[]?.ipv4Address][0] // empty'
+  )"
+  address="${address%%/*}"
+  [[ -n "$address" ]] || fail "could not read the IPv4 address for $container_name"
+  proxy_url="http://$address:8888"
+
+  printf 'VPN for %s is running.\n' "$name"
+  printf "export HTTP_PROXY='%s' HTTPS_PROXY='%s' http_proxy='%s' https_proxy='%s'\n" \
+    "$proxy_url" "$proxy_url" "$proxy_url" "$proxy_url"
+}
+
+start_named_proxy() {
+  local name="$1"
+  local container_name="tinyvpn-$name"
+  local conf_dir
+  local conf_file
+
+  validate_name "$name"
+  conf_dir="$(configuration_dir)"
+  conf_file="$conf_dir/$name.conf"
+  [[ -f "$conf_file" ]] || fail "configuration file does not exist: $conf_file"
+  [[ -r "$conf_file" ]] || fail "configuration file is not readable: $conf_file"
+
+  start_container_system
+
+  if container_running "$container_name"; then
+    fail "$container_name is already running"
+  fi
+
+  if container_exists "$container_name"; then
+    "$CONTAINER_CLI" start "$container_name" >&2
+  else
+    ensure_image
+    "$CONTAINER_CLI" run \
+      --detach \
+      --name "$container_name" \
+      --cap-add NET_ADMIN \
+      --dns "$DNS_SERVER" \
+      --env "TINYVPN_CONFIG=/etc/wireguard/$name.conf" \
+      --env "TINYVPN_INTERFACE=wg0" \
+      --mount "type=bind,source=$conf_dir,target=/etc/wireguard,readonly" \
+      "$IMAGE" >&2
+  fi
+
+  print_proxy_details "$name" "$container_name"
+}
+
+stop_named_proxy() {
+  local name="$1"
+  local container_name="tinyvpn-$name"
+
+  validate_name "$name"
+  start_container_system
+
+  container_exists "$container_name" || fail "container does not exist: $container_name"
+
+  if container_running "$container_name"; then
+    "$CONTAINER_CLI" stop "$container_name"
+    printf 'Stopped %s.\n' "$container_name"
+  else
+    printf '%s is already stopped.\n' "$container_name"
+  fi
+}
+
+stop_all_proxies() {
+  local running_name
+  local -a proxy_names=()
+
+  start_container_system
+  while IFS= read -r running_name; do
+    case "$running_name" in
+      tinyvpn-*) proxy_names+=("$running_name") ;;
+    esac
+  done < <("$CONTAINER_CLI" list --quiet)
+
+  if [[ ${#proxy_names[@]} -eq 0 ]]; then
+    printf 'No TinyVPN containers are running.\n'
+    return
+  fi
+
+  "$CONTAINER_CLI" stop "${proxy_names[@]}"
+  printf 'Stopped %s TinyVPN container(s).\n' "${#proxy_names[@]}"
+}
+
+list_proxies() {
+  local container_name
+  local found="false"
+
+  start_container_system
+  while IFS= read -r container_name; do
+    case "$container_name" in
+      tinyvpn-*)
+        printf '%s\n' "$container_name"
+        found="true"
+        ;;
+    esac
+  done < <("$CONTAINER_CLI" list --quiet)
+
+  [[ "$found" == "true" ]] || printf 'No TinyVPN containers are running.\n'
+}
+
+list_configs() {
+  local conf_dir
+  local conf_file
+  local name
+  local found="false"
+
+  conf_dir="$(configuration_dir)"
+  shopt -s nullglob
+  for conf_file in "$conf_dir"/*.conf; do
+    name="$(basename -- "$conf_file" .conf)"
+    if [[ "$name" =~ ^[A-Za-z0-9][A-Za-z0-9-]*$ ]]; then
+      printf '%s\n' "$name"
+      found="true"
+    fi
+  done
+  shopt -u nullglob
+
+  [[ "$found" == "true" ]] || printf 'No startable VPN configurations exist.\n'
+}
+
+main() {
+  case "${1:-}" in
+    -h|--help|help)
+      [[ $# -eq 1 ]] || fail "help does not accept more arguments"
+      usage
+      ;;
+    build)
+      [[ $# -eq 1 ]] || fail "build does not accept arguments"
+      build_image
+      ;;
+    list)
+      [[ $# -eq 1 ]] || fail "list does not accept arguments"
+      list_proxies
+      ;;
+    configs)
+      [[ $# -eq 1 ]] || fail "configs does not accept arguments"
+      list_configs
+      ;;
+    start)
+      [[ $# -eq 2 ]] || fail "usage: run-vpn start NAME"
+      start_named_proxy "$2"
+      ;;
+    stop)
+      [[ $# -eq 2 ]] || fail "usage: run-vpn stop NAME|--all"
+      if [[ "$2" == "--all" ]]; then
+        stop_all_proxies
+      else
+        stop_named_proxy "$2"
+      fi
+      ;;
+    "")
+      usage >&2
+      exit 64
+      ;;
+    *)
+      fail "unknown command: $1"
+      ;;
+  esac
+}
+
+main "$@"
