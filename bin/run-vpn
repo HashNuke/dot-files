@@ -130,6 +130,7 @@ ensure_image() {
 print_proxy_details() {
   local name="$1"
   local container_name="$2"
+  local state="$3"
   local address
   local proxy_url
 
@@ -138,13 +139,16 @@ print_proxy_details() {
 
   address="$(
     "$CONTAINER_CLI" inspect "$container_name" |
-      jq -r '[.status.networks[]?.ipv4Address][0] // empty'
+      jq -r '
+        (if type == "array" then .[0] else . end) |
+        [.status.networks[]?.ipv4Address][0] // empty
+      '
   )"
   address="${address%%/*}"
   [[ -n "$address" ]] || fail "could not read the IPv4 address for $container_name"
   proxy_url="http://$address:8888"
 
-  printf 'VPN for %s is running.\n' "$name"
+  printf 'VPN for %s is %s.\n' "$name" "$state"
   printf "export HTTP_PROXY='%s' HTTPS_PROXY='%s' http_proxy='%s' https_proxy='%s'\n" \
     "$proxy_url" "$proxy_url" "$proxy_url" "$proxy_url"
 }
@@ -156,16 +160,17 @@ start_named_proxy() {
   local conf_file
 
   validate_name "$name"
+  start_container_system
+
+  if container_running "$container_name"; then
+    print_proxy_details "$name" "$container_name" "already running"
+    return
+  fi
+
   conf_dir="$(configuration_dir)"
   conf_file="$conf_dir/$name.conf"
   [[ -f "$conf_file" ]] || fail "configuration file does not exist: $conf_file"
   [[ -r "$conf_file" ]] || fail "configuration file is not readable: $conf_file"
-
-  start_container_system
-
-  if container_running "$container_name"; then
-    fail "$container_name is already running"
-  fi
 
   if container_exists "$container_name"; then
     "$CONTAINER_CLI" start "$container_name" >&2
@@ -182,7 +187,7 @@ start_named_proxy() {
       "$IMAGE" >&2
   fi
 
-  print_proxy_details "$name" "$container_name"
+  print_proxy_details "$name" "$container_name" "running"
 }
 
 stop_named_proxy() {

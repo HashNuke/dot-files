@@ -104,3 +104,4 @@ run-vpn help
 The image accepts any compatible WireGuard configuration.
 The configuration must route IPv4 traffic with `AllowedIPs = 0.0.0.0/0`.
 TinyVPN blocks IPv6 egress in the container.
+TinyVPN uses the container DNS server and ignores a WireGuard `DNS` directive.

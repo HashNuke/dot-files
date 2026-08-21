@@ -1,3 +1,7 @@
+/^[[:space:]]*DNS[[:space:]]*=/ {
+  next
+}
+
 /^[[:space:]]*(Address|AllowedIPs)[[:space:]]*=/ {
   separator_index = index($0, "=")
   key = substr($0, 1, separator_index)
