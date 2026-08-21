@@ -76,6 +76,12 @@ configuration_dir() {
 
   [[ -n "$configured_path" ]] || \
     fail "CONTAINER_VPN_CONF_PATH is not set"
+
+  case "$configured_path" in
+    \~) configured_path="$HOME" ;;
+    \~/*) configured_path="$HOME/${configured_path:2}" ;;
+  esac
+
   [[ -d "$configured_path" ]] || \
     fail "configuration directory does not exist: $configured_path"
   [[ "$configured_path" != *,* ]] || \
