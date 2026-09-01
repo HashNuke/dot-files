@@ -3,3 +3,8 @@ npm install -g @openai/codex \
     @github/copilot \
     @google/gemini-cli \
     opencode-ai
+
+npx skills add herdrdev/herdr --skill herdr -g
+npx impeccable install
+
+
